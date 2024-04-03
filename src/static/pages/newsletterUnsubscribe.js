@@ -28,6 +28,8 @@ export default function NewsletterUnsubscribe(props) {
         });
     };
 
+
+
     const handleSubmit = async (formData) => {
         try {
             await axios.post('https://wecreatedesigns.ro/backend/api/newsletter/unsubscribe/', formData);
