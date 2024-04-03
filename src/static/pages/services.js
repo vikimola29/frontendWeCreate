@@ -38,7 +38,7 @@ export default function Services(props) {
     };
     const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:8000/backend/api/newsletter/subscribe/', formData);
+            await axios.post('https://wecreatedesigns.ro/backend/api/newsletter/subscribe/', formData);
             const messageS = <FormattedMessage id='serv.sub.alert.succ'/>
             setSuccessMessage(messageS);
             setOpenSuccess(true);

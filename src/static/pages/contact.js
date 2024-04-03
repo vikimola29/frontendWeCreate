@@ -40,7 +40,7 @@ export default function Contact(props) {
 
     const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:8000/backend/api/create_message/', formData);
+            await axios.post('https://wecreatedesigns.ro/backend/api/create_message/', formData);
             const messageS = <FormattedMessage id='contact.sub.alert.succ'/>
             setSuccessMessage(messageS);
             setOpenSuccess(true);
