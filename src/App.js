@@ -346,10 +346,10 @@ function App() {
                             <Route exact path="/newsletter-unsubscribe"
                                    element={<NewsletterUnsubscribe isDarkTheme={isDarkTheme}
                                                                    bgGradient={gradientContainerDark}/>}/>}
-                        {isDarkTheme &&
-                            <Route exact path="*"
-                                   element={<PageNotFound isDarkTheme={isDarkTheme}
-                                                          bgGradient={gradientContainerDark}/>}/>}
+                        {/*{isDarkTheme &&*/}
+                        {/*    <Route exact path="*"*/}
+                        {/*           element={<PageNotFound isDarkTheme={isDarkTheme}*/}
+                        {/*                                  bgGradient={gradientContainerDark}/>}/>}*/}
                         {!isDarkTheme && <Route exact path="/servicii"
                                                 element={<Services isDarkTheme={isDarkTheme}
                                                                    bgGradient={gradientContainerLight}/>}/>}
@@ -372,10 +372,10 @@ function App() {
                             <Route exact path="/newsletter-unsubscribe"
                                    element={<NewsletterUnsubscribe isDarkTheme={isDarkTheme}
                                                                    bgGradient={gradientContainerLight}/>}/>}
-                        {!isDarkTheme &&
-                            <Route exact path="*"
-                                   element={<PageNotFound isDarkTheme={isDarkTheme}
-                                                          bgGradient={gradientContainerLight}/>}/>}
+                        {/*{!isDarkTheme &&*/}
+                        {/*    <Route exact path="*"*/}
+                        {/*           element={<PageNotFound isDarkTheme={isDarkTheme}*/}
+                        {/*                                  bgGradient={gradientContainerLight}/>}/>}*/}
                     </Routes>
                 </BrowserRouter>
 
