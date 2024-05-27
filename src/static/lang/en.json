@@ -3,21 +3,17 @@
   "header.tech": "Technologies",
   "header.about": "About",
   "header.contact": "Contact",
+  "header.login": "Account",
   "page1.title": "Launch your business with an innovative, adaptable and cost-effective website!",
   "page1.text": "At WeCreate we are passionate about creating incredible and affordable websites.",
   "page1.button.text": "Work With Us",
   "page1.description.logo1": "The world in the palm of your hand: websites easily available from any location, at any time",
   "page1.description.logo2": "Newest equipment and latest technologies",
   "page1.description.logo3": "Exclusively crafted design, customized to perfectly fit your requirements",
-
   "page1.description.logo4": "Youthful and committed team with flexible and adaptive thinking",
-
-
   "page.not.found.title": "404",
   "page.not.found.description1": "Page not found",
   "page.not.found.description2": "The page you are looking for could not be found on this website. Please check the URL and try again.",
-
-
   "serv.title": "Our Services",
   "serv.description": "When we develop websites, we focus on their visual appearance, functionality, and make efforts to ensure easy management for clients and their end users.",
   "serv.top.computer1": "A website is a digital platform that provides a virtual presence for individuals, businesses, or organizations on the internet, offering a means to showcase information, products, or services to a global audience.",
@@ -55,8 +51,6 @@
   "serv.bottom.gdpr5": ".",
   "serv.sub.alert.succ": "Subscribe succesful!",
   "serv.sub.alert.warn": "We couldn't add your e-mail to our mailing list! Check if your e-mail is correct.",
-
-
   "serv.bottom.unsub1": "Unsubscribe",
   "serv.bottom.unsub2": " at any time. We respect your privacy and won't share your email address with anyone.",
   "newsletter.unsub.title": "Newsletter Unsubscribe",
@@ -125,12 +119,8 @@
   "contact.form.message": "Message",
   "contact.form.message.helper": "Ask us anything!",
   "contact.form.submit": "",
-
   "contact.sub.alert.succ": "Form sent successfully!",
   "contact.sub.alert.warn": "Error occured! Try sending again.",
-
-
-
   "footer.company.name": "WECREATE DESIGNS S.R.L.",
   "footer.toggle.theme": "Theme:",
   "footer.company.address1": "Harghita county, Mihăileni municipality,",
@@ -255,7 +245,6 @@
   "cookie.popup.text": "This website uses cookies to ensure you get the best experience on our website.",
   "cookie.popup.button.accept": "Accept",
   "cookie.popup.button.reject": "Reject",
-
   "gdpr.title": "Privacy Policy",
   "gdpr.info.collect.title": "Collection of Personal Information",
   "gdpr.info.collect.1": "Ensuring confidentiality for the visitors of our website is of utmost importance to us, and we are committed to safeguarding it. We adhere to the 2018 European Data Protection Regulation. This policy outlines how we will handle your personal information.",
@@ -327,6 +316,34 @@
   "gdpr.info.cookie.title": "Cookies",
   "gdpr.info.cookie.description": "Our website uses cookies. A cookie is a file that contains an identifier (a string of letters and numbers) that is sent from a web server to a browser and is stored by that browser. The identifier is then sent back to the server each time the browser requests a page from it. Cookies can be 'persistent' or 'session' cookies: a persistent cookie will be stored by the browser and will remain valid until the expiration date, unless it is deleted before the expiration date; on the other hand, a session cookie will expire at the end of the user's session or when the browser is closed. Cookies typically do not contain information that personally identifies a user, but the personal information we store about you may be linked to information stored and obtained through cookies. On our website, we use both persistent and session cookies. However, users can delete cookies at any time through their browser settings.",
   "gdpr.info.final.title": "Final Provisions",
-  "gdpr.info.final.description": "If you have any questions or objections regarding the retention of personal data or if you wish for your data not to be retained, you have the right to request our company to delete all collected data. In this regard, you can contact our company at the email address: wecreate.designs.srl@gmail.com."
+  "gdpr.info.final.description": "If you have any questions or objections regarding the retention of personal data or if you wish for your data not to be retained, you have the right to request our company to delete all collected data. In this regard, you can contact our company at the email address: wecreate.designs.srl@gmail.com.",
+  "register.alert.succ": "Registered successfully!",
+  "register.alert.alert": "Registered unsuccessful!",
+  "register.title": "Register",
+  "register.name": "Name",
+  "register.name.helper": "Your name!",
+  "register.email": "Mail",
+  "register.password": "Password",
+  "register.password.helper": "Choose a secure password!",
+  "register.password2": "Repeat password",
+  "register.password2.helper": "Repeat password!",
+  "register.mail.helper": "We will communicate wth this address!",
+  "register.companyName": "Company Name",
+  "register.companyName.helper": "Optional!",
+  "login.title": "Log In",
+  "login.alert.succ": "Logged in successfully!",
+  "login.alert.alert": "Logged in unsuccessful!",
+  "login.email": "Mail",
+  "login.password": "Password",
+  "login.forgotten": "",
+  "login.forgotten.password": "Forgotten Password",
+  "login.register": "Register!",
+  "recover.title": "Recover Account",
+  "recover.email": "Mail",
+  "recover.email.helper": "Type in your email!",
+  "recover.warn": "Email is not in our database or a problem occurred!",
+  "recover.password.title": "Choose a new password!",
+  "recover.password.succ": "Password changed successfully!",
+  "recover.password.warn": "Problem occurred!"
 }
 

@@ -1,5 +1,5 @@
 import {Button, Link} from "@mui/material";
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {FormattedMessage} from "react-intl";
 import Typography from "@mui/material/Typography";
 import ChangeLangButtons from "./changeLangButtons";
@@ -13,6 +13,7 @@ export default function FooterMiddle(props) {
     const handleLanguageChange = (newLocale) => {
         changeLanguage(newLocale);
     };
+
     return (
 
         <Typography variant="body1" component={'span'} className='footer-middle' style={{textAlign: 'center'}}>
@@ -31,7 +32,7 @@ export default function FooterMiddle(props) {
             <div style={{margin: '0.4rem 0'}}></div>
 
             <div className="footer-left-div">
-                <ChangeLangButtons handleLanguageChange={handleLanguageChange} locale={locale}/>
+                <ChangeLangButtons handleLanguageChange={handleLanguageChange} locale={locale} isDarkTheme={props.isDarkTheme}/>
             </div>
 
             <div style={{margin: '0.5rem 0'}}></div>
@@ -40,7 +41,7 @@ export default function FooterMiddle(props) {
                   target="_blank" rel="noopener" color="inherit" sx={{textDecoration: 'none'}}>
                 wecreate.designs.srl@gmail.com
             </Link>
-                       <div style={{margin: '0.5rem 0'}}></div>
+            <div style={{margin: '0.5rem 0'}}></div>
 
         </Typography>
 

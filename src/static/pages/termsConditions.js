@@ -3,7 +3,7 @@ import Header from "../components/header";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 
-export default function Terms_conditions(props) {
+export default function TermsConditions(props) {
     const GradientContainer = props.bgGradient
 
     return (

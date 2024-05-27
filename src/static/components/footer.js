@@ -15,8 +15,7 @@ export default function Footer(props) {
                 </Grid>
 
                 <Grid item xs={12} md={5}>
-                    <FooterMiddle toggleTheme={props.toggleTheme}/>
-
+                    <FooterMiddle toggleTheme={props.toggleTheme} isDarkTheme={props.isDarkTheme}/>
                 </Grid>
 
                 <Grid item xs={12} md={3}>

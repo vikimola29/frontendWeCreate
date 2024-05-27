@@ -1,5 +1,4 @@
 
-
 body {
     margin: 0;
     height: 100%;
@@ -36,22 +35,22 @@ code {
     /*align-content: baseline;*/
 }
 
-.header-logo-text-extra-small{
+.header-logo-text-extra-small {
     height: 1.4rem;
     margin-top: 0.5rem;
 }
 
-.header-logo-text-small{
+.header-logo-text-small {
     height: 2rem;
     margin-top: 0.5rem;
 }
 
-.header-logo-text-medium{
+.header-logo-text-medium {
     height: 2.2rem;
     margin-top: 0.5rem;
 }
 
-.header-logo-text-large{
+.header-logo-text-large {
     height: 2.5rem;
     margin-top: 0.5rem;
 
@@ -89,13 +88,14 @@ code {
 
 .page1-blank-top {
     height: 5rem;
+    /*background-color: coral;*/
 }
 
 .page1-top-first {
     /*background-color: #f7bfbe !important;*/
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: baseline ;
     justify-content: center;
     /*padding-left: 2em !important;*/
     /*padding-right: 1em !important;*/
@@ -125,8 +125,8 @@ code {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    /*padding-top: 0.5rem;*/
+    /*padding-bottom: 0.5rem;*/
 
 
 }
@@ -685,7 +685,7 @@ code {
     text-align: center !important;
 }
 
-.terms-content{
+.terms-content {
     padding-left: 3%;
     padding-right: 3%;
 }
@@ -707,8 +707,8 @@ code {
 }
 
 /*COOKIES POPUP*/
-.cookie-popup-button{
-    margin-left:1% !important;
+.cookie-popup-button {
+    margin-left: 1% !important;
     margin-right: 1% !important;
 }
 
@@ -723,6 +723,76 @@ code {
     justify-content: center;
 }
 
+/*REGISTER*/
+.register-title {
+    display: flex;
+    justify-content: center;
+}
+
+.register-content {
+    min-height: 90vh;
+    padding-left: 3%;
+    padding-right: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*LOGIN*/
+.login-title {
+    display: flex;
+    justify-content: center;
+}
+
+.login-content {
+    height: 90vh;
+    padding-left: 3%;
+    padding-right: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-forgotten-password{
+    /*background-color: coral;*/
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*RECOVER*/
+.recover-title {
+    display: flex;
+    justify-content: center;
+}
+
+.recover-content {
+    height: 90vh;
+    padding-left: 3%;
+    padding-right: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*RECOVER-PASSWORD*/
+.recover-password-title {
+    display: flex;
+    justify-content: center;
+}
+
+.recover-password-content {
+    height: 90vh;
+    padding-left: 3%;
+    padding-right: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 

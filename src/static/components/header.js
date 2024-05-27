@@ -11,7 +11,7 @@ import {useTheme} from '@material-ui/core/styles';
 
 export default function Header() {
     const logoText = require("../image/header/logoText.png");
-    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down(750));
+    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down(850));
     const isExtraSmallScreenLogo = useMediaQuery((theme) => theme.breakpoints.down(350));
     const theme = useTheme();
     const isSmallScreenLogo = useMediaQuery(theme.breakpoints.between(350, theme.breakpoints.values.sm));
@@ -50,13 +50,13 @@ export default function Header() {
                 <Toolbar>
                     {
                         isExtraSmallScreenLogo && <NavLink style={{flexGrow: 1}}
-                                                    className="header-logo-navlink"
-                                                    to="/">
-                        <div className="header-logos">
-                            <img className="header-logo-text-extra-small" src={logoText} alt="logo"/>
-                        </div>
+                                                           className="header-logo-navlink"
+                                                           to="/">
+                            <div className="header-logos">
+                                <img className="header-logo-text-extra-small" src={logoText} alt="logo"/>
+                            </div>
 
-                    </NavLink>}
+                        </NavLink>}
 
                     {
                         isSmallScreenLogo &&
@@ -143,6 +143,15 @@ export default function Header() {
                                                       defaultMessage="Contact"/>
                                 </CustomMenuItem2>
                             </NavLink>
+                            <NavLink
+                                className="header-item-navlink"
+                                to="/login"
+                            >
+                                <CustomMenuItem2>
+                                    <FormattedMessage id="header.login"
+                                                      defaultMessage="Login"/>
+                                </CustomMenuItem2>
+                            </NavLink>
 
                         </div>)
                     }
@@ -188,6 +197,15 @@ export default function Header() {
                     <CustomMenuItem className='header-dropdown-item' onClick={handleMenuClose}>
                         <FormattedMessage id="header.contact"
                                           defaultMessage="Contact"/>
+                    </CustomMenuItem>
+                </NavLink>
+                <NavLink
+                    className="header-item-navlink"
+                    to="/login"
+                >
+                    <CustomMenuItem className='header-dropdown-item' onClick={handleMenuClose}>
+                        <FormattedMessage id="header.login"
+                                          defaultMessage="Login"/>
                     </CustomMenuItem>
                 </NavLink>
 

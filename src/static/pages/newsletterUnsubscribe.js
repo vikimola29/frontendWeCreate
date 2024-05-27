@@ -29,7 +29,6 @@ export default function NewsletterUnsubscribe(props) {
     };
 
 
-
     const handleSubmit = async (formData) => {
         try {
             await axios.post('https://wecreatedesigns.ro/backend/api/newsletter/unsubscribe/', formData);
@@ -61,6 +60,7 @@ export default function NewsletterUnsubscribe(props) {
 
 
             <Grid container className='newsletter-unsub'>
+
                 <div className='newsletter-unsub-content'>
 
                     <Typography component={'span'} variant="h3" style={{textAlign: 'center'}}>

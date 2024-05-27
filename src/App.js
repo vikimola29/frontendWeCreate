@@ -9,10 +9,14 @@ import About from "./static/pages/about";
 import Contact from "./static/pages/contact";
 import Cookies from "./static/pages/cookies";
 import Gdpr from "./static/pages/gdpr";
-import Terms_conditions from "./static/pages/terms_conditions";
+import TermsConditions from "./static/pages/termsConditions";
 import NewsletterUnsubscribe from "./static/pages/newsletterUnsubscribe";
 import PageNotFound from "./static/pages/pageNotFound";
 import CookieConsent from "./static/components/cookiePopup";
+import Register from "./static/pages/register";
+import LogIn from "./static/pages/logIn";
+import RecoverAccountMailForm from "./static/pages/recoverAccountMailForm";
+import RecoverAccountNewPassword from "./static/pages/recoverAccountNewPassword";
 
 function App() {
     const lightTheme = {
@@ -299,11 +303,16 @@ function App() {
     const [isDarkTheme, setIsDarkTheme] = useState(localStorage.getItem('darkTheme') === 'true' || false);
 
     useEffect(() => {
-        localStorage.setItem('darkTheme', String(isDarkTheme));
-    }, [isDarkTheme]);
+        const savedTheme = localStorage.getItem('darkTheme') === 'true';
+        setIsDarkTheme(savedTheme);
+    }, []);
 
     const toggleTheme = () => {
-        setIsDarkTheme(prevTheme => !prevTheme);
+        setIsDarkTheme(prevTheme => {
+            const newTheme = !prevTheme;
+            localStorage.setItem('darkTheme', newTheme.toString());
+            return newTheme;
+        });
     };
 
     const gradientContainerLight = styled('div')({
@@ -319,6 +328,7 @@ function App() {
 
         <ThemeProvider theme={isDarkTheme ? createTheme(darkTheme) : createTheme(lightTheme)}>
             <CssBaseline/>
+
             <div className="app">
                 <BrowserRouter>
                     <Routes>
@@ -340,12 +350,28 @@ function App() {
                             <Route exact path="/politica-confidentialitate" element={<Gdpr isDarkTheme={isDarkTheme}
                                                                                            bgGradient={gradientContainerDark}/>}/>}
                         {isDarkTheme &&
-                            <Route exact path="/termeni-conditii" element={<Terms_conditions isDarkTheme={isDarkTheme}
-                                                                                             bgGradient={gradientContainerDark}/>}/>}
+                            <Route exact path="/termeni-conditii" element={<TermsConditions isDarkTheme={isDarkTheme}
+                                                                                            bgGradient={gradientContainerDark}/>}/>}
                         {isDarkTheme &&
                             <Route exact path="/newsletter-unsubscribe"
                                    element={<NewsletterUnsubscribe isDarkTheme={isDarkTheme}
                                                                    bgGradient={gradientContainerDark}/>}/>}
+                        {isDarkTheme &&
+                            <Route exact path="/register"
+                                   element={<Register isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerDark}/>}/>}
+                        {isDarkTheme &&
+                            <Route exact path="/login"
+                                   element={<LogIn isDarkTheme={isDarkTheme}
+                                                   bgGradient={gradientContainerDark}/>}/>}
+                        {isDarkTheme &&
+                            <Route exact path="/recover"
+                                   element={<RecoverAccountMailForm isDarkTheme={isDarkTheme}
+                                                                    bgGradient={gradientContainerDark}/>}/>}
+                        {isDarkTheme &&
+                            <Route exact path="/recover-password"
+                                   element={<RecoverAccountNewPassword isDarkTheme={isDarkTheme}
+                                                                       bgGradient={gradientContainerDark}/>}/>}
                         {isDarkTheme &&
                             <Route exact path="*"
                                    element={<PageNotFound isDarkTheme={isDarkTheme}
@@ -366,12 +392,28 @@ function App() {
                             <Route exact path="/politica-confidentialitate" element={<Gdpr isDarkTheme={isDarkTheme}
                                                                                            bgGradient={gradientContainerLight}/>}/>}
                         {!isDarkTheme &&
-                            <Route exact path="/termeni-conditii" element={<Terms_conditions isDarkTheme={isDarkTheme}
-                                                                                             bgGradient={gradientContainerLight}/>}/>}
+                            <Route exact path="/termeni-conditii" element={<TermsConditions isDarkTheme={isDarkTheme}
+                                                                                            bgGradient={gradientContainerLight}/>}/>}
                         {!isDarkTheme &&
                             <Route exact path="/newsletter-unsubscribe"
                                    element={<NewsletterUnsubscribe isDarkTheme={isDarkTheme}
                                                                    bgGradient={gradientContainerLight}/>}/>}
+                        {!isDarkTheme &&
+                            <Route exact path="/register"
+                                   element={<Register isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                        {!isDarkTheme &&
+                            <Route exact path="/login"
+                                   element={<LogIn isDarkTheme={isDarkTheme}
+                                                   bgGradient={gradientContainerLight}/>}/>}
+                        {!isDarkTheme &&
+                            <Route exact path="/recover"
+                                   element={<RecoverAccountMailForm isDarkTheme={isDarkTheme}
+                                                                    bgGradient={gradientContainerLight}/>}/>}
+                        {!isDarkTheme &&
+                            <Route exact path="/recover-password"
+                                   element={<RecoverAccountNewPassword isDarkTheme={isDarkTheme}
+                                                                       bgGradient={gradientContainerLight}/>}/>}
                         {!isDarkTheme &&
                             <Route exact path="*"
                                    element={<PageNotFound isDarkTheme={isDarkTheme}
@@ -379,8 +421,7 @@ function App() {
                     </Routes>
                 </BrowserRouter>
 
-                {localStorage.removeItem('accepted-cookies')}
-
+               
                 <CookieConsent/>
 
                 {
@@ -389,7 +430,6 @@ function App() {
                         :
                         <Footer backgroundColor={'#009688'} isDarkTheme={isDarkTheme} toggleTheme={toggleTheme}/>
                 }
-
 
             </div>
         </ThemeProvider>
