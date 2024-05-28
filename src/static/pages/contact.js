@@ -85,7 +85,6 @@ export default function Contact(props) {
 
     return (
         <GradientContainer>
-            <Header/>
 
             <div style={{height: '5rem'}}>
             </div>

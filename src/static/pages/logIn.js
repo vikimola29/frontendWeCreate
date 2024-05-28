@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import Header from "../components/header";
-import {Alert, Button, FormControl, TextField, useMediaQuery} from "@mui/material";
+import {Alert, Button, FormControl, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import CheckIcon from "@mui/icons-material/Check";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import Cookies from 'js-cookie';
 
 
 export default function LogIn(props) {
@@ -31,14 +32,27 @@ export default function LogIn(props) {
     };
 
 
-
     const handleSubmit = async (formData) => {
         try {
-            await axios.post('http://127.0.0.1:8000/backend/api/login/', formData);
+            const csrfToken = Cookies.get('csrftoken');
+            await axios.post('http://127.0.0.1:8000/backend/api/login/', formData, {
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                },
+                withCredentials: true,
+            });
             const messageS = <FormattedMessage id='login.alert.succ'/>
             setSuccessMessage(messageS);
             setOpenSuccess(true);
             setOpenWarning(false);
+
+            props.setIsAuthenticated(() => {
+            const newAuth = true; // Set to true directly
+            localStorage.setItem('isAuthenticated', newAuth.toString());
+            return newAuth});
+
+            navigate('/profile');
+
         } catch (error) {
             const messageW = <FormattedMessage id='login.alert.warn'/>
             setWarningMessage(messageW);
@@ -57,15 +71,13 @@ export default function LogIn(props) {
     };
 
 
-
     const handleButtonClick = () => {
         navigate('/register');
-  };
+    };
 
     return (
 
         <GradientContainer>
-            <Header/>
             <div style={{height: '5rem'}}>
             </div>
 
@@ -79,7 +91,6 @@ export default function LogIn(props) {
                 </div>
                 <br/>
                 <br/>
-
 
 
                 <FormControl
@@ -116,7 +127,7 @@ export default function LogIn(props) {
                                    </Typography>
                                }
                                aria-describedby="password-text"/>
-                    <Typography component={'span'} variant="caption" sx={{marginLeft:'0.7rem'}}>
+                    <Typography component={'span'} variant="caption" sx={{marginLeft: '0.7rem'}}>
 
                         <FormattedMessage
                             // id="login.forgotten"
@@ -173,7 +184,6 @@ export default function LogIn(props) {
                     )}
 
 
-
                     <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">
                         <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
                             <FormattedMessage id='login.title'
@@ -186,14 +196,12 @@ export default function LogIn(props) {
                 </FormControl>
 
 
-                <Button onClick={() => handleButtonClick()}  variant="contained" color="primary">
-                        <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
-                            <FormattedMessage id='login.register'
-                                              defaultMessage="No account? Register!"/>
-                        </Typography>
-                    </Button>
-
-
+                <Button onClick={() => handleButtonClick()} variant="contained" color="primary">
+                    <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
+                        <FormattedMessage id='login.register'
+                                          defaultMessage="No account? Register!"/>
+                    </Typography>
+                </Button>
 
 
                 <br/>

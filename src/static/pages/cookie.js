@@ -3,12 +3,11 @@ import Header from "../components/header";
 import {FormattedMessage} from "react-intl";
 import Typography from "@mui/material/Typography";
 
-export default function Cookies(props) {
+export default function Cookie(props) {
     const GradientContainer = props.bgGradient
 
     return (
         <GradientContainer>
-            <Header/>
             <div style={{height: '5rem'}}>
             </div>
             <div className="cookies-content">

@@ -56,7 +56,6 @@ export default function NewsletterUnsubscribe(props) {
 
     return (
         <GradientContainer>
-            <Header/>
 
 
             <Grid container className='newsletter-unsub'>

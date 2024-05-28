@@ -60,7 +60,6 @@ export default function Register(props) {
     return (
 
         <GradientContainer>
-            <Header/>
             <div style={{height: '5rem'}}>
             </div>
 

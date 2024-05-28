@@ -334,7 +334,7 @@
   "login.alert.succ": "Autentificare reușită!",
   "login.alert.warn": "Autentificare nereușită!",
   "login.email": "Email",
-  "login.password": "",
+  "login.password": "Parolă",
   "login.forgotten": "",
   "login.forgotten.password": "Parolă uitată",
   "login.register": "Înregistrează-te!",

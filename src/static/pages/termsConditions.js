@@ -8,7 +8,6 @@ export default function TermsConditions(props) {
 
     return (
         <GradientContainer>
-            <Header/>
 
 
             <div style={{height: '5rem'}}>

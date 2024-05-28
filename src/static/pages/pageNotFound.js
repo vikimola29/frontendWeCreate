@@ -12,7 +12,6 @@ export default function PageNotFound(props) {
 
     return (
         <GradientContainer>
-            <Header/>
 
             <div style={{height: '4rem'}}>
             </div>

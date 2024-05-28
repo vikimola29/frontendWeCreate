@@ -9,8 +9,7 @@ export default function Gdpr(props) {
 
     return (
         <GradientContainer>
-            <Header/>
-            <div style={{height: '5rem'}}>
+F            <div style={{height: '5rem'}}>
             </div>
             <div className='gdpr-content'>
                 <Typography component={'span'} variant='h3' className='gdpr-title'>

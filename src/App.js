@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {createTheme, CssBaseline, styled, ThemeProvider} from "@mui/material";
 import Footer from "./static/components/footer";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Home from "./static/pages/home";
 import Services from "./static/pages/services";
 import Technologies from "./static/pages/technologies";
 import About from "./static/pages/about";
 import Contact from "./static/pages/contact";
-import Cookies from "./static/pages/cookies";
+import Cookie from "./static/pages/cookie";
 import Gdpr from "./static/pages/gdpr";
 import TermsConditions from "./static/pages/termsConditions";
 import NewsletterUnsubscribe from "./static/pages/newsletterUnsubscribe";
@@ -17,6 +17,10 @@ import Register from "./static/pages/register";
 import LogIn from "./static/pages/logIn";
 import RecoverAccountMailForm from "./static/pages/recoverAccountMailForm";
 import RecoverAccountNewPassword from "./static/pages/recoverAccountNewPassword";
+import Profile from "./static/pages/profile";
+import axios from "axios";
+import Header from "./static/components/header";
+import Cookies from 'js-cookie';
 
 function App() {
     const lightTheme = {
@@ -301,11 +305,19 @@ function App() {
     };
 
     const [isDarkTheme, setIsDarkTheme] = useState(localStorage.getItem('darkTheme') === 'true' || false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('darkTheme') === 'true';
         setIsDarkTheme(savedTheme);
-    }, []);
+
+        const storedAuth = localStorage.getItem('isAuthenticated');
+        if (storedAuth === 'true') {
+            setIsAuthenticated(true);
+        }
+    }, [isDarkTheme]);
 
     const toggleTheme = () => {
         setIsDarkTheme(prevTheme => {
@@ -329,9 +341,15 @@ function App() {
         <ThemeProvider theme={isDarkTheme ? createTheme(darkTheme) : createTheme(lightTheme)}>
             <CssBaseline/>
 
+
             <div className="app">
+
                 <BrowserRouter>
+
+                    <Header isAuthenticated={isAuthenticated}/>
+
                     <Routes>
+
                         <Route exact path="/" element={<Home isDarkTheme={isDarkTheme}
                                                              gradientContainerLight={gradientContainerLight}
                                                              gradientContainerDark={gradientContainerDark}/>}/>
@@ -344,8 +362,8 @@ function App() {
                                                                                     bgGradient={gradientContainerDark}/>}/>}
                         {isDarkTheme && <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
                                                                                        bgGradient={gradientContainerDark}/>}/>}
-                        {isDarkTheme && <Route exact path="/cookies" element={<Cookies isDarkTheme={isDarkTheme}
-                                                                                       bgGradient={gradientContainerDark}/>}/>}
+                        {isDarkTheme && <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
+                                                                                      bgGradient={gradientContainerDark}/>}/>}
                         {isDarkTheme &&
                             <Route exact path="/politica-confidentialitate" element={<Gdpr isDarkTheme={isDarkTheme}
                                                                                            bgGradient={gradientContainerDark}/>}/>}
@@ -362,7 +380,7 @@ function App() {
                                                       bgGradient={gradientContainerDark}/>}/>}
                         {isDarkTheme &&
                             <Route exact path="/login"
-                                   element={<LogIn isDarkTheme={isDarkTheme}
+                                   element={<LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
                                                    bgGradient={gradientContainerDark}/>}/>}
                         {isDarkTheme &&
                             <Route exact path="/recover"
@@ -372,6 +390,10 @@ function App() {
                             <Route exact path="/recover-password"
                                    element={<RecoverAccountNewPassword isDarkTheme={isDarkTheme}
                                                                        bgGradient={gradientContainerDark}/>}/>}
+                        {isDarkTheme &&
+                            <Route exact path="/profile"
+                                   element={isAuthenticated ? <Profile isDarkTheme={isDarkTheme}
+                                                     bgGradient={gradientContainerDark}/> : <Navigate to="/login" />}/>}
                         {isDarkTheme &&
                             <Route exact path="*"
                                    element={<PageNotFound isDarkTheme={isDarkTheme}
@@ -386,8 +408,8 @@ function App() {
                                                                                      bgGradient={gradientContainerLight}/>}/>}
                         {!isDarkTheme && <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
                                                                                         bgGradient={gradientContainerLight}/>}/>}
-                        {!isDarkTheme && <Route exact path="/cookies" element={<Cookies isDarkTheme={isDarkTheme}
-                                                                                        bgGradient={gradientContainerLight}/>}/>}
+                        {!isDarkTheme && <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
+                                                                                       bgGradient={gradientContainerLight}/>}/>}
                         {!isDarkTheme &&
                             <Route exact path="/politica-confidentialitate" element={<Gdpr isDarkTheme={isDarkTheme}
                                                                                            bgGradient={gradientContainerLight}/>}/>}
@@ -404,7 +426,7 @@ function App() {
                                                       bgGradient={gradientContainerLight}/>}/>}
                         {!isDarkTheme &&
                             <Route exact path="/login"
-                                   element={<LogIn isDarkTheme={isDarkTheme}
+                                   element={<LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
                                                    bgGradient={gradientContainerLight}/>}/>}
                         {!isDarkTheme &&
                             <Route exact path="/recover"
@@ -414,6 +436,11 @@ function App() {
                             <Route exact path="/recover-password"
                                    element={<RecoverAccountNewPassword isDarkTheme={isDarkTheme}
                                                                        bgGradient={gradientContainerLight}/>}/>}
+                        {console.log(isAuthenticated)}
+                        {!isDarkTheme &&
+                            <Route exact path="/profile"
+                                   element={isAuthenticated ? <Profile isDarkTheme={isDarkTheme}
+                                                     bgGradient={gradientContainerLight}/> : <Navigate to="/login" />}/>}
                         {!isDarkTheme &&
                             <Route exact path="*"
                                    element={<PageNotFound isDarkTheme={isDarkTheme}
@@ -421,7 +448,7 @@ function App() {
                     </Routes>
                 </BrowserRouter>
 
-               
+
                 <CookieConsent/>
 
                 {

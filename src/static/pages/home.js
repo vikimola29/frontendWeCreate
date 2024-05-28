@@ -5,7 +5,7 @@ import Page1 from "../components/page1";
 export default function Home(props) {
     return (
         <div className="home">
-            <Header/>
+
 
             {
                 props.isDarkTheme ?

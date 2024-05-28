@@ -56,7 +56,6 @@ export default function RecoverAccountMailForm(props) {
     return (
 
         <GradientContainer>
-            <Header/>
             <div style={{height: '5rem'}}>
             </div>
 

@@ -9,7 +9,7 @@ import {NavLink} from "react-router-dom";
 import {useTheme} from '@material-ui/core/styles';
 
 
-export default function Header() {
+export default function Header(props) {
     const logoText = require("../image/header/logoText.png");
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down(850));
     const isExtraSmallScreenLogo = useMediaQuery((theme) => theme.breakpoints.down(350));
@@ -96,7 +96,8 @@ export default function Header() {
                         </NavLink>
                     }
 
-                    {isSmallScreen ? (<IconButton
+                    {isSmallScreen ?
+                        (<IconButton
                             onClick={handleMenuClick}
                             size="large"
                             edge="start"
@@ -143,13 +144,14 @@ export default function Header() {
                                                       defaultMessage="Contact"/>
                                 </CustomMenuItem2>
                             </NavLink>
+
                             <NavLink
                                 className="header-item-navlink"
-                                to="/login"
+                                to="/profile"
                             >
                                 <CustomMenuItem2>
                                     <FormattedMessage id="header.login"
-                                                      defaultMessage="Login"/>
+                                                      defaultMessage="Account"/>
                                 </CustomMenuItem2>
                             </NavLink>
 
@@ -201,11 +203,11 @@ export default function Header() {
                 </NavLink>
                 <NavLink
                     className="header-item-navlink"
-                    to="/login"
+                    to="/profile"
                 >
                     <CustomMenuItem className='header-dropdown-item' onClick={handleMenuClose}>
                         <FormattedMessage id="header.login"
-                                          defaultMessage="Login"/>
+                                          defaultMessage="Account"/>
                     </CustomMenuItem>
                 </NavLink>
 

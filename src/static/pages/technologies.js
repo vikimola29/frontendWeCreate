@@ -21,7 +21,6 @@ export default function Technologies(props) {
     return (
         <GradientContainer>
 
-            <Header/>
 
             <div style={{height: '5rem'}}>
             </div>
