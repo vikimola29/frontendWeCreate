@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import axios from 'axios';
-import Header from "../components/header";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import {Alert, Button, FormControl, FormHelperText, FormLabel, Grid, TextField, useMediaQuery} from "@mui/material";
+import {Button, FormControl, FormHelperText, FormLabel, Grid, TextField, useMediaQuery} from "@mui/material";
 import {BiMap, BiPhoneCall} from "react-icons/bi";
 import {LuMails} from "react-icons/lu";
 import {AiOutlineFieldTime, AiOutlineInfoCircle} from "react-icons/ai";
-import CheckIcon from "@mui/icons-material/Check";
+import Messages from "../components/Messages";
 
 
 export default function Contact(props) {
@@ -17,8 +16,6 @@ export default function Contact(props) {
     const outreachDark = require("../image/contact/outreachDark.png")
     const logoLight = require("../image/contact/logoLight.png")
     const logoDark = require("../image/contact/logoDark.png")
-    const [successMessage, setSuccessMessage] = useState('');
-    const [warningMessage, setWarningMessage] = useState('');
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
     const alertRef = useRef(null);
@@ -41,46 +38,13 @@ export default function Contact(props) {
     const handleSubmit = async () => {
         try {
             await axios.post('http://127.0.0.1:8000/backend/api/create_message/', formData);
-            const messageS = <FormattedMessage id='contact.sub.alert.succ'/>
-            setSuccessMessage(messageS);
             setOpenSuccess(true);
             setOpenWarning(false);
         } catch (error) {
-            const messageW = <FormattedMessage id='contact.sub.alert.warn'/>
-            setWarningMessage(messageW);
             setOpenSuccess(false);
             setOpenWarning(true);
         }
     };
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseWarning = () => {
-        setOpenWarning(false);
-    };
-
-    const resizeObserver = new ResizeObserver(() => {
-        if (alertRef.current) {
-            const {width, height} = alertRef.current.getBoundingClientRect();
-            if (width === 0 || height === 0) {
-                setOpenSuccess(false);
-                setOpenWarning(false);
-            }
-        }
-    });
-
-    useEffect(() => {
-        if (alertRef.current) {
-            resizeObserver.observe(alertRef.current);
-        }
-
-        return () => {
-            // Clean up the ResizeObserver
-            resizeObserver.disconnect();
-        };
-    }, []);
 
 
     return (
@@ -119,9 +83,9 @@ export default function Contact(props) {
                     <div className="contact-company-name">
                         <br/>
                         {props.isDarkTheme ?
-                        <img className="contact-company-logo" src={logoDark} alt="logo"/>
+                            <img className="contact-company-logo" src={logoDark} alt="logo"/>
                             :
-                        <img className="contact-company-logo" src={logoLight} alt="logo"/>
+                            <img className="contact-company-logo" src={logoLight} alt="logo"/>
                         }
                         <Typography component={'span'} variant="body1">
                             <FormattedMessage id='contact.company.name'
@@ -385,46 +349,14 @@ export default function Contact(props) {
                                          width: isSmallScreen ? '100%' : '60%'
                                      }}>
 
-                            <div ref={alertRef}>
-                                {openSuccess && (
-                                    <div>
-                                        <Button
-                                            aria-label="close"
-                                            color="inherit"
-                                            size="small"
-                                            sx={{textTransform: 'none'}}
-                                        > <Alert onClick={handleCloseSuccess} icon={<CheckIcon fontSize="inherit"/>}
-                                                 severity="success" sx={{width: '100%'}}>
-                                            <Typography component={'span'} variant="body2">
-                                                {successMessage}
-                                            </Typography>
 
-                                        </Alert>
-                                        </Button>
-                                        <br/>
-                                        <br/>
-                                    </div>)}
+                                <Messages openSuccess={openSuccess} openWarning={openWarning}
+                                          setOpenSuccess={setOpenSuccess}
+                                          setOpenWarning={setOpenWarning}
+                                          successMessage={<FormattedMessage id='contact.sub.alert.succ'/>}
+                                          warningMessage={<FormattedMessage id='contact.sub.alert.warn'/>}/>
 
 
-                                {openWarning && (
-                                    <div>
-                                        <Button
-                                            aria-label="close"
-                                            color="inherit"
-                                            size="small"
-                                            sx={{textTransform: 'none'}}>
-                                            <Alert onClick={handleCloseWarning} severity="warning" sx={{width: '100%'}}>
-                                                <Typography component={'span'} variant="body2">
-                                                    {warningMessage}
-                                                </Typography>
-                                            </Alert>
-                                        </Button>
-                                        <br/>
-                                        <br/>
-                                    </div>
-                                )}
-
-                            </div>
                             <Button variant="contained" style={{width: '50%'}} color="secondary"
                                     onClick={() => handleSubmit(formData)}>
                                 <Typography component={'span'} variant="body2">
@@ -454,8 +386,8 @@ export default function Contact(props) {
                              alt="outreach"/>}
                 </Grid>
             </Grid>
-             <br/>
-                        <br/>
+            <br/>
+            <br/>
         </GradientContainer>
 
 

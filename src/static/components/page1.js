@@ -19,27 +19,32 @@ export default function Page1(props) {
     const GradientContainer = props.bgGradient
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const isMediumScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
+    const isLargeScreen = useMediaQuery((theme) => theme.breakpoints.up('lg'));
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth', // Optional: Adds smooth scrolling animation
+            behavior: 'smooth',
         });
     };
 
     return (
         <GradientContainer>
 
-            <Grid container className="page1-blank-top">
-            </Grid>
+            <div style={{height: '5rem'}}>
+            </div>
 
             <Grid container item xs={12} className="page1-container">
 
-                {/*<img className="logo" style={{height:'50rem'}}*/}
-                {/*     src={companyLogo} alt="logo1"/>*/}
 
                 <Grid item xs={12} md={6} className="page1-top-first">
 
                     <div className="page1-top-first-text-button-container">
+                        {isLargeScreen && <br/>}
+                        {isLargeScreen && <br/>}
+                        {isLargeScreen && <br/>}
+                        {isLargeScreen && <br/>}
+                        {/*{isLargeScreen && <br/>}*/}
+                        {/*{isLargeScreen && <br/>}*/}
 
                         {/*<div className="page1-top-first-text-container">*/}
                         <Typography variant="h3">
@@ -64,7 +69,12 @@ export default function Page1(props) {
                                     </Typography>
                                 </Button>
                             </NavLink>
+                            {isMediumScreen && <br/>}
+                            {isMediumScreen && <br/>}
+                            {isSmallScreen && <br/>}
+                            {isSmallScreen && <br/>}
                         </div>
+
 
                     </div>
 
@@ -79,8 +89,8 @@ export default function Page1(props) {
 
             </Grid>
 
-<br/>
-<br/>
+            <br/>
+            <br/>
 
             <Grid container item xs={12} className="page1-bottom">
 

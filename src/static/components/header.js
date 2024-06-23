@@ -27,6 +27,13 @@ export default function Header(props) {
         setAnchorEl(null);
     };
 
+     const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
+
     const CustomMenuItem = styled('div')(({theme}) => ({
         color: theme.palette.primary.contrastText,
         // backgroundColor: theme.palette.secondary.main,
@@ -51,7 +58,7 @@ export default function Header(props) {
                     {
                         isExtraSmallScreenLogo && <NavLink style={{flexGrow: 1}}
                                                            className="header-logo-navlink"
-                                                           to="/">
+                                                           to="/" onClick={scrollToTop}>
                             <div className="header-logos">
                                 <img className="header-logo-text-extra-small" src={logoText} alt="logo"/>
                             </div>
@@ -62,7 +69,7 @@ export default function Header(props) {
                         isSmallScreenLogo &&
                         <NavLink style={{flexGrow: 1}}
                                  className="header-logo-navlink"
-                                 to="/"
+                                 to="/" onClick={scrollToTop}
                         >
                             <div className="header-logos">
                                 <img className="header-logo-text-small" src={logoText} alt="logo"/>
@@ -75,7 +82,7 @@ export default function Header(props) {
                         isMediumScreenLogo &&
                         <NavLink style={{flexGrow: 1}}
                                  className="header-logo-navlink"
-                                 to="/"
+                                 to="/" onClick={scrollToTop}
                         >
                             <div className="header-logos">
                                 <img className="header-logo-text-medium" src={logoText} alt="logo"/>
@@ -87,7 +94,7 @@ export default function Header(props) {
                         isLargeScreenLogo &&
                         <NavLink style={{flexGrow: 1}}
                                  className="header-logo-navlink"
-                                 to="/"
+                                 to="/" onClick={scrollToTop}
                         >
                             <div className="header-logos">
                                 <img className="header-logo-text-large" src={logoText} alt="logo"/>
@@ -111,7 +118,7 @@ export default function Header(props) {
                         (<div className='header-expanded-items'>
                             <NavLink
                                 className="header-item-navlink"
-                                to="/servicii">
+                                to="/servicii" onClick={scrollToTop}>
                                 <CustomMenuItem2>
                                     <FormattedMessage id="header.services"
                                                       defaultMessage="Services"/>
@@ -120,7 +127,7 @@ export default function Header(props) {
                             </NavLink>
                             <NavLink
                                 className="header-item-navlink"
-                                to="/tehnologii">
+                                to="/tehnologii" onClick={scrollToTop}>
                                 <CustomMenuItem2>
                                     <FormattedMessage id="header.tech"
                                                       defaultMessage="Technologies"/>
@@ -128,7 +135,7 @@ export default function Header(props) {
                             </NavLink>
                             <NavLink
                                 className="header-item-navlink"
-                                to="/despre"
+                                to="/despre" onClick={scrollToTop}
                             >
                                 <CustomMenuItem2>
                                     <FormattedMessage id="header.about"
@@ -137,7 +144,7 @@ export default function Header(props) {
                             </NavLink>
                             <NavLink
                                 className="header-item-navlink"
-                                to="/contact"
+                                to="/contact" onClick={scrollToTop}
                             >
                                 <CustomMenuItem2>
                                     <FormattedMessage id="header.contact"
@@ -147,7 +154,7 @@ export default function Header(props) {
 
                             <NavLink
                                 className="header-item-navlink"
-                                to="/profile"
+                                to="/profile" onClick={scrollToTop}
                             >
                                 <CustomMenuItem2>
                                     <FormattedMessage id="header.login"
@@ -166,7 +173,7 @@ export default function Header(props) {
                   onClose={handleMenuClose}>
                 <NavLink
                     className="header-item-navlink"
-                    to="/servicii"
+                    to="/servicii" onClick={scrollToTop}
                 >
                     <CustomMenuItem className='header-dropdown-item' onClick={handleMenuClose}>
                         <FormattedMessage id="header.services"
@@ -175,7 +182,7 @@ export default function Header(props) {
                 </NavLink>
                 <NavLink
                     className="header-item-navlink"
-                    to="/tehnologii"
+                    to="/tehnologii" onClick={scrollToTop}
                 >
                     <CustomMenuItem className='header-dropdown-item'
                                     onClick={handleMenuClose}>
@@ -185,7 +192,7 @@ export default function Header(props) {
                 </NavLink>
                 <NavLink
                     className="header-item-navlink"
-                    to="/despre"
+                    to="/despre" onClick={scrollToTop}
                 >
                     <CustomMenuItem className='header-dropdown-item' onClick={handleMenuClose}>
                         <FormattedMessage id="header.about"
@@ -194,7 +201,7 @@ export default function Header(props) {
                 </NavLink>
                 <NavLink
                     className="header-item-navlink"
-                    to="/contact"
+                    to="/contact" onClick={scrollToTop}
                 >
                     <CustomMenuItem className='header-dropdown-item' onClick={handleMenuClose}>
                         <FormattedMessage id="header.contact"
@@ -203,7 +210,7 @@ export default function Header(props) {
                 </NavLink>
                 <NavLink
                     className="header-item-navlink"
-                    to="/profile"
+                    to="/profile" onClick={scrollToTop}
                 >
                     <CustomMenuItem className='header-dropdown-item' onClick={handleMenuClose}>
                         <FormattedMessage id="header.login"

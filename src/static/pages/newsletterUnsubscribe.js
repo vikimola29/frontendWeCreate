@@ -1,18 +1,12 @@
 import React, {useState} from "react";
-import Header from "../components/header";
-import {Alert, Button, FormControl, FormHelperText, Grid, TextField} from "@mui/material";
+import {Button, FormControl, FormHelperText, Grid, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import axios from "axios";
-import CheckIcon from "@mui/icons-material/Check";
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import {AiOutlineClose} from "react-icons/ai";
+import Messages from "../components/Messages";
 
 export default function NewsletterUnsubscribe(props) {
     const GradientContainer = props.bgGradient
-    const [successMessage, setSuccessMessage] = useState('');
-    const [warningMessage, setWarningMessage] = useState('');
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
     const [formData, setFormData] = useState({
@@ -31,26 +25,13 @@ export default function NewsletterUnsubscribe(props) {
 
     const handleSubmit = async (formData) => {
         try {
-            await axios.post('https://wecreatedesigns.ro/backend/api/newsletter/unsubscribe/', formData);
-            const messageS = <FormattedMessage id='newsletter.unsub.alert.succ'/>
-            setSuccessMessage(messageS);
+            await axios.post('http://localhost:8000/backend/api/newsletter/unsubscribe/', formData);
             setOpenSuccess(true);
             setOpenWarning(false);
         } catch (error) {
-            const messageW = <FormattedMessage id='newsletter.unsub.alert.warn'/>
-            setWarningMessage(messageW);
             setOpenSuccess(false);
             setOpenWarning(true);
         }
-    };
-
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseWarning = () => {
-        setOpenWarning(false);
     };
 
 
@@ -94,43 +75,10 @@ export default function NewsletterUnsubscribe(props) {
                         </FormHelperText>
                         <br/>
 
-                        {openSuccess && (
-                            <div>
-                                <Button
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    sx={{textTransform: 'none'}}
-                                > <Alert onClick={handleCloseSuccess} icon={<CheckIcon fontSize="inherit"/>}
-                                         severity="success" sx={{width: '100%'}}>
-                                    <Typography component={'span'} variant="body2">
-                                        {successMessage}
-                                    </Typography>
-
-                                </Alert>
-                                </Button>
-                                <br/>
-                                <br/>
-                            </div>)}
-
-
-                        {openWarning && (
-                            <div>
-                                <Button
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    sx={{textTransform: 'none'}}>
-                                    <Alert onClick={handleCloseWarning} severity="warning" sx={{width: '100%'}}>
-                                        <Typography component={'span'} variant="body2">
-                                            {warningMessage}
-                                        </Typography>
-                                    </Alert>
-                                </Button>
-                                <br/>
-                                <br/>
-                            </div>
-                        )}
+                        <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
+                                  setOpenWarning={setOpenWarning}
+                                  successMessage={<FormattedMessage id='newsletter.unsub.alert.succ'/>}
+                                  warningMessage={<FormattedMessage id='newsletter.unsub.alert.warn'/>}/>
 
 
                         <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">

@@ -6,8 +6,7 @@ import {FormattedMessage} from "react-intl";
 import CheckIcon from "@mui/icons-material/Check";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-
-
+import Messages from "../components/Messages";
 
 
 export default function RecoverAccountMailForm(props) {
@@ -38,8 +37,6 @@ export default function RecoverAccountMailForm(props) {
             await axios.post('http://127.0.0.1:8000/backend/api/recover/', formData);
             routerNavigate('/recover-password')
         } catch (error) {
-            const messageW = <FormattedMessage id='recover.warn'/>
-            setWarningMessage(messageW);
             setOpenSuccess(false);
             setOpenWarning(true);
         }
@@ -103,43 +100,10 @@ export default function RecoverAccountMailForm(props) {
                     <br/>
 
 
-                    {openSuccess && (
-                        <div>
-                            <Button
-                                aria-label="close"
-                                color="inherit"
-                                size="small"
-                                sx={{textTransform: 'none'}}
-                            > <Alert onClick={handleCloseSuccess} icon={<CheckIcon fontSize="inherit"/>}
-                                     severity="success" sx={{width: '100%'}}>
-                                <Typography component={'span'} variant="body2">
-                                    {successMessage}
-                                </Typography>
-
-                            </Alert>
-                            </Button>
-                            <br/>
-                            <br/>
-                        </div>)}
-
-
-                    {openWarning && (
-                        <div>
-                            <Button
-                                aria-label="close"
-                                color="inherit"
-                                size="small"
-                                sx={{textTransform: 'none'}}>
-                                <Alert onClick={handleCloseWarning} severity="warning" sx={{width: '100%'}}>
-                                    <Typography component={'span'} variant="body2">
-                                        {warningMessage}
-                                    </Typography>
-                                </Alert>
-                            </Button>
-                            <br/>
-                            <br/>
-                        </div>
-                    )}
+                   <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
+                                  setOpenWarning={setOpenWarning}
+                                  successMessage={<FormattedMessage id='recover.succ'/>}
+                                  warningMessage={<FormattedMessage id='recover.warn'/>}/>
 
 
                     <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">

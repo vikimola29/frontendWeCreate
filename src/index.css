@@ -95,7 +95,7 @@ code {
     /*background-color: #f7bfbe !important;*/
     display: flex;
     flex-direction: column;
-    align-items: baseline ;
+    align-items: baseline;
     justify-content: center;
     /*padding-left: 2em !important;*/
     /*padding-right: 1em !important;*/
@@ -755,7 +755,7 @@ code {
     align-items: center;
 }
 
-.login-forgotten-password{
+.login-forgotten-password {
     /*background-color: coral;*/
     width: 20vw;
     display: flex;
@@ -763,6 +763,7 @@ code {
     justify-content: center;
     align-items: center;
 }
+
 /*RECOVER*/
 .recover-title {
     display: flex;
@@ -778,6 +779,7 @@ code {
     justify-content: center;
     align-items: center;
 }
+
 /*RECOVER-PASSWORD*/
 .recover-password-title {
     display: flex;
@@ -794,6 +796,21 @@ code {
     align-items: center;
 }
 
+/*PROFILE*/
+.profile{
+    min-height: 70vh;
+}
 
+.profile-logout-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-
+/*Success AND Warning*/
+.Success-Warning{
+    /*background-color: coral;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

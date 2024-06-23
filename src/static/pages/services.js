@@ -13,6 +13,7 @@ import {CgProfile} from "react-icons/cg";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 import CheckIcon from "@mui/icons-material/Check";
+import Messages from "../components/Messages";
 
 
 export default function Services(props) {
@@ -21,16 +22,14 @@ export default function Services(props) {
     const GradientContainer = props.bgGradient
     const computer = require("../image/services/computer1.png")
     const comp = require("../image/services/computer2.png")
-    const [successMessage, setSuccessMessage] = useState('');
-    const [warningMessage, setWarningMessage] = useState('');
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
     const [formData, setFormData] =
-        useState({email: '',
-    });
+        useState({
+            email: '',
+        });
     const handleChange = (e) => {
         const {id, value} = e.target;
-        // console.log(id, value);
         setFormData({
             ...formData,
             [id]: value,
@@ -39,32 +38,22 @@ export default function Services(props) {
     const handleSubmit = async () => {
         try {
             await axios.post('http://localhost:8000/backend/api/newsletter/subscribe/', formData);
-            const messageS = <FormattedMessage id='serv.sub.alert.succ'/>
-            setSuccessMessage(messageS);
             setOpenSuccess(true);
             setOpenWarning(false);
         } catch (error) {
-            const messageW = <FormattedMessage id='serv.sub.alert.warn'/>
-            setWarningMessage(messageW);
             setOpenSuccess(false);
             setOpenWarning(true);
         }
+
+
     };
 
 
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth', // Optional: Adds smooth scrolling animation
+            behavior: 'smooth',
         });
-    };
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseWarning = () => {
-        setOpenWarning(false);
     };
 
 
@@ -334,49 +323,14 @@ export default function Services(props) {
                         </FormHelperText>
                         <br/>
 
-
-                        {openSuccess && (
-                            <div>
-                                <Button
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    sx={{textTransform: 'none'}}
-                                > <Alert onClick={handleCloseSuccess} icon={<CheckIcon fontSize="inherit"/>}
-                                         severity="success" sx={{width: '100%'}}>
-                                    <Typography component={'span'} variant="body2">
-                                        {successMessage}
-                                    </Typography>
-
-                                </Alert>
-                                </Button>
-                                <br/>
-                                <br/>
-                            </div>)}
-
-
-                        {openWarning && (
-                            <div>
-                                <Button
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    sx={{textTransform: 'none'}}>
-                                    <Alert onClick={handleCloseWarning} severity="warning" sx={{width: '100%'}}>
-                                        <Typography component={'span'} variant="body2">
-                                            {warningMessage}
-                                        </Typography>
-                                    </Alert>
-                                </Button>
-                                <br/>
-                                <br/>
-                            </div>
-                        )}
+                        <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
+                                  setOpenWarning={setOpenWarning} successMessage={<FormattedMessage id='serv.sub.alert.succ'/>}
+                                  warningMessage={<FormattedMessage id='serv.sub.alert.warn'/>}/>
 
 
                         <NavLink
                             className="header-logo-navlink"
-                            to="/servicii">
+                            to="/servicii" >
                             <Button variant="contained" onClick={() => handleSubmit(formData)} color="secondary">
                                 <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
                                     <FormattedMessage id='serv.bottom.button'

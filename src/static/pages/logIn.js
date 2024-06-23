@@ -1,25 +1,34 @@
-import React, {useState} from "react";
-import Header from "../components/header";
-import {Alert, Button, FormControl, TextField} from "@mui/material";
+import React, {useContext, useEffect, useState} from "react";
+import {Button, FormControl, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import CheckIcon from "@mui/icons-material/Check";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import Cookies from 'js-cookie';
-
+import jwtDecode from 'jwt-decode';
+import AuthContext from "../components/AuthContext";
+import Messages from "../components/Messages";
 
 export default function LogIn(props) {
     const GradientContainer = props.bgGradient
-    const [successMessage, setSuccessMessage] = useState('');
-    const [warningMessage, setWarningMessage] = useState('');
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: ''
     });
+
+    const {loginUser} = useContext(AuthContext)
+
+    useEffect(() => {
+        const token = localStorage.getItem('access_token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            if (decodedToken.exp * 1000 > Date.now()) {
+                props.setIsAuthenticated(true);
+                navigate('/profile');
+            }
+        }
+    }, [navigate, props]);
 
 
     const handleChange = (e) => {
@@ -32,42 +41,26 @@ export default function LogIn(props) {
     };
 
 
-    const handleSubmit = async (formData) => {
+    const handleSubmit = async (e) => {
         try {
-            const csrfToken = Cookies.get('csrftoken');
-            await axios.post('http://127.0.0.1:8000/backend/api/login/', formData, {
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                },
-                withCredentials: true,
-            });
-            const messageS = <FormattedMessage id='login.alert.succ'/>
-            setSuccessMessage(messageS);
+            console.log("LOGIN")
+            e.preventDefault()
+            const username = e.target.username.value
+            const password = e.target.password.value
+            console.log(username)
+            console.log(password)
+            await loginUser(username, password)
+
             setOpenSuccess(true);
             setOpenWarning(false);
 
-            props.setIsAuthenticated(() => {
-            const newAuth = true; // Set to true directly
-            localStorage.setItem('isAuthenticated', newAuth.toString());
-            return newAuth});
-
+            props.setIsAuthenticated(true);
+            localStorage.setItem('isAuthenticated', 'true');
             navigate('/profile');
-
         } catch (error) {
-            const messageW = <FormattedMessage id='login.alert.warn'/>
-            setWarningMessage(messageW);
             setOpenSuccess(false);
             setOpenWarning(true);
         }
-    };
-
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseWarning = () => {
-        setOpenWarning(false);
     };
 
 
@@ -84,7 +77,7 @@ export default function LogIn(props) {
 
             <div className="login-content">
                 <div className="login-title">
-                    <Typography component={'span'} variant="h3" style={{textAlign: 'center'}}>
+                    <Typography component={'span'} variant="h3" >
                         <FormattedMessage id='login.title'
                                           defaultMessage="Log In"/>
                     </Typography>
@@ -92,110 +85,80 @@ export default function LogIn(props) {
                 <br/>
                 <br/>
 
-
-                <FormControl
-                    margin="normal"
-                    color="primary"
-                    variant="filled">
-
-
-                    <TextField id="email"
-                               type="email"
-                               value={formData.email} onChange={handleChange} variant="outlined" color="secondary"
-                               style={{width: '100%'}}
-                               InputLabelProps={{color: "primary"}}
-                               label={
-                                   <Typography variant="body2">
-                                       <FormattedMessage id='login.email'
-                                                         defaultMessage="Mail"/>
-                                   </Typography>
-                               }
-                               aria-describedby="email-text"/>
+                <form onSubmit={handleSubmit}>
+                    <FormControl
+                        margin="normal"
+                        color="primary"
+                        variant="filled">
 
 
-                    <br/>
-
-                    <TextField id="password"
-                               type="password"
-                               value={formData.password} onChange={handleChange} variant="outlined" color="secondary"
-                               style={{width: '100%'}}
-                               InputLabelProps={{color: "primary"}}
-                               label={
-                                   <Typography variant="body2">
-                                       <FormattedMessage id='login.password'
-                                                         defaultMessage="Password"/>
-                                   </Typography>
-                               }
-                               aria-describedby="password-text"/>
-                    <Typography component={'span'} variant="caption" sx={{marginLeft: '0.7rem'}}>
-
-                        <FormattedMessage
-                            // id="login.forgotten"
-                            id="login.forgotten.password"
-                            defaultMessage="{link}"
-                            values={{
-                                link: (
-                                    <a href="/recover" target="_blank" rel="noopener noreferrer">
-                                        <FormattedMessage id="login.forgotten.password" defaultMessage="Parola uitata"/>
-                                    </a>
-                                ),
-                            }}
-                        />
-                    </Typography>
-                    <br/>
+                        <TextField id="username"
+                                   type="text"
+                                   value={formData.username} onChange={handleChange} variant="outlined"
+                                   color="secondary"
+                                   style={{width: '100%'}}
+                                   InputLabelProps={{color: "primary"}}
+                                   label={
+                                       <Typography variant="body2">
+                                           <FormattedMessage id='login.email'
+                                                             defaultMessage="Mail"/>
+                                       </Typography>
+                                   }
+                                   aria-describedby="email-text"/>
 
 
-                    {openSuccess && (
-                        <div>
-                            <Button
-                                aria-label="close"
-                                color="inherit"
-                                size="small"
-                                sx={{textTransform: 'none'}}
-                            > <Alert onClick={handleCloseSuccess} icon={<CheckIcon fontSize="inherit"/>}
-                                     severity="success" sx={{width: '100%'}}>
-                                <Typography component={'span'} variant="body2">
-                                    {successMessage}
-                                </Typography>
+                        <br/>
 
-                            </Alert>
-                            </Button>
-                            <br/>
-                            <br/>
-                        </div>)}
+                        <TextField id="password"
+                                   type="password"
+                                   value={formData.password} onChange={handleChange} variant="outlined"
+                                   color="secondary"
+                                   style={{width: '100%'}}
+                                   InputLabelProps={{color: "primary"}}
+                                   label={
+                                       <Typography variant="body2">
+                                           <FormattedMessage id='login.password'
+                                                             defaultMessage="Password"/>
+                                       </Typography>
+                                   }
+                                   aria-describedby="password-text"/>
+                        <Typography component={'span'} variant="caption" sx={{marginLeft: '0.7rem'}}>
 
-
-                    {openWarning && (
-                        <div>
-                            <Button
-                                aria-label="close"
-                                color="inherit"
-                                size="small"
-                                sx={{textTransform: 'none'}}>
-                                <Alert onClick={handleCloseWarning} severity="warning" sx={{width: '100%'}}>
-                                    <Typography component={'span'} variant="body2">
-                                        {warningMessage}
-                                    </Typography>
-                                </Alert>
-                            </Button>
-                            <br/>
-                            <br/>
-                        </div>
-                    )}
-
-
-                    <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">
-                        <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
-                            <FormattedMessage id='login.title'
-                                              defaultMessage="Log In"/>
+                            <FormattedMessage
+                                // id="login.forgotten"
+                                id="login.forgotten.password"
+                                defaultMessage="{link}"
+                                values={{
+                                    link: (
+                                        <a href="/recover" target="_blank" rel="noopener noreferrer">
+                                            <FormattedMessage id="login.forgotten.password"
+                                                              defaultMessage="Parola uitata"/>
+                                        </a>
+                                    ),
+                                }}
+                            />
                         </Typography>
-                    </Button>
+                        <br/>
 
-                    <br/>
+                        <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={{setOpenSuccess}}
+                                  setOpenWarning={setOpenWarning}
+                                  successMessage={<FormattedMessage id='login.alert.succ'/>}
+                                  warningMessage={<FormattedMessage id='login.alert.warn'/>}/>
 
-                </FormControl>
 
+                        {/*<Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">*/}
+                        <Button variant="contained" color="secondary" type="submit">
+                            <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
+                                <FormattedMessage id='login.title'
+                                                  defaultMessage="Log In"/>
+                            </Typography>
+                        </Button>
 
+                        <br/>
+
+                    </FormControl>
+
+                </form>
                 <Button onClick={() => handleButtonClick()} variant="contained" color="primary">
                     <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
                         <FormattedMessage id='login.register'

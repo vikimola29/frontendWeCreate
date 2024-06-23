@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import CheckIcon from "@mui/icons-material/Check";
 import axios from "axios";
+import Messages from "../components/Messages";
 
 
 export default function RecoverAccountNewPassword(props) {
@@ -116,43 +117,12 @@ export default function RecoverAccountNewPassword(props) {
 
                     <br/>
 
-                    {openSuccess && (
-                        <div>
-                            <Button
-                                aria-label="close"
-                                color="inherit"
-                                size="small"
-                                sx={{textTransform: 'none'}}
-                            > <Alert onClick={handleCloseSuccess} icon={<CheckIcon fontSize="inherit"/>}
-                                     severity="success" sx={{width: '100%'}}>
-                                <Typography component={'span'} variant="body2">
-                                    {successMessage}
-                                </Typography>
-
-                            </Alert>
-                            </Button>
-                            <br/>
-                            <br/>
-                        </div>)}
+                          <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
+                                  setOpenWarning={setOpenWarning}
+                                  successMessage={<FormattedMessage id='recover.password.succ'/>}
+                                  warningMessage={<FormattedMessage id='recover.password.warn'/>}/>
 
 
-                    {openWarning && (
-                        <div>
-                            <Button
-                                aria-label="close"
-                                color="inherit"
-                                size="small"
-                                sx={{textTransform: 'none'}}>
-                                <Alert onClick={handleCloseWarning} severity="warning" sx={{width: '100%'}}>
-                                    <Typography component={'span'} variant="body2">
-                                        {warningMessage}
-                                    </Typography>
-                                </Alert>
-                            </Button>
-                            <br/>
-                            <br/>
-                        </div>
-                    )}
 
 
                     <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">

@@ -17,7 +17,7 @@ export default function FooterRight() {
                                       className="footer-grid-text"/>
                 </Link>
 
-                <Link href='/Cookie'
+                <Link href='/cookies'
                       rel="noopener noreferrer" color="inherit" sx={{textDecoration: 'none'}}>
                     <FormattedMessage id='footer.cookies'
                                       defaultMessage="Cookies"
