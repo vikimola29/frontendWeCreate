@@ -413,17 +413,17 @@ function App() {
                                            element={isAuthenticated === "true" ?
                                                <Clients setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
-                                                        bgGradient={gradientContainerLight}/> :
+                                                        bgGradient={gradientContainerDark}/> :
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                      bgGradient={gradientContainerLight}/>}/>}
+                                                      bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="/projects"
                                            element={isAuthenticated === "true" ?
                                                <Projects setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
-                                                        bgGradient={gradientContainerLight}/> :
+                                                        bgGradient={gradientContainerDark}/> :
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                      bgGradient={gradientContainerLight}/>}/>}
+                                                      bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="*"
                                            element={<PageNotFound isDarkTheme={isDarkTheme}

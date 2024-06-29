@@ -155,7 +155,7 @@ const Profile = (props) => {
                     {user && user.status === "Admin" && (
                         <Grid container item sm={12} md={6} className="profile-projects">
                             <div className="profile-projects-btn">
-                                <Button onClick={() => goToClients()} variant="contained" color="secondary">
+                                <Button onClick={() => goToClients()} variant="contained" color="primary">
                                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                                         <FormattedMessage id='profile.clients.button' defaultMessage="Go to Clients"/>
                                     </Typography>
@@ -163,7 +163,7 @@ const Profile = (props) => {
                             </div>
 
                             <div className="profile-projects-btn">
-                                <Button onClick={() => goToProjects()} variant="contained" color="secondary">
+                                <Button onClick={() => goToProjects()} variant="contained" color="primary">
                                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                                         <FormattedMessage id='profile.projects.button' defaultMessage="Go to Projects"/>
                                     </Typography>
