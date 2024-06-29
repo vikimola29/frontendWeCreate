@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import {Button, FormControl, FormHelperText, TextField} from "@mui/material";
 import Messages from "../components/Messages";
+import AuthContext from "../components/AuthContext";
 
 
 export default function Register(props) {
@@ -17,6 +18,7 @@ export default function Register(props) {
         password2: ''
 
     });
+    const {loginUser} = useContext(AuthContext)
 
 
     const handleChange = (e) => {
@@ -53,6 +55,8 @@ const handleSubmit = async (formData) => {
             console.log('Registration successful:', data.message);
             setOpenSuccess(true);
             setOpenWarning(false);
+
+
         } else {
             console.log('Registration failed:', data.message);
             setOpenSuccess(false);

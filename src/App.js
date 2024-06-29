@@ -18,8 +18,11 @@ import LogIn from "./static/pages/logIn";
 import RecoverAccountMailForm from "./static/pages/recoverAccountMailForm";
 import RecoverAccountNewPassword from "./static/pages/recoverAccountNewPassword";
 import Profile from "./static/pages/profile";
+import Clients from "./static/pages/clients";
 import Header from "./static/components/header";
 import {AuthProvider} from "./static/components/AuthContext";
+import {AuthProviderProfileData} from "./static/components/fetchProfileData";
+import Projects from "./static/pages/project";
 
 function App() {
     const lightTheme = {
@@ -316,8 +319,8 @@ function App() {
             setIsAuthenticated('true');
         }
 
-        console.log(isAuthenticated, "auth App")
-        console.log(isDarkTheme, "theme App")
+        // console.log(isAuthenticated, "auth App")
+        // console.log(isDarkTheme, "theme App")
     }, [isDarkTheme, isAuthenticated]);
 
 
@@ -347,114 +350,156 @@ function App() {
             <div className="app">
                 <BrowserRouter>
                     <AuthProvider>
+                        <AuthProviderProfileData>
 
-                        <Header isAuthenticated={isAuthenticated}/>
+                            <Header isAuthenticated={isAuthenticated}/>
 
-                        <Routes>
+                            <Routes>
 
-                            <Route exact path="/" element={<Home isDarkTheme={isDarkTheme}
-                                                                 gradientContainerLight={gradientContainerLight}
-                                                                 gradientContainerDark={gradientContainerDark}/>}/>
-                            {isDarkTheme && <Route exact path="/servicii"
-                                                   element={<Services isDarkTheme={isDarkTheme}
-                                                                      bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/tehnologii" element={<Technologies isDarkTheme={isDarkTheme}
-                                                                                       bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme && <Route exact path="/despre" element={<About isDarkTheme={isDarkTheme}
-                                                                                        bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme && <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
+                                <Route exact path="/" element={<Home isDarkTheme={isDarkTheme}
+                                                                     gradientContainerLight={gradientContainerLight}
+                                                                     gradientContainerDark={gradientContainerDark}/>}/>
+                                {isDarkTheme && <Route exact path="/servicii"
+                                                       element={<Services isDarkTheme={isDarkTheme}
+                                                                          bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/tehnologii" element={<Technologies isDarkTheme={isDarkTheme}
                                                                                            bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme && <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
-                                                                                          bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/politica-confidentialitate" element={<Gdpr isDarkTheme={isDarkTheme}
+                                {isDarkTheme && <Route exact path="/despre" element={<About isDarkTheme={isDarkTheme}
+                                                                                            bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme && <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
                                                                                                bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/termeni-conditii"
-                                       element={<TermsConditions isDarkTheme={isDarkTheme}
-                                                                 bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/newsletter-unsubscribe"
-                                       element={<NewsletterUnsubscribe isDarkTheme={isDarkTheme}
-                                                                       bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/register"
-                                       element={<Register isDarkTheme={isDarkTheme}
+                                {isDarkTheme && <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
+                                                                                              bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/politica-confidentialitate"
+                                           element={<Gdpr isDarkTheme={isDarkTheme}
                                                           bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/login"
-                                       element={<LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                       bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/recover"
-                                       element={<RecoverAccountMailForm isDarkTheme={isDarkTheme}
-                                                                        bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/recover-password"
-                                       element={<RecoverAccountNewPassword isDarkTheme={isDarkTheme}
+                                {isDarkTheme &&
+                                    <Route exact path="/termeni-conditii"
+                                           element={<TermsConditions isDarkTheme={isDarkTheme}
+                                                                     bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/newsletter-unsubscribe"
+                                           element={<NewsletterUnsubscribe isDarkTheme={isDarkTheme}
                                                                            bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="/profile"
-                                       element={isAuthenticated==="true" ?
-                                           <Profile setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                    bgGradient={gradientContainerDark}/> : <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                       bgGradient={gradientContainerDark}/>}/>}
-                            {isDarkTheme &&
-                                <Route exact path="*"
-                                       element={<PageNotFound isDarkTheme={isDarkTheme}
+                                {isDarkTheme &&
+                                    <Route exact path="/register"
+                                           element={<Register isDarkTheme={isDarkTheme}
                                                               bgGradient={gradientContainerDark}/>}/>}
-                            {!isDarkTheme && <Route exact path="/servicii"
-                                                    element={<Services isDarkTheme={isDarkTheme}
-                                                                       bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/tehnologii" element={<Technologies isDarkTheme={isDarkTheme}
-                                                                                       bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme && <Route exact path="/despre" element={<About isDarkTheme={isDarkTheme}
-                                                                                         bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme && <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
-                                                                                            bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme && <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
-                                                                                           bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/politica-confidentialitate" element={<Gdpr isDarkTheme={isDarkTheme}
-                                                                                               bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/termeni-conditii"
-                                       element={<TermsConditions isDarkTheme={isDarkTheme}
-                                                                 bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/newsletter-unsubscribe"
-                                       element={<NewsletterUnsubscribe isDarkTheme={isDarkTheme}
-                                                                       bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/register"
-                                       element={<Register isDarkTheme={isDarkTheme}
-                                                          bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/login"
-                                       element={<LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                       bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/recover"
-                                       element={<RecoverAccountMailForm isDarkTheme={isDarkTheme}
-                                                                        bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/recover-password"
-                                       element={<RecoverAccountNewPassword isDarkTheme={isDarkTheme}
+                                {isDarkTheme &&
+                                    <Route exact path="/login"
+                                           element={<LogIn setIsAuthenticated={setIsAuthenticated}
+                                                           isDarkTheme={isDarkTheme}
+                                                           bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/recover"
+                                           element={<RecoverAccountMailForm isDarkTheme={isDarkTheme}
+                                                                            bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/recover-password"
+                                           element={<RecoverAccountNewPassword isDarkTheme={isDarkTheme}
+                                                                               bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/profile"
+                                           element={isAuthenticated === "true" ?
+                                               <Profile setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerDark}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/clients"
+                                           element={isAuthenticated === "true" ?
+                                               <Clients setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/projects"
+                                           element={isAuthenticated === "true" ?
+                                               <Projects setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="*"
+                                           element={<PageNotFound isDarkTheme={isDarkTheme}
+                                                                  bgGradient={gradientContainerDark}/>}/>}
+                                {!isDarkTheme && <Route exact path="/servicii"
+                                                        element={<Services isDarkTheme={isDarkTheme}
                                                                            bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="/profile"
-                                       element={isAuthenticated==="true"?
-                                           <Profile setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                    bgGradient={gradientContainerLight}/> : <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                       bgGradient={gradientContainerLight}/>}/>}
-                            {!isDarkTheme &&
-                                <Route exact path="*"
-                                       element={<PageNotFound isDarkTheme={isDarkTheme}
+                                {!isDarkTheme &&
+                                    <Route exact path="/tehnologii" element={<Technologies isDarkTheme={isDarkTheme}
+                                                                                           bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme && <Route exact path="/despre" element={<About isDarkTheme={isDarkTheme}
+                                                                                             bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
+                                                                                   bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme && <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
+                                                                                               bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/politica-confidentialitate"
+                                           element={<Gdpr isDarkTheme={isDarkTheme}
+                                                          bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/termeni-conditii"
+                                           element={<TermsConditions isDarkTheme={isDarkTheme}
+                                                                     bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/newsletter-unsubscribe"
+                                           element={<NewsletterUnsubscribe isDarkTheme={isDarkTheme}
+                                                                           bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/register"
+                                           element={<Register isDarkTheme={isDarkTheme}
                                                               bgGradient={gradientContainerLight}/>}/>}
-                        </Routes>
-
+                                {!isDarkTheme &&
+                                    <Route exact path="/login"
+                                           element={<LogIn setIsAuthenticated={setIsAuthenticated}
+                                                           isDarkTheme={isDarkTheme}
+                                                           bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/recover"
+                                           element={<RecoverAccountMailForm isDarkTheme={isDarkTheme}
+                                                                            bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/recover-password"
+                                           element={<RecoverAccountNewPassword isDarkTheme={isDarkTheme}
+                                                                               bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/profile"
+                                           element={isAuthenticated === "true" ?
+                                               <Profile setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/clients"
+                                           element={isAuthenticated === "true" ?
+                                               <Clients setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/projects"
+                                           element={isAuthenticated === "true" ?
+                                               <Projects setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="*"
+                                           element={<PageNotFound isDarkTheme={isDarkTheme}
+                                                                  bgGradient={gradientContainerLight}/>}/>}
+                            </Routes>
+                        </AuthProviderProfileData>
                     </AuthProvider>
                 </BrowserRouter>
 

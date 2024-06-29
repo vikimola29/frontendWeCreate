@@ -799,13 +799,67 @@ code {
 /*PROFILE*/
 .profile{
     min-height: 70vh;
+      padding-left: 3%;
+    padding-right: 3%;
 }
 
+.profile-title{
+    display: flex;
+    justify-content: center;
+}
+.profile-userdata{
+    /*background-color: plum;*/
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+
+}
+.profile-projects{
+    /*background-color: coral;*/
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-evenly !important;
+    align-items: center !important;
+}
+
+.profile-projects-btn{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.profile-project-card {
+   /*background-color: palevioletred;*/
+}
+
+.profile-logout{
+     display: flex;
+    justify-content: center;
+}
 .profile-logout-button{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+/*CLIENTS*/
+.clients-title{
+     display: flex;
+    justify-content: center;
+}
+.clients{
+    min-height: 90vh;
+}
+
+
+/*PROJECTS*/
+.projects-title{
+     display: flex;
+    justify-content: center;
+}
+.projects{
+    min-height: 90vh;
+}
+
 
 /*Success AND Warning*/
 .Success-Warning{

@@ -13,7 +13,7 @@ export default function LogIn(props) {
     const [openWarning, setOpenWarning] = useState(false);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        username: '',
+        email: '',
         password: ''
     });
 
@@ -45,11 +45,11 @@ export default function LogIn(props) {
         try {
             console.log("LOGIN")
             e.preventDefault()
-            const username = e.target.username.value
+            const email = e.target.email.value
             const password = e.target.password.value
-            console.log(username)
+            console.log(email)
             console.log(password)
-            await loginUser(username, password)
+            await loginUser(email, password)
 
             setOpenSuccess(true);
             setOpenWarning(false);
@@ -92,9 +92,9 @@ export default function LogIn(props) {
                         variant="filled">
 
 
-                        <TextField id="username"
+                        <TextField id="email"
                                    type="text"
-                                   value={formData.username} onChange={handleChange} variant="outlined"
+                                   value={formData.email} onChange={handleChange} variant="outlined"
                                    color="secondary"
                                    style={{width: '100%'}}
                                    InputLabelProps={{color: "primary"}}
