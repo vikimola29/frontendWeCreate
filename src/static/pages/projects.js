@@ -52,15 +52,11 @@ export default function Projects(props) {
 
                 <br/>
                 <br/>
-                <Grid container className='projects-profile-btn'>
-                    <div>
                         <Button onClick={() => goToProfile()} variant="contained" color="primary">
                             <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                                 <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
                             </Typography>
                         </Button>
-                    </div>
-                </Grid>
 
 
                 <Grid container>
@@ -70,7 +66,6 @@ export default function Projects(props) {
                                 <br/>
                                 <br/>
                                 <Typography variant="h4">{project.name}</Typography>
-                                <br/>
                                 <Grid container spacing={1}>
                                     <Grid className="projects-data" item xs={12} md={3}>
                                         <Typography variant="body1"><a href={project.link} target="_blank"

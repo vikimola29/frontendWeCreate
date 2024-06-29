@@ -22,7 +22,7 @@ import Clients from "./static/pages/clients";
 import Header from "./static/components/header";
 import {AuthProvider} from "./static/components/AuthContext";
 import {AuthProviderProfileData} from "./static/components/fetchProfileData";
-import Projects from "./static/pages/project";
+import Projects from "./static/pages/projects";
 
 function App() {
     const lightTheme = {
