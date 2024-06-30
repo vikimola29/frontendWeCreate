@@ -23,6 +23,10 @@ import Header from "./static/components/header";
 import {AuthProvider} from "./static/components/AuthContext";
 import {AuthProviderProfileData} from "./static/components/fetchProfileData";
 import Projects from "./static/pages/projects";
+import * as PropTypes from "prop-types";
+import UpdateProject from "./static/pages/projectUpdate";
+
+
 
 function App() {
     const lightTheme = {
@@ -425,6 +429,22 @@ function App() {
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
+                                    <Route exact path="/project-update/:projectId"
+                                           element={isAuthenticated === "true" ?
+                                               <UpdateProject setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerDark}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/project-delete"
+                                           element={isAuthenticated === "true" ?
+                                               <Projects setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerDark}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
                                     <Route exact path="*"
                                            element={<PageNotFound isDarkTheme={isDarkTheme}
                                                                   bgGradient={gradientContainerDark}/>}/>}
@@ -490,6 +510,14 @@ function App() {
                                     <Route exact path="/projects"
                                            element={isAuthenticated === "true" ?
                                                <Projects setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                                  {isDarkTheme &&
+                                    <Route exact path="/project-update/:projectId"
+                                           element={isAuthenticated === "true" ?
+                                               <UpdateProject setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
                                                         bgGradient={gradientContainerLight}/> :
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}

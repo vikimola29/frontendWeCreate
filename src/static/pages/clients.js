@@ -37,6 +37,13 @@ export default function Clients(props) {
         navigate('/profile');
     };
 
+     const goToUpdate = () => {
+        navigate('/client-update')
+    }
+    const goToDelete = () => {
+        navigate('/client-delete')
+    }
+
     return (
         <GradientContainer>
             <div className='clients'>
@@ -52,7 +59,7 @@ export default function Clients(props) {
                 </Grid>
 
 
-                <Button onClick={() => goToProfile()} variant="contained" color="secondary">
+                <Button onClick={() => goToProfile()} variant="contained" color="primary">
                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                         <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
                     </Typography>
@@ -67,17 +74,39 @@ export default function Clients(props) {
                             <div className="project-card">
                                 <br/>
                                 <br/>
-                                <Typography variant="h4">{client.name}</Typography>
+
                                 <Grid container spacing={1}>
-                                    <Grid className="projects-data" item xs={12} md={6}>
+                                    <Grid className="clients-data" item xs={12} md={3}>
+                                         <Typography variant="h4">{client.name}</Typography>
+                                    </Grid>
+                                    <Grid className="clients-data" item xs={12} md={4}>
                                         <Typography variant="body1">Email: {client.email}</Typography>
                                         <Typography variant="body1">Company Name: {client.company_name}</Typography>
                                     </Grid>
-                                    <Grid className="projects-data" item xs={12} md={6}>
+                                    <Grid className="clients-data" item xs={12} md={4}>
                                         <Typography variant="body1">Phone Number: {client.phone_number}</Typography>
                                         <Typography variant="body1">Address: {client.address}</Typography>
                                         <Typography variant="body1">Status: {client.status}</Typography>
                                     </Grid>
+                                    <Grid className="clients-data" item xs={12} md={1}>
+                                            <Button onClick={() => goToUpdate()} variant="contained" color="secondary">
+                                                <Typography component={'span'} style={{color: "#E0F2F1"}}
+                                                            variant='body1'>
+                                                    <FormattedMessage id='project.edit.button'
+                                                                      defaultMessage="Update"/>
+                                                </Typography>
+                                            </Button>
+                                        <div style={{height: '1rem'}}>
+                                        </div>
+                                            <Button onClick={() => goToDelete()} variant="contained" color="secondary">
+                                                <Typography component={'span'} style={{color: "#E0F2F1"}}
+                                                            variant='body1'>
+                                                    <FormattedMessage id='project.delete.button'
+                                                                      defaultMessage="Delete"/>
+                                                </Typography>
+                                            </Button>
+                                    </Grid>
+
                                 </Grid>
                             </div>
                         </Grid>

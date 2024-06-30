@@ -6,6 +6,7 @@ import {FormattedMessage} from "react-intl";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../components/AuthContext";
+import {getAllProjects} from "../components/api";
 
 export default function Projects(props) {
     const GradientContainer = props.bgGradient
@@ -18,11 +19,7 @@ export default function Projects(props) {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/backend/api/all-projects/', {
-                    headers: {
-                        'Authorization': `Bearer ${authTokens.access}`
-                    }
-                });
+                const response = await getAllProjects(authTokens)
                 setProjects(response.data);
             } catch (error) {
                 console.error("Failed to fetch profile data:", error);
@@ -33,6 +30,40 @@ export default function Projects(props) {
     }, [authTokens]);
     const goToProfile = () => {
         navigate('/profile');
+        scrollToTop()
+
+    };
+    const goToAddProject = () => {
+        navigate('/profile');
+        scrollToTop()
+
+    };
+
+
+    const goToUpdate = (projectId) => {
+        navigate(`/project-update/${projectId}`);
+        scrollToTop()
+    }
+    const handleDelete = async (e) => {
+        // try {
+        //         const response = await axios.get('http://127.0.0.1:8000/backend/api/projects/', {
+        //             headers: {
+        //                 'Authorization': `Bearer ${authTokens.access}`
+        //             }
+        //         });
+        //         setProjects(response.data);
+        //     } catch (error) {
+        //         console.error("Failed to fetch profile data:", error);
+        //     }
+        window.location.reload(false);
+
+    }
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
     };
 
     return (
@@ -41,23 +72,36 @@ export default function Projects(props) {
 
                 <div style={{height: '5rem'}}>
                 </div>
-                <Grid container className="projects-title">
+                <div className="projects-title">
                     <Typography component={'span'} variant="h3">
                         <FormattedMessage id='projects.title'
                                           defaultMessage="List of Projects"/>
                     </Typography>
 
 
-                </Grid>
+                </div>
 
                 <br/>
-                <br/>
-                        <Button onClick={() => goToProfile()} variant="contained" color="primary">
+                <Grid container className="projects-nav-btns-ccontainer">
+                    <Grid item xs={12} sm={6} className="projects-nav-btns">
+                        <Button onClick={() => goToProfile()} variant="contained" color="primary" style={{marginTop:'1rem'}}>
                             <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
+                                <FormattedMessage id='projects.profile.button' defaultMessage="Go to Profile"/>
                             </Typography>
                         </Button>
+                    </Grid>
+                    <Grid item xs={12} sm={6} className="projects-nav-btns">
 
+
+
+                        <Button onClick={() => goToAddProject()} variant="contained" color="primary" style={{marginTop:'1rem'}}>
+                            <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
+                                <FormattedMessage id='projects.profile.button' defaultMessage="Add Prtoject"/>
+                            </Typography>
+                        </Button>
+                    </Grid>
+
+                </Grid>
 
                 <Grid container>
                     {projects.map((project) => (
@@ -90,26 +134,24 @@ export default function Projects(props) {
                                             Status: {project.monthly_payment_status}</Typography>
                                     </Grid>
                                     <Grid className="projects-data" item xs={12} md={1}>
-                                        <div>
-                                            <Button onClick={() => goToProfile()} variant="contained" color="secondary">
-                                                <Typography component={'span'} style={{color: "#E0F2F1"}}
-                                                            variant='body1'>
-                                                    <FormattedMessage id='project.edit.button'
-                                                                      defaultMessage="Update"/>
-                                                </Typography>
-                                            </Button>
-                                        </div>
+                                        <Button onClick={() => goToUpdate(project.id)} variant="contained"
+                                                color="secondary">
+                                            <Typography component={'span'} style={{color: "#E0F2F1"}}
+                                                        variant='body1'>
+                                                <FormattedMessage id='project.edit.button'
+                                                                  defaultMessage="Update"/>
+                                            </Typography>
+                                        </Button>
                                         <div style={{height: '1rem'}}>
                                         </div>
-                                        <div>
-                                            <Button onClick={() => goToProfile()} variant="contained" color="secondary">
-                                                <Typography component={'span'} style={{color: "#E0F2F1"}}
-                                                            variant='body1'>
-                                                    <FormattedMessage id='project.delete.button'
-                                                                      defaultMessage="Delete"/>
-                                                </Typography>
-                                            </Button>
-                                        </div>
+                                        <Button onClick={handleDelete} variant="contained"
+                                                color="secondary">
+                                            <Typography component={'span'} style={{color: "#E0F2F1"}}
+                                                        variant='body1'>
+                                                <FormattedMessage id='project.delete.button'
+                                                                  defaultMessage="Delete"/>
+                                            </Typography>
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             </div>

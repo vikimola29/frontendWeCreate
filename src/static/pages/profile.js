@@ -36,28 +36,34 @@ const Profile = (props) => {
 
 
     const goToClients = () => {
-        navigate('/clients');
-    };
+        navigate('/clients')
+    }
     const goToProjects = () => {
-        navigate('/projects');
-    };
+        navigate('/projects')
+    }
     const handleLogout = async () => {
-        await logoutUser();
-        navigate('/');
-    };
+        await logoutUser()
+        navigate('/')
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+
+    }
+
 
     return (
         <GradientContainer>
             <div className="profile">
                 <div style={{height: '5rem'}}>
                 </div>
-                <Grid container className="profile-title">
+                <div className="profile-title">
                     <Typography component={'span'} variant="h3">
                         <FormattedMessage id='profile.title'
                                           defaultMessage="Hellow"/>
                     </Typography>
 
-                </Grid>
+                </div>
                 <br/>
                 <br/>
                 <Grid container className="profile-userdata-projectdata">

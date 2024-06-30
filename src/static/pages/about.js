@@ -16,7 +16,7 @@ export default function About(props) {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth', // Optional: Adds smooth scrolling animation
+            behavior: 'smooth',
         });
     };
     return (
