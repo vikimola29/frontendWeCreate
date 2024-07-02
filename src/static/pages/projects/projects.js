@@ -6,7 +6,7 @@ import {FormattedMessage} from "react-intl";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../components/AuthContext";
-import {getAllProjects} from "../../components/api";
+import {deleteProject, getAllProjects} from "../../components/api";
 
 export default function Projects(props) {
     const GradientContainer = props.bgGradient
@@ -45,13 +45,12 @@ export default function Projects(props) {
         scrollToTop()
     }
     const handleDelete  = async (projectId) =>  {
-        // try{
-        //     await handleDelete(authTokens, projectId)
-        // }catch (error) {
-        //     console.log(error)
-        // }
-        // window.location.reload(false);
-        console.log("DeL")
+        try{
+            await deleteProject(authTokens, projectId)
+        }catch (error) {
+            console.log(error)
+        }
+        window.location.reload(false);
 
     }
 
