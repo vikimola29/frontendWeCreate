@@ -919,6 +919,31 @@ code {
     align-items: center;
     justify-content: center;
 }
+/*PROJECT CREATE*/
+.project-create-title {
+    display: flex;
+    justify-content: center;
+}
+.project-create{
+     min-height: 90vh;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.project-create-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.project-create-btn{
+    /*background-color: chartreuse;*/
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 /*Success AND Warning*/
 .Success-Warning {

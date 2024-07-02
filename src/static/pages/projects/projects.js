@@ -1,12 +1,12 @@
 import React, {useContext, useEffect, useState} from "react";
-import Header from "../components/header";
+import Header from "../../components/header";
 import {Button, Grid, useMediaQuery} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import AuthContext from "../components/AuthContext";
-import {getAllProjects} from "../components/api";
+import AuthContext from "../../components/AuthContext";
+import {getAllProjects} from "../../components/api";
 
 export default function Projects(props) {
     const GradientContainer = props.bgGradient
@@ -34,7 +34,7 @@ export default function Projects(props) {
 
     };
     const goToAddProject = () => {
-        navigate('/profile');
+        navigate('/project-create');
         scrollToTop()
 
     };
@@ -44,18 +44,14 @@ export default function Projects(props) {
         navigate(`/project-update/${projectId}`);
         scrollToTop()
     }
-    const handleDelete = async (e) => {
-        // try {
-        //         const response = await axios.get('http://127.0.0.1:8000/backend/api/projects/', {
-        //             headers: {
-        //                 'Authorization': `Bearer ${authTokens.access}`
-        //             }
-        //         });
-        //         setProjects(response.data);
-        //     } catch (error) {
-        //         console.error("Failed to fetch profile data:", error);
-        //     }
-        window.location.reload(false);
+    const handleDelete  = async (projectId) =>  {
+        // try{
+        //     await handleDelete(authTokens, projectId)
+        // }catch (error) {
+        //     console.log(error)
+        // }
+        // window.location.reload(false);
+        console.log("DeL")
 
     }
 
@@ -96,7 +92,7 @@ export default function Projects(props) {
 
                         <Button onClick={() => goToAddProject()} variant="contained" color="primary" style={{marginTop:'1rem'}}>
                             <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                <FormattedMessage id='projects.profile.button' defaultMessage="Add Prtoject"/>
+                                <FormattedMessage id='projects.profile.button' defaultMessage="Create Prtoject"/>
                             </Typography>
                         </Button>
                     </Grid>
@@ -144,7 +140,7 @@ export default function Projects(props) {
                                         </Button>
                                         <div style={{height: '1rem'}}>
                                         </div>
-                                        <Button onClick={handleDelete} variant="contained"
+                                        <Button onClick={() => handleDelete(project.id)} variant="contained"
                                                 color="secondary">
                                             <Typography component={'span'} style={{color: "#E0F2F1"}}
                                                         variant='body1'>

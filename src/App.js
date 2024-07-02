@@ -22,9 +22,10 @@ import Clients from "./static/pages/clients";
 import Header from "./static/components/header";
 import {AuthProvider} from "./static/components/AuthContext";
 import {AuthProviderProfileData} from "./static/components/fetchProfileData";
-import Projects from "./static/pages/projects";
+import Projects from "./static/pages/projects/projects";
 import * as PropTypes from "prop-types";
-import UpdateProject from "./static/pages/projectUpdate";
+import UpdateProject from "./static/pages/projects/updateProject";
+import CreateProject from "./static/pages/projects/createProject";
 
 
 
@@ -432,6 +433,14 @@ function App() {
                                     <Route exact path="/project-update/:projectId"
                                            element={isAuthenticated === "true" ?
                                                <UpdateProject setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerDark}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/project-create"
+                                           element={isAuthenticated === "true" ?
+                                               <CreateProject setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
                                                         bgGradient={gradientContainerDark}/> :
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}

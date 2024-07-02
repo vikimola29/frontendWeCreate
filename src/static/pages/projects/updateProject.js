@@ -1,13 +1,12 @@
-// ProjectUpdate.js
 import React, {useState, useContext, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {Typography, TextField, Button, Grid} from '@mui/material';
-import AuthContext from '../components/AuthContext';
-import {getProject, updateProject} from "../components/api";
+import AuthContext from '../../components/AuthContext';
+import {getProject, updateProject} from "../../components/api";
 import {FormattedMessage} from "react-intl";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import DatePicker from '@mui/lab/DatePicker';
-import Messages from "../components/Messages";
+import Messages from "../../components/Messages";
 
 
 export default function UpdateProject(props) {
@@ -39,7 +38,7 @@ export default function UpdateProject(props) {
                 const response = await getProject(authTokens, projectId);
                 setProjectData(response.data);
                 if (response.data?.length > 0) {
-                    setProjectData(response.data[0]); // Assuming response.data is an array with one object
+                    setProjectData(response.data[0]);
                 } else {
                     console.log("No project found")
                 }
@@ -57,12 +56,14 @@ export default function UpdateProject(props) {
             ...projectData,
             [e.target.name]: e.target.value
         });
+        console.log(projectData);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateProject(authTokens, projectId, projectData);
+            await updateProject(authTokens, projectId, projectData)
+
             setOpenSuccess(true)
             setOpenWarning(false)
 
@@ -72,6 +73,18 @@ export default function UpdateProject(props) {
             setOpenWarning(true)
             setOpenSuccess(false)
         }
+    };
+    const goToProfile = () => {
+        navigate('/profile');
+        scrollToTop()
+
+    };
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
     };
 
 
@@ -110,8 +123,9 @@ export default function UpdateProject(props) {
                             <br/>
                             <br/>
                             <TextField
-                                label="Client"
+                                label="Client Mail"
                                 name="client"
+                                type='email'
                                 value={projectData.client || ''}
                                 onChange={handleChange}
                             />
@@ -130,7 +144,9 @@ export default function UpdateProject(props) {
 
 
                             <TextField
-                                label="Finish due date:"
+                                label="Finish due date"
+                                name="finish_due_date"
+                                type='date'
                                 value={projectData.finish_due_date || ''}
                                 onChange={handleChange}
                             />
@@ -147,6 +163,7 @@ export default function UpdateProject(props) {
                             <TextField
                                 label="Batch Payment Due Date"
                                 name="batch_payment_due_date"
+                                type='date'
                                 value={projectData.batch_payment_due_date || ''}
                                 onChange={handleChange}
                             />
@@ -171,7 +188,7 @@ export default function UpdateProject(props) {
                             <br/>
                             <br/>
                             <TextField
-                                label="Monthly Payment Due Date"
+                                label="Monthly Payment Due Date: YYYY-MM-DD"
                                 name="monthly_payment_due_date"
                                 value={projectData.monthly_payment_due_date || ''}
                                 onChange={handleChange}
@@ -187,7 +204,7 @@ export default function UpdateProject(props) {
                             <br/>
                             <br/>
                             <TextField
-                                label="Registered Date"
+                                label="Registered Date: YYYY-MM-DD"
                                 name="registered_date"
                                 value={projectData.registered_date || ''}
                                 onChange={handleChange}
@@ -197,20 +214,26 @@ export default function UpdateProject(props) {
                         </Grid>
 
 
-
-
-
                         <div className="project-update-btn">
                             <Messages openSuccess={openSuccess} openWarning={openWarning}
-                                  setOpenSuccess={setOpenSuccess}
-                                  setOpenWarning={setOpenWarning}
-                                  successMessage={<FormattedMessage id='project.update.alert.succ'
-                                                                    default='Update successfull!'/>}
-                                  warningMessage={<FormattedMessage id='project.update.alert.warn'
-                                                                    default="Error ocurred!"/>}/>
-                            <Button type='submit' variant="contained" color="primary">
+                                      setOpenSuccess={setOpenSuccess}
+                                      setOpenWarning={setOpenWarning}
+                                      successMessage={<FormattedMessage id='project.update.alert.succ'
+                                                                        default='Update successfull!'/>}
+                                      warningMessage={<FormattedMessage id='project.update.alert.warn'
+                                                                        default="Error ocurred!"/>}/>
+                            <Button type='submit' variant="contained" color="secondary">
                                 <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                                     <FormattedMessage id='projects.profile.button' defaultMessage="Submit"/>
+                                </Typography>
+                            </Button>
+
+                            <br/>
+
+                            <Button onClick={() => goToProfile()} variant="contained" color="primary"
+                                    style={{marginTop: '1rem'}}>
+                                <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
+                                    <FormattedMessage id='projects.profile.button' defaultMessage="Go to Profile"/>
                                 </Typography>
                             </Button>
                         </div>
