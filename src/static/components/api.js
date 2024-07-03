@@ -45,7 +45,7 @@ export const getUsersProjects = (authTokens) => {
 
 export const updateProject = (authTokens, projectId, projectData) => {
     console.log("PROJECT DATA", projectData)
-    return axios.put(`${API_URL}projects/${projectId}/`, projectData, {
+    return axios.put(`${API_URL}project/${projectId}/`, projectData, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
             'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export const updateProject = (authTokens, projectId, projectData) => {
     });
 };
 export const deleteProject = (authTokens, projectId) => {
-    return axios.delete(`${API_URL}projects/${projectId}/`, {
+    return axios.delete(`${API_URL}project/${projectId}/`, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
             'Content-Type': 'application/json'
@@ -78,8 +78,8 @@ export const getLoggedUser = (authTokens) => {
         }
     });
 };
-export const getUser = (authTokens, userId) => {
-    return axios.get(`${API_URL}clients/${userId}/`,{
+export const getUser = (authTokens, clientId) => {
+    return axios.get(`${API_URL}client/${clientId}/`,{
         headers: {
             'Authorization': `Bearer ${authTokens.access}`
         }
@@ -93,8 +93,9 @@ export const getAllUsers = (authTokens) => {
         }
     });
 };
-export const updateUser = (authTokens, userData, userId) => {
-    return axios.put(`${API_URL}user/${userId}`, userData, {
+export const updateUser = (authTokens, formData, clientId) => {
+    console.log(formData)
+    return axios.put(`${API_URL}client/${clientId}/`, formData, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
             'Content-Type': 'application/json'
@@ -102,7 +103,7 @@ export const updateUser = (authTokens, userData, userId) => {
     });
 };
 export const deleteUser = (authTokens, userData) => {
-    return axios.delete(`${API_URL}user/${userData.id}`, userData, {
+    return axios.delete(`${API_URL}client/${userData.id}/`, userData, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
             'Content-Type': 'application/json'

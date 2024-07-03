@@ -73,6 +73,7 @@ export default function Clients(props) {
                                 <Grid container spacing={1}>
                                     <Grid className="clients-data" item xs={12} md={3}>
                                          <Typography variant="h4">{client.name}</Typography>
+                                         <Typography variant="h4">{client.id}</Typography>
                                     </Grid>
                                     <Grid className="clients-data" item xs={12} md={4}>
                                         <Typography variant="body1">Email: {client.email}</Typography>

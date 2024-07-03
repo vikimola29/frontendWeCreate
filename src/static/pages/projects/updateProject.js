@@ -261,7 +261,7 @@ export default function UpdateProject(props) {
                                                                         default="Error ocurred!"/>}/>
                             <Button type='submit' variant="contained" color="secondary">
                                 <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                    <FormattedMessage id='projects.profile.button' defaultMessage="Submit"/>
+                                    <FormattedMessage id='projects.update.button' defaultMessage="Update"/>
                                 </Typography>
                             </Button>
 
