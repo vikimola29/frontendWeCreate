@@ -1,108 +1,98 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import {Button, FormControl, FormHelperText, TextField} from "@mui/material";
+import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import Messages from "../../components/Messages";
 import AuthContext from "../../components/AuthContext";
+import {getUser, updateUser} from "../../components/api";
+import {useNavigate, useParams} from "react-router-dom";
 
 
-export default function UpdateClient(props) {
+export default function UpdateClientByClient(props) {
     const GradientContainer = props.bgGradient
+    const navigate = useNavigate();
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
+    const {authTokens} = useContext(AuthContext);
+    const {clientId} = useParams()
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        companyName: '',
-        password: '',
-        password2: ''
+        'email': '',
+        'name': '',
+        'address': '',
+        'phone_number': '',
+        'company_name': '',
+        'status': '',
+        'is_staff': '',
+        'is_superuser': ''
 
     });
-    const {loginUser} = useContext(AuthContext)
+
+
+    useEffect(() => {
+        const fetchProject = async () => {
+            try {
+                const response = await getUser(authTokens, clientId);
+                setFormData(response.data);
+                if (response.data?.length > 0) {
+                    setFormData(response.data[0]);
+                    console.log(formData)
+                } else {
+                    console.log("No project found")
+                }
+            } catch (error) {
+                console.log(error)
+
+            }
+        };
+
+        fetchProject();
+    }, [authTokens, clientId]);
 
 
     const handleChange = (e) => {
-        const {id, value} = e.target;
-        // console.log(id, value);
         setFormData({
             ...formData,
-            [id]: value,
+            [e.target.name]: e.target.value
         });
+        console.log(formData);
     };
-const handleSubmit = async (formData) => {
-    try {
-        const response = await fetch('http://127.0.0.1:8000/backend/api/register/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: formData.name,
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log("Formdata: " + formData)
+        try {
+            const updatedData = {
                 email: formData.email,
-                companyName: formData.companyName,
-                password: formData.password,
-                password2: formData.password2
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-
-        if (data.success) {
-            console.log('Registration successful:', data.message);
+                name: formData.name,
+                address: formData.address,
+                phone_number: formData.phone_number,
+                company_name: formData.company_name,
+                status: formData.status,
+                is_staff: formData.is_staff === 'true',
+                is_superuser: formData.is_superuser === 'true'
+            };
+            console.log("Updated data: " + updatedData);
+            await updateUser(authTokens, updatedData, clientId);
             setOpenSuccess(true);
             setOpenWarning(false);
 
-
-        } else {
-            console.log('Registration failed:', data.message);
+        } catch (error) {
+            console.error('Error during update client:', error);
             setOpenSuccess(false);
             setOpenWarning(true);
         }
-    } catch (error) {
-        console.error('Error during registration:', error);
-        setOpenSuccess(false);
-        setOpenWarning(true);
-    }
-};
+    };
+    const goToProfile = () => {
+        navigate('/profile');
+        scrollToTop()
 
-    // const handleSubmit = async (formData) => {
-    //     try {
-    //         // formData.preventDefault();
-    //         const response = await fetch('http://127.0.0.1:8000/backend/api/register/', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({
-    //                 name: formData.name,
-    //                 email: formData.email,
-    //                 companyName: formData.companyName,
-    //                 password: formData.password,
-    //                 password2: formData.password2
-    //             })
-    //         });
-    //
-    //         const data = await response.json();
-    //
-    //         if (data.success) {
-    //             console.log('Registration successful:', data.message);
-    //             setOpenSuccess(true);
-    //             setOpenWarning(false);
-    //         } else {
-    //             console.log('Registration failed:', data.message);
-    //             setOpenSuccess(false);
-    //             setOpenWarning(true);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error during registration:', error);
-    //         setOpenSuccess(false);
-    //         setOpenWarning(true);
-    //     }
-    // };
+    };
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
 
 
     return (
@@ -111,125 +101,116 @@ const handleSubmit = async (formData) => {
             <div style={{height: '5rem'}}>
             </div>
 
-            <div className="register-content">
+            <div className="update-client-content">
 
-                <div className="register-title">
+                <div className="update-client-title">
                     <Typography component={'span'} variant="h3" style={{textAlign: 'center'}}>
-                        <FormattedMessage id='register.title'
-                                          defaultMessage="Register"/>
+                        <FormattedMessage id='update.client.title'
+                                          defaultMessage="Update client"/>
                     </Typography>
+                    <br/>
+                    <br/>
+                    <Typography variant="h3">{formData.name}</Typography>
                 </div>
 
 
                 <br/>
                 <br/>
+                <form onSubmit={handleSubmit}>
+                    <div>
 
-                <FormControl
-                    margin="normal"
-                    color="primary"
-                    variant="filled">
+                            <FormControl fullWidth style={{width: '70%'}}>
+                                <TextField
+                                    label="Name"
+                                    id="name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                />
+                            </FormControl>
+
+                            <br/>
+                            <br/>
+
+                            <FormControl fullWidth style={{width: '70%'}}>
+                                <TextField label='Company Name'
+                                           id="company_name"
+                                           name="company_name"
+                                           type="text"
+                                           value={formData.company_name || ''}
+                                           onChange={handleChange}
+
+                                />
+                            </FormControl>
+                            <br/>
+                            <br/>
+                            <FormControl fullWidth style={{width: '70%'}}>
+                                <TextField id="address"
+                                           name="address"
+                                           type="text"
+                                           value={formData.address || ''}
+                                           onChange={handleChange} variant="outlined"
+                                           label={
+                                               <Typography variant="body2">
+                                                   <FormattedMessage id='register.address'
+                                                                     defaultMessage="Address"/>
+                                               </Typography>
+                                           }
+                                />
+                            </FormControl>
+
+                            <br/>
+                            <br/>
+
+                            <FormControl fullWidth style={{width: '70%'}}>
+                                <TextField id="phone_number"
+                                           name="phone_number"
+                                           type="text"
+                                           value={formData.phone_number || ''}
+                                           onChange={handleChange}
+                                           label={
+                                               <Typography variant="body2">
+                                                   <FormattedMessage id='register.phone_number'
+                                                                     defaultMessage="Phone Number"/>
+                                               </Typography>
+                                           }
+                                           aria-describedby="name-text"/>
+                            </FormControl>
 
 
-                    <TextField id="name"
-                               type="text"
-                               value={formData.name} onChange={handleChange} variant="outlined" color="secondary"
-                               style={{width: '100%'}}
-                               InputLabelProps={{color: "primary"}}
-                               label={
-                                   <Typography variant="body2">
-                                       <FormattedMessage id='register.name'
-                                                         defaultMessage="Name"/>
-                                   </Typography>
-                               }
-                               aria-describedby="name-text"/>
-                    <FormHelperText id="password-text">
-                        <Typography component={'span'} variant="body2">
-                            <FormattedMessage id='register.name.helper'
-                                              defaultMessage="Your name!"/>
-                        </Typography>
-                    </FormHelperText>
 
+                    </div>
                     <br/>
 
-                    <TextField id="companyName"
-                               type="text"
-                               value={formData.companyName} onChange={handleChange} variant="outlined" color="secondary"
-                               style={{width: '100%'}}
-                               InputLabelProps={{color: "primary"}}
-                               label={
-                                   <Typography variant="body2">
-                                       <FormattedMessage id='register.companyName'
-                                                         defaultMessage="Company Name"/>
-                                   </Typography>
-                               }
-                               aria-describedby="name-text"/>
-                    <FormHelperText id="password-text">
-                        <Typography component={'span'} variant="body2">
-                            <FormattedMessage id='register.companyName.helper'
-                                              defaultMessage="Optional"/>
-                        </Typography>
-                    </FormHelperText>
-
                     <br/>
+                    <div className="client-update-btn">
 
-                    <TextField id="email"
-                               type="email"
-                               value={formData.email} onChange={handleChange} variant="outlined" color="secondary"
-                               style={{width: '100%'}}
-                               InputLabelProps={{color: "primary"}}
-                               label={
-                                   <Typography variant="body2">
-                                       <FormattedMessage id='register.email'
-                                                         defaultMessage="Mail"/>
-                                   </Typography>
-                               }
-                               aria-describedby="email-text"/>
-                    <FormHelperText id="mail-text">
-                        <Typography component={'span'} variant="body2">
-                            <FormattedMessage id='register.mail.helper'
-                                              defaultMessage="We will communicate wth this address!"/>
-                        </Typography>
-                    </FormHelperText>
+                        <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
+                                  setOpenWarning={setOpenWarning}
+                                  successMessage={<FormattedMessage id='register.alert.succ'/>}
+                                  warningMessage={<FormattedMessage id='register.alert.warn'/>}/>
 
 
-                    <br/>
+                        <Button type='submit' variant="contained" color="secondary">
+                            <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
+                                <FormattedMessage id='update.btn'
+                                                  defaultMessage="Update"/>
+                            </Typography>
+                        </Button>
+                    </div>
+                </form>
+                <br/>
 
-                    <TextField id="password"
-                               type="password"
-                               value={formData.password} onChange={handleChange} variant="outlined" color="secondary"
-                               style={{width: '100%'}}
-                               InputLabelProps={{color: "primary"}}
-                               label={
-                                   <Typography variant="body2">
-                                       <FormattedMessage id='register.password'
-                                                         defaultMessage="Password"/>
-                                   </Typography>
-                               }
-                               aria-describedby="password-text"/>
-                    <FormHelperText id="password-text">
-                        <Typography component={'span'} variant="body2">
-                            <FormattedMessage id='register.password.helper'
-                                              defaultMessage="Choose a secure password!"/>
-                        </Typography>
-                    </FormHelperText>
+                <Button onClick={() => goToProfile()} variant="contained" color="primary"
+                        style={{marginTop: '1rem'}}>
+                    <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
+                        <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
+                    </Typography>
+                </Button>
 
-                    <br/>
+                <br/>
+                <br/>
 
-                    <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
-                              setOpenWarning={setOpenWarning}
-                              successMessage={<FormattedMessage id='register.alert.succ'/>}
-                              warningMessage={<FormattedMessage id='register.alert.warn'/>}/>
-
-
-                    <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">
-                        <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
-                            <FormattedMessage id='update.btn'
-                                              defaultMessage="Update"/>
-                        </Typography>
-                    </Button>
-                    <br/>
-                    <br/>
-                </FormControl>
 
             </div>
 

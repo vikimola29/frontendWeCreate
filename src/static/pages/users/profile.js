@@ -37,8 +37,9 @@ const Profile = (props) => {
     const goToProjects = () => {
         navigate('/projects')
     }
-     const goToUpdateUser = () => {
-        navigate('/user-update')
+    const goToUpdateUser = (clientId) => {
+        navigate(`/clientS-update/${clientId}`);
+
     }
     const handleLogout = async () => {
         await logoutUser()
@@ -91,7 +92,7 @@ const Profile = (props) => {
                                 <Typography component={'span'} variant="body1">Status: {user.status}</Typography>
                                 <br/>
                                 <br/>
-                                <Button onClick={() => goToUpdateUser()} variant="contained" color="secondary">
+                                <Button onClick={() => goToUpdateUser(user.id)} variant="contained" color="secondary">
                                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                                         <FormattedMessage id='profile.update.user.button' defaultMessage="Update Data"/>
                                     </Typography>
