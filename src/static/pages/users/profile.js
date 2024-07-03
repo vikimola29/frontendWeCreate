@@ -27,7 +27,6 @@ const Profile = (props) => {
                 console.error("Failed to fetch profile data:", error);
             }
         };
-
         fetchProjects();
     }, [authTokens]);
 

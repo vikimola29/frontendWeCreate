@@ -2,7 +2,13 @@ import axios from 'axios';
 
 
 const API_URL = 'http://127.0.0.1:8000/backend/api/';
-
+export const obtainToken = (email, password) => {
+    return axios.post(`${API_URL}token/`, { email, password }, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};
 export const createProject = (authTokens, projectData) => {
 
     return axios.post(`${API_URL}projects/`, projectData, {
@@ -65,8 +71,15 @@ export const createUser = ( userData) => {
 };
 
 
-export const getUsers = (authTokens, userData) => {
-    return axios.get(`${API_URL}projects/${userData.id}/`, userData, {
+export const getLoggedUser = (authTokens) => {
+    return axios.get(`${API_URL}profile/`,{
+        headers: {
+            'Authorization': `Bearer ${authTokens.access}`
+        }
+    });
+};
+export const getUser = (authTokens, userId) => {
+    return axios.get(`${API_URL}clients/${userId}/`,{
         headers: {
             'Authorization': `Bearer ${authTokens.access}`
         }
@@ -80,8 +93,8 @@ export const getAllUsers = (authTokens) => {
         }
     });
 };
-export const updateUser = (authTokens, userData) => {
-    return axios.put(`${API_URL}user/${userData.id}`, userData, {
+export const updateUser = (authTokens, userData, userId) => {
+    return axios.put(`${API_URL}user/${userId}`, userData, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
             'Content-Type': 'application/json'

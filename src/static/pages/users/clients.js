@@ -10,7 +10,6 @@ import {getAllUsers} from "../../components/api";
 
 export default function Clients(props) {
     const GradientContainer = props.bgGradient
-    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
     const navigate = useNavigate();
     const [clients, setClients] = useState([]);
     const {authTokens} = useContext(AuthContext);
@@ -33,8 +32,8 @@ export default function Clients(props) {
         navigate('/profile');
     };
 
-     const goToUpdate = () => {
-        navigate('/client-update')
+     const goToUpdate = (clientId) => {
+        navigate(`/client-update/${clientId}`);
     }
     const goToDelete = () => {
         navigate('/client-delete')
@@ -85,7 +84,7 @@ export default function Clients(props) {
                                         <Typography variant="body1">Status: {client.status}</Typography>
                                     </Grid>
                                     <Grid className="clients-data" item xs={12} md={1}>
-                                            <Button onClick={() => goToUpdate()} variant="contained" color="secondary">
+                                            <Button onClick={() => goToUpdate(client.id)} variant="contained" color="secondary">
                                                 <Typography component={'span'} style={{color: "#E0F2F1"}}
                                                             variant='body1'>
                                                     <FormattedMessage id='project.edit.button'

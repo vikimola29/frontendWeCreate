@@ -91,6 +91,7 @@ import {createContext, useState, useEffect} from 'react'
 import jwtDecode from 'jwt-decode';
 import {useNavigate} from 'react-router-dom'
 import axios from "axios";
+import {obtainToken} from "./api";
 
 const AuthContext = createContext()
 
@@ -138,20 +139,12 @@ export const AuthProvider = ({children}) => {
         console.log("TOKEN")
         console.log('Attempting to log in with:', {email, password});
 
-        const response = await fetch('http://127.0.0.1:8000/backend/api/token/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // body: JSON.stringify({username: e.target.username.value, password: e.target.password.value})
-            body: JSON.stringify({email, password})
-        });
+        const response = await obtainToken(email, password)
+        console.log('token obtained')
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
 
-        let data = await response.json();
+        let data = response.data
+
 
         if (data) {
             localStorage.setItem('authTokens', JSON.stringify(data));
@@ -162,7 +155,6 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('isAuthenticated', 'true');
 
             navigate('/')
-            console.log("YO")
         } else {
             alert('Something went wrong while logging in the user!')
         }

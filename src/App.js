@@ -26,17 +26,10 @@ import Projects from "./static/pages/projects/projects";
 import * as PropTypes from "prop-types";
 import UpdateProject from "./static/pages/projects/updateProject";
 import CreateProject from "./static/pages/projects/createProject";
+import UpdateClient from "./static/pages/users/updateClient";
 
 
-function UpdateClient(props) {
-    return null;
-}
 
-UpdateClient.propTypes = {
-    isDarkTheme: PropTypes.bool,
-    setIsAuthenticated: PropTypes.func,
-    bgGradient: PropTypes.func
-};
 
 function App() {
     const lightTheme = {
