@@ -13,12 +13,12 @@ import TermsConditions from "./static/pages/termsConditions";
 import NewsletterUnsubscribe from "./static/pages/newsletterUnsubscribe";
 import PageNotFound from "./static/pages/pageNotFound";
 import CookieConsent from "./static/components/cookiePopup";
-import Register from "./static/pages/register";
-import LogIn from "./static/pages/logIn";
+import Register from "./static/pages/users/register";
+import LogIn from "./static/pages/users/logIn";
 import RecoverAccountMailForm from "./static/pages/recoverAccountMailForm";
 import RecoverAccountNewPassword from "./static/pages/recoverAccountNewPassword";
-import Profile from "./static/pages/profile";
-import Clients from "./static/pages/clients";
+import Profile from "./static/pages/users/profile";
+import Clients from "./static/pages/users/clients";
 import Header from "./static/components/header";
 import {AuthProvider} from "./static/components/AuthContext";
 import {AuthProviderProfileData} from "./static/components/fetchProfileData";
@@ -28,6 +28,15 @@ import UpdateProject from "./static/pages/projects/updateProject";
 import CreateProject from "./static/pages/projects/createProject";
 
 
+function UpdateClient(props) {
+    return null;
+}
+
+UpdateClient.propTypes = {
+    isDarkTheme: PropTypes.bool,
+    setIsAuthenticated: PropTypes.func,
+    bgGradient: PropTypes.func
+};
 
 function App() {
     const lightTheme = {
@@ -414,14 +423,6 @@ function App() {
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
-                                    <Route exact path="/clients"
-                                           element={isAuthenticated === "true" ?
-                                               <Clients setIsAuthenticated={setIsAuthenticated}
-                                                        isDarkTheme={isDarkTheme}
-                                                        bgGradient={gradientContainerDark}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                      bgGradient={gradientContainerDark}/>}/>}
-                                {isDarkTheme &&
                                     <Route exact path="/projects"
                                            element={isAuthenticated === "true" ?
                                                <Projects setIsAuthenticated={setIsAuthenticated}
@@ -445,10 +446,19 @@ function App() {
                                                         bgGradient={gradientContainerDark}/> :
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
+
                                 {isDarkTheme &&
-                                    <Route exact path="/project-delete"
+                                    <Route exact path="/clients"
                                            element={isAuthenticated === "true" ?
-                                               <Projects setIsAuthenticated={setIsAuthenticated}
+                                               <Clients setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerDark}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/client-update/:clientId"
+                                           element={isAuthenticated === "true" ?
+                                               <UpdateClient setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
                                                         bgGradient={gradientContainerDark}/> :
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
@@ -507,6 +517,31 @@ function App() {
                                                         bgGradient={gradientContainerLight}/> :
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
+
+                                {!isDarkTheme &&
+                                    <Route exact path="/projects"
+                                           element={isAuthenticated === "true" ?
+                                               <Projects setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                                  {!isDarkTheme &&
+                                    <Route exact path="/project-update/:projectId"
+                                           element={isAuthenticated === "true" ?
+                                               <UpdateProject setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/project-create"
+                                           element={isAuthenticated === "true" ?
+                                               <CreateProject setIsAuthenticated={setIsAuthenticated}
+                                                        isDarkTheme={isDarkTheme}
+                                                        bgGradient={gradientContainerLight}/> :
+                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                                      bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/clients"
                                            element={isAuthenticated === "true" ?
@@ -516,17 +551,9 @@ function App() {
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
-                                    <Route exact path="/projects"
+                                    <Route exact path="/client-update/:clientId"
                                            element={isAuthenticated === "true" ?
-                                               <Projects setIsAuthenticated={setIsAuthenticated}
-                                                        isDarkTheme={isDarkTheme}
-                                                        bgGradient={gradientContainerLight}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
-                                                      bgGradient={gradientContainerLight}/>}/>}
-                                  {isDarkTheme &&
-                                    <Route exact path="/project-update/:projectId"
-                                           element={isAuthenticated === "true" ?
-                                               <UpdateProject setIsAuthenticated={setIsAuthenticated}
+                                               <UpdateClient setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
                                                         bgGradient={gradientContainerLight}/> :
                                                <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}

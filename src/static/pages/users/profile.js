@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from "react";
-import AuthContextProfileData from "../components/fetchProfileData";
-import AuthContext from "../components/AuthContext";
+import AuthContextProfileData from "../../components/fetchProfileData";
+import AuthContext from "../../components/AuthContext";
 import {useNavigate} from "react-router-dom";
 import {Button, Grid, useMediaQuery} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import axios from "axios";
+import {getUsersProjects} from "../../components/api";
 
 const Profile = (props) => {
     const GradientContainer = props.bgGradient
@@ -20,11 +21,7 @@ const Profile = (props) => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/backend/api/projects/', {
-                    headers: {
-                        'Authorization': `Bearer ${authTokens.access}`
-                    }
-                });
+                const response = await getUsersProjects(authTokens)
                 setProjects(response.data);
             } catch (error) {
                 console.error("Failed to fetch profile data:", error);
@@ -40,6 +37,9 @@ const Profile = (props) => {
     }
     const goToProjects = () => {
         navigate('/projects')
+    }
+     const goToUpdateUser = () => {
+        navigate('/user-update')
     }
     const handleLogout = async () => {
         await logoutUser()
@@ -92,7 +92,7 @@ const Profile = (props) => {
                                 <Typography component={'span'} variant="body1">Status: {user.status}</Typography>
                                 <br/>
                                 <br/>
-                                <Button variant="contained" color="secondary">
+                                <Button onClick={() => goToUpdateUser()} variant="contained" color="secondary">
                                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                                         <FormattedMessage id='profile.update.user.button' defaultMessage="Update Data"/>
                                     </Typography>

@@ -2,8 +2,9 @@ import React, {useContext, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import {Button, FormControl, FormHelperText, TextField} from "@mui/material";
-import Messages from "../components/Messages";
-import AuthContext from "../components/AuthContext";
+import Messages from "../../components/Messages";
+import AuthContext from "../../components/AuthContext";
+import {createUser} from "../../components/api";
 
 
 export default function Register(props) {
@@ -13,7 +14,7 @@ export default function Register(props) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        companyName: '',
+        company_name: '',
         password: '',
         password2: ''
 
@@ -29,80 +30,18 @@ export default function Register(props) {
             [id]: value,
         });
     };
-const handleSubmit = async (formData) => {
-    try {
-        const response = await fetch('http://127.0.0.1:8000/backend/api/register/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: formData.name,
-                email: formData.email,
-                companyName: formData.companyName,
-                password: formData.password,
-                password2: formData.password2
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-
-        if (data.success) {
-            console.log('Registration successful:', data.message);
+    const handleSubmit = async (formData) => {
+        try {
+            await createUser(formData);
             setOpenSuccess(true);
             setOpenWarning(false);
-
-
-        } else {
-            console.log('Registration failed:', data.message);
+        } catch (error) {
+            console.error('Error during registration:', error);
             setOpenSuccess(false);
             setOpenWarning(true);
         }
-    } catch (error) {
-        console.error('Error during registration:', error);
-        setOpenSuccess(false);
-        setOpenWarning(true);
-    }
-};
+    };
 
-    // const handleSubmit = async (formData) => {
-    //     try {
-    //         // formData.preventDefault();
-    //         const response = await fetch('http://127.0.0.1:8000/backend/api/register/', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({
-    //                 name: formData.name,
-    //                 email: formData.email,
-    //                 companyName: formData.companyName,
-    //                 password: formData.password,
-    //                 password2: formData.password2
-    //             })
-    //         });
-    //
-    //         const data = await response.json();
-    //
-    //         if (data.success) {
-    //             console.log('Registration successful:', data.message);
-    //             setOpenSuccess(true);
-    //             setOpenWarning(false);
-    //         } else {
-    //             console.log('Registration failed:', data.message);
-    //             setOpenSuccess(false);
-    //             setOpenWarning(true);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error during registration:', error);
-    //         setOpenSuccess(false);
-    //         setOpenWarning(true);
-    //     }
-    // };
 
 
     return (
@@ -151,21 +90,22 @@ const handleSubmit = async (formData) => {
 
                     <br/>
 
-                    <TextField id="companyName"
+                    <TextField id="company_name"
                                type="text"
-                               value={formData.companyName} onChange={handleChange} variant="outlined" color="secondary"
+                               value={formData.company_name} onChange={handleChange} variant="outlined"
+                               color="secondary"
                                style={{width: '100%'}}
                                InputLabelProps={{color: "primary"}}
                                label={
                                    <Typography variant="body2">
-                                       <FormattedMessage id='register.companyName'
+                                       <FormattedMessage id='register.company_name'
                                                          defaultMessage="Company Name"/>
                                    </Typography>
                                }
                                aria-describedby="name-text"/>
                     <FormHelperText id="password-text">
                         <Typography component={'span'} variant="body2">
-                            <FormattedMessage id='register.companyName.helper'
+                            <FormattedMessage id='register.company_name.helper'
                                               defaultMessage="Optional"/>
                         </Typography>
                     </FormHelperText>

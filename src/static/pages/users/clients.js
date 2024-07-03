@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from "react";
-import Header from "../components/header";
+import Header from "../../components/header";
 import {Button, Grid, useMediaQuery} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import {useNavigate} from "react-router-dom";
-import AuthContext from "../components/AuthContext";
+import AuthContext from "../../components/AuthContext";
 import axios from "axios";
+import {getAllUsers} from "../../components/api";
 
 export default function Clients(props) {
     const GradientContainer = props.bgGradient
@@ -18,17 +19,12 @@ export default function Clients(props) {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/backend/api/all-clients/', {
-                    headers: {
-                        'Authorization': `Bearer ${authTokens.access}`
-                    }
-                });
+                const response= await getAllUsers(authTokens)
                 setClients(response.data);
             } catch (error) {
                 console.error("Failed to fetch profile data:", error);
             }
         };
-
         fetchClients();
     }, [authTokens]);
 

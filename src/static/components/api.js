@@ -29,6 +29,14 @@ export const getAllProjects = (authTokens) => {
     });
 };
 
+export const getUsersProjects = (authTokens) => {
+    return axios.get(`${API_URL}projects/`, {
+        headers: {
+            'Authorization': `Bearer ${authTokens.access}`
+        }
+    });
+}
+
 export const updateProject = (authTokens, projectId, projectData) => {
     console.log("PROJECT DATA", projectData)
     return axios.put(`${API_URL}projects/${projectId}/`, projectData, {
@@ -48,8 +56,40 @@ export const deleteProject = (authTokens, projectId) => {
 };
 
 
+export const createUser = ( userData) => {
+    return axios.post(`${API_URL}clients/`, userData, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};
+
+
+export const getUsers = (authTokens, userData) => {
+    return axios.get(`${API_URL}projects/${userData.id}/`, userData, {
+        headers: {
+            'Authorization': `Bearer ${authTokens.access}`
+        }
+    });
+};
+
+export const getAllUsers = (authTokens) => {
+    return axios.get(`${API_URL}all-clients/`, {
+        headers: {
+            'Authorization': `Bearer ${authTokens.access}`
+        }
+    });
+};
 export const updateUser = (authTokens, userData) => {
-    return axios.put(`${API_URL}user/`, userData, {
+    return axios.put(`${API_URL}user/${userData.id}`, userData, {
+        headers: {
+            'Authorization': `Bearer ${authTokens.access}`,
+            'Content-Type': 'application/json'
+        }
+    });
+};
+export const deleteUser = (authTokens, userData) => {
+    return axios.delete(`${API_URL}user/${userData.id}`, userData, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
             'Content-Type': 'application/json'

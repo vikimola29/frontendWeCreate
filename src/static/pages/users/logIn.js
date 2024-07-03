@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import {useNavigate} from "react-router-dom";
 import jwtDecode from 'jwt-decode';
-import AuthContext from "../components/AuthContext";
-import Messages from "../components/Messages";
+import AuthContext from "../../components/AuthContext";
+import Messages from "../../components/Messages";
 
 export default function LogIn(props) {
     const GradientContainer = props.bgGradient
