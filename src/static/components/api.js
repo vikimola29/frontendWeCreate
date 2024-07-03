@@ -93,17 +93,17 @@ export const getAllUsers = (authTokens) => {
         }
     });
 };
-export const updateUser = (authTokens, formData, clientId) => {
-    console.log(formData)
-    return axios.put(`${API_URL}client/${clientId}/`, formData, {
+export const updateUser = (authTokens, clientData, clientId) => {
+    console.log(clientData)
+    return axios.put(`${API_URL}client/${clientId}/`, clientData, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
             'Content-Type': 'application/json'
         }
     });
 };
-export const deleteUser = (authTokens, userData) => {
-    return axios.delete(`${API_URL}client/${userData.id}/`, userData, {
+export const deleteUser = (authTokens, clientId) => {
+    return axios.delete(`${API_URL}client/${clientId}/`, clientId, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
             'Content-Type': 'application/json'

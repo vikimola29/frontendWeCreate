@@ -3,10 +3,10 @@ import Header from "../../components/header";
 import {Button, Grid, useMediaQuery} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import AuthContext from "../../components/AuthContext";
 import axios from "axios";
-import {getAllUsers} from "../../components/api";
+import {deleteUser, getAllUsers} from "../../components/api";
 
 export default function Clients(props) {
     const GradientContainer = props.bgGradient
@@ -18,7 +18,7 @@ export default function Clients(props) {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response= await getAllUsers(authTokens)
+                const response = await getAllUsers(authTokens)
                 setClients(response.data);
             } catch (error) {
                 console.error("Failed to fetch profile data:", error);
@@ -32,11 +32,18 @@ export default function Clients(props) {
         navigate('/profile');
     };
 
-     const goToUpdate = (clientId) => {
+    const goToUpdate = (clientId) => {
         navigate(`/client-update/${clientId}`);
     }
-    const goToDelete = () => {
-        navigate('/client-delete')
+    const goToDelete = async (clientId) => {
+        await deleteUser(authTokens, clientId)
+        window.location.reload(false);
+
+
+    }
+
+    const goToRegister=()=>{
+        navigate('/register');
     }
 
     return (
@@ -53,13 +60,19 @@ export default function Clients(props) {
 
                 </Grid>
 
+                <div>
 
                 <Button onClick={() => goToProfile()} variant="contained" color="primary">
                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                         <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
                     </Typography>
                 </Button>
-
+                <Button onClick={() => goToRegister()} variant="contained" color="primary" style={{marginTop:'1rem'}}>
+                            <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
+                                <FormattedMessage id='projects.profile.button' defaultMessage="Register new User"/>
+                            </Typography>
+                        </Button>
+                </div>
                 <br/>
                 <br/>
 
@@ -72,8 +85,8 @@ export default function Clients(props) {
 
                                 <Grid container spacing={1}>
                                     <Grid className="clients-data" item xs={12} md={3}>
-                                         <Typography variant="h4">{client.name}</Typography>
-                                         <Typography variant="h4">{client.id}</Typography>
+                                        <Typography variant="h4">{client.name}</Typography>
+                                        <Typography variant="h4">{client.id}</Typography>
                                     </Grid>
                                     <Grid className="clients-data" item xs={12} md={4}>
                                         <Typography variant="body1">Email: {client.email}</Typography>
@@ -85,22 +98,23 @@ export default function Clients(props) {
                                         <Typography variant="body1">Status: {client.status}</Typography>
                                     </Grid>
                                     <Grid className="clients-data" item xs={12} md={1}>
-                                            <Button onClick={() => goToUpdate(client.id)} variant="contained" color="secondary">
-                                                <Typography component={'span'} style={{color: "#E0F2F1"}}
-                                                            variant='body1'>
-                                                    <FormattedMessage id='project.edit.button'
-                                                                      defaultMessage="Update"/>
-                                                </Typography>
-                                            </Button>
+                                        <Button onClick={() => goToUpdate(client.id)} variant="contained"
+                                                color="secondary">
+                                            <Typography component={'span'} style={{color: "#E0F2F1"}}
+                                                        variant='body1'>
+                                                <FormattedMessage id='project.edit.button'
+                                                                  defaultMessage="Update"/>
+                                            </Typography>
+                                        </Button>
                                         <div style={{height: '1rem'}}>
                                         </div>
-                                            <Button onClick={() => goToDelete()} variant="contained" color="secondary">
-                                                <Typography component={'span'} style={{color: "#E0F2F1"}}
-                                                            variant='body1'>
-                                                    <FormattedMessage id='project.delete.button'
-                                                                      defaultMessage="Delete"/>
-                                                </Typography>
-                                            </Button>
+                                        <Button onClick={() => goToDelete(client.id)} variant="contained" color="secondary">
+                                            <Typography component={'span'} style={{color: "#E0F2F1"}}
+                                                        variant='body1'>
+                                                <FormattedMessage id='project.delete.button'
+                                                                  defaultMessage="Delete"/>
+                                            </Typography>
+                                        </Button>
                                     </Grid>
 
                                 </Grid>
