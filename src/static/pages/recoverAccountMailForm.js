@@ -7,6 +7,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Messages from "../components/Messages";
+import {recover} from "../components/api";
 
 
 export default function RecoverAccountMailForm(props) {
@@ -32,9 +33,9 @@ export default function RecoverAccountMailForm(props) {
     };
 
 
-    const handleSubmit = async (formData) => {
+    const handleSubmit = async () => {
         try {
-            await axios.post('http://127.0.0.1:8000/backend/api/recover/', formData);
+            await recover(formData)
             routerNavigate('/recover-password')
         } catch (error) {
             setOpenSuccess(false);
@@ -100,10 +101,10 @@ export default function RecoverAccountMailForm(props) {
                     <br/>
 
 
-                   <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
-                                  setOpenWarning={setOpenWarning}
-                                  successMessage={<FormattedMessage id='recover.succ'/>}
-                                  warningMessage={<FormattedMessage id='recover.warn'/>}/>
+                    <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
+                              setOpenWarning={setOpenWarning}
+                              successMessage={<FormattedMessage id='recover.succ'/>}
+                              warningMessage={<FormattedMessage id='recover.warn'/>}/>
 
 
                     <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">

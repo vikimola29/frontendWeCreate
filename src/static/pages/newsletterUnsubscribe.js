@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import axios from "axios";
 import Messages from "../components/Messages";
+import {unsubscribeNewsletter} from "../components/api";
 
 export default function NewsletterUnsubscribe(props) {
     const GradientContainer = props.bgGradient
@@ -23,9 +24,9 @@ export default function NewsletterUnsubscribe(props) {
     };
 
 
-    const handleSubmit = async (formData) => {
+    const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:8000/backend/api/newsletter/unsubscribe/', formData);
+            await unsubscribeNewsletter(formData)
             setOpenSuccess(true);
             setOpenWarning(false);
         } catch (error) {

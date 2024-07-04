@@ -37,6 +37,7 @@ export default function UpdateProject(props) {
                 setProjectData(response.data);
                 if (response.data?.length > 0) {
                     setProjectData(response.data[0]);
+                    console.log(projectData)
                 } else {
                     console.log("No project found")
                 }
@@ -46,8 +47,8 @@ export default function UpdateProject(props) {
             }
         };
 
-        fetchProject();
-    }, [authTokens, projectId]);
+           fetchProject(); // Correctly invoke the function here
+  }, [authTokens, projectId]);
 
     const handleChange = (e) => {
         setProjectData({
@@ -101,7 +102,7 @@ export default function UpdateProject(props) {
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={1}>
 
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={4} className="project-update-fields">
                             <FormControl fullWidth style={{ width: '70%' }} >
                             <TextField
                                 label="Name"
@@ -110,7 +111,6 @@ export default function UpdateProject(props) {
                                 onChange={handleChange}
                             /></FormControl>
                             <br/>
-                            <br/>
                             <FormControl fullWidth style={{ width: '70%' }} >
                             <TextField
                                 label="Link"
@@ -118,7 +118,6 @@ export default function UpdateProject(props) {
                                 value={projectData.link || ''}
                                 onChange={handleChange}
                             /></FormControl>
-                            <br/>
                             <br/>
                             <FormControl fullWidth style={{ width: '70%' }} >
                             <TextField
@@ -129,15 +128,13 @@ export default function UpdateProject(props) {
                                 onChange={handleChange}
                             /></FormControl>
                             <br/>
-                            <br/>
-
                             <FormControl fullWidth style={{ width: '70%' }} >
                                 <InputLabel id="status-label">Status</InputLabel>
                                 <Select
                                     labelId="status-label"
                                     id="status"
                                     name="status"
-                                    value={projectData.status}
+                                    value={projectData.status || ''}
                                     onChange={handleChange}
                                 >
                                     <MenuItem value="Pending">Pending</MenuItem>
@@ -146,9 +143,8 @@ export default function UpdateProject(props) {
                                 </Select>
                             </FormControl>
                             <br/>
-                            <br/>
                         </Grid>
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={4} className="project-update-fields">
 
                             <FormControl fullWidth style={{ width: '70%' }}>
                             <TextField
@@ -160,7 +156,6 @@ export default function UpdateProject(props) {
                                 onChange={handleChange}
                             /></FormControl>
                             <br/>
-                            <br/>
                             <FormControl fullWidth style={{ width: '70%' }} >
 
                             <TextField
@@ -169,7 +164,6 @@ export default function UpdateProject(props) {
                                 value={projectData.batch_price || ''}
                                 onChange={handleChange}
                             /></FormControl>
-                            <br/>
                             <br/>
                             <FormControl fullWidth style={{ width: '70%' }}>
                             <TextField
@@ -181,7 +175,6 @@ export default function UpdateProject(props) {
                                 onChange={handleChange}
                             /></FormControl>
                             <br/>
-                            <br/>
 
                             <FormControl fullWidth style={{ width: '70%' }} >
                                 <InputLabel id="batch_payment_status-label">Batch Payment Status</InputLabel>
@@ -189,7 +182,7 @@ export default function UpdateProject(props) {
                                     labelId="batch_payment_status-label"
                                     id="batch_payment_status"
                                     name="batch_payment_status"
-                                    value={projectData.batch_payment_status}
+                                    value={projectData.batch_payment_status || ''}
                                     onChange={handleChange}
                                 >
                                     <MenuItem value="Paid">Paid</MenuItem>
@@ -197,9 +190,8 @@ export default function UpdateProject(props) {
                                 </Select>
                             </FormControl>
                             <br/>
-                            <br/>
                         </Grid>
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={4} className="project-update-fields">
                             <FormControl fullWidth style={{ width: '70%' }} >
 
                             <TextField
@@ -208,7 +200,6 @@ export default function UpdateProject(props) {
                                 value={projectData.monthly_price || ''}
                                 onChange={handleChange}
                             /></FormControl>
-                            <br/>
                             <br/>
                             <FormControl fullWidth style={{ width: '70%' }}>
                             <TextField
@@ -220,7 +211,6 @@ export default function UpdateProject(props) {
                                 onChange={handleChange}
                             /></FormControl>
                             <br/>
-                            <br/>
 
                             <FormControl fullWidth style={{ width: '70%' }} >
                                 <InputLabel id="monthly_payment_status-label">Monthly Payment Status</InputLabel>
@@ -228,14 +218,13 @@ export default function UpdateProject(props) {
                                     labelId="monthly_payment_status-label"
                                     id="monthly_payment_status"
                                     name="monthly_payment_status"
-                                    value={projectData.monthly_payment_status}
+                                    value={projectData.monthly_payment_status || ''}
                                     onChange={handleChange}
                                 >
                                     <MenuItem value="Paid">Paid</MenuItem>
                                     <MenuItem value="Not Paid">Not Paid</MenuItem>
                                 </Select>
                             </FormControl>
-                            <br/>
                             <br/>
                             <FormControl fullWidth style={{ width: '70%' }}>
                             <TextField

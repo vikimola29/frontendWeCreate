@@ -44,9 +44,8 @@ export default function UpdateClient(props) {
 
             }
         };
-
-        fetchProject();
-    }, [authTokens, clientId]);
+          fetchProject(); // Correctly invoke the function here
+  }, [authTokens, clientId]);
 
 
     const handleChange = (e) => {
@@ -101,15 +100,9 @@ export default function UpdateClient(props) {
             <div style={{height: '5rem'}}>
             </div>
 
-            <div className="update-client-content">
+            <div className="update-client">
 
-                <div className="update-client-title">
-                    <Typography component={'span'} variant="h3" style={{textAlign: 'center'}}>
-                        <FormattedMessage id='update.client.title'
-                                          defaultMessage="Update client"/>
-                    </Typography>
-                    <br/>
-                    <br/>
+                <div className="client-update-title">
                     <Typography variant="h3">{formData.name}</Typography>
                 </div>
 
@@ -119,7 +112,7 @@ export default function UpdateClient(props) {
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={1}>
 
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={6} className="client-update-fields">
                             <FormControl fullWidth style={{width: '70%'}}>
                                 <TextField
                                     label="Name"
@@ -182,7 +175,7 @@ export default function UpdateClient(props) {
                         <br/>
                         <br/>
 
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={6} className="client-update-fields">
 
 
                             <FormControl fullWidth style={{width: '70%'}}>
@@ -244,22 +237,23 @@ export default function UpdateClient(props) {
                                   warningMessage={<FormattedMessage id='register.alert.warn'/>}/>
 
 
-                        <Button type='submit' variant="contained" color="secondary">
-                            <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
-                                <FormattedMessage id='update.btn'
-                                                  defaultMessage="Update"/>
-                            </Typography>
-                        </Button>
+                            <Button type='submit' variant="contained" color="secondary">
+                                <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
+                                    <FormattedMessage id='update.btn'
+                                                      defaultMessage="Update"/>
+                                </Typography>
+                            </Button>
+
+                            <Button onClick={() => goToProfile()} variant="contained" color="primary"
+                                    style={{marginTop: '1rem'}}>
+                                <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
+                                    <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
+                                </Typography>
+                            </Button>
                     </div>
                 </form>
                 <br/>
 
-                <Button onClick={() => goToProfile()} variant="contained" color="primary"
-                        style={{marginTop: '1rem'}}>
-                    <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                        <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
-                    </Typography>
-                </Button>
 
                 <br/>
                 <br/>

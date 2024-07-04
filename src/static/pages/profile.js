@@ -1,21 +1,20 @@
 import React, {useContext, useEffect, useState} from "react";
-import AuthContextProfileData from "../../components/fetchProfileData";
-import AuthContext from "../../components/AuthContext";
+import AuthContextProfileData from "../components/fetchProfileData";
+import AuthContext from "../components/AuthContext";
 import {useNavigate} from "react-router-dom";
-import {Button, Grid, useMediaQuery} from "@mui/material";
+import {Button, Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import axios from "axios";
-import {getUsersProjects} from "../../components/api";
+import {getUsersProjects} from "../components/api";
 
 const Profile = (props) => {
     const GradientContainer = props.bgGradient
-    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
     const {user} = useContext(AuthContextProfileData);
     const {logoutUser} = useContext(AuthContext);
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
     const {authTokens} = useContext(AuthContext);
+    console.log(user)
 
 
     useEffect(() => {
@@ -62,6 +61,9 @@ const Profile = (props) => {
                         <FormattedMessage id='profile.title'
                                           defaultMessage="Hellow"/>
                     </Typography>
+                    {user && <Typography component={'span'} variant="h3" style={{ marginLeft: '1rem' }}>
+                                    {user.name}
+                                </Typography>}
 
                 </div>
                 <br/>

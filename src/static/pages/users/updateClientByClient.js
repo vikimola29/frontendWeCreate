@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {Button, FormControl, TextField} from "@mui/material";
 import Messages from "../../components/Messages";
 import AuthContext from "../../components/AuthContext";
 import {getUser, updateUser} from "../../components/api";
@@ -45,8 +45,8 @@ export default function UpdateClientByClient(props) {
             }
         };
 
-        fetchProject();
-    }, [authTokens, clientId]);
+          fetchProject(); // Correctly invoke the function here
+  }, [authTokens, clientId]);
 
 
     const handleChange = (e) => {
@@ -59,7 +59,6 @@ export default function UpdateClientByClient(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("Formdata: " + formData)
         try {
             const updatedData = {
                 email: formData.email,
@@ -103,7 +102,7 @@ export default function UpdateClientByClient(props) {
 
             <div className="update-client-content">
 
-                <div className="update-client-title">
+                <div className="client-update-title">
                     <Typography component={'span'} variant="h3" style={{textAlign: 'center'}}>
                         <FormattedMessage id='update.client.title'
                                           defaultMessage="Update client"/>
@@ -117,7 +116,7 @@ export default function UpdateClientByClient(props) {
                 <br/>
                 <br/>
                 <form onSubmit={handleSubmit}>
-                    <div>
+                    <div >
 
                             <FormControl fullWidth style={{width: '70%'}}>
                                 <TextField

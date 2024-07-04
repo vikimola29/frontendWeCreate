@@ -125,8 +125,8 @@ export default function LogIn(props) {
                         <Typography component={'span'} variant="caption" sx={{marginLeft: '0.7rem'}}>
 
                             <FormattedMessage
-                                // id="login.forgotten"
-                                id="login.forgotten.password"
+                                id="login.forgotten"
+                                // id="login.forgotten.password"
                                 defaultMessage="{link}"
                                 values={{
                                     link: (

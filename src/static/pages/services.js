@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import Header from "../components/header";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import {Alert, Button, Divider, FormControl, FormHelperText, Grid, TextField, useMediaQuery} from "@mui/material";
+import {Button, Divider, FormControl, FormHelperText, Grid, TextField, useMediaQuery} from "@mui/material";
 import {BsSun} from 'react-icons/bs';
 import {HiMiniLanguage} from 'react-icons/hi2';
 import {BiDotsHorizontalRounded, BiMessageSquareDetail, BiSearchAlt} from 'react-icons/bi';
@@ -11,9 +10,8 @@ import {RiSecurePaymentLine} from 'react-icons/ri';
 import {SlEnvolopeLetter} from "react-icons/sl";
 import {CgProfile} from "react-icons/cg";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import CheckIcon from "@mui/icons-material/Check";
 import Messages from "../components/Messages";
+import {subscribeNewsletter} from "../components/api";
 
 
 export default function Services(props) {
@@ -37,7 +35,7 @@ export default function Services(props) {
     };
     const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:8000/backend/api/newsletter/subscribe/', formData);
+            await subscribeNewsletter(formData)
             setOpenSuccess(true);
             setOpenWarning(false);
         } catch (error) {

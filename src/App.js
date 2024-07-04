@@ -17,19 +17,16 @@ import Register from "./static/pages/users/register";
 import LogIn from "./static/pages/users/logIn";
 import RecoverAccountMailForm from "./static/pages/recoverAccountMailForm";
 import RecoverAccountNewPassword from "./static/pages/recoverAccountNewPassword";
-import Profile from "./static/pages/users/profile";
+import Profile from "./static/pages/profile";
 import Clients from "./static/pages/users/clients";
 import Header from "./static/components/header";
 import {AuthProvider} from "./static/components/AuthContext";
 import {AuthProviderProfileData} from "./static/components/fetchProfileData";
 import Projects from "./static/pages/projects/projects";
-import * as PropTypes from "prop-types";
 import UpdateProject from "./static/pages/projects/updateProject";
 import CreateProject from "./static/pages/projects/createProject";
 import UpdateClient from "./static/pages/users/updateClient";
 import UpdateClientByClient from "./static/pages/users/updateClientByClient";
-
-
 
 
 function App() {

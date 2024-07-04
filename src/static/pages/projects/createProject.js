@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography} from '@mui/material';
 import AuthContext from '../../components/AuthContext';
 import {FormattedMessage} from "react-intl";
@@ -81,7 +81,7 @@ export default function CreateProject(props) {
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={1}>
 
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={4} className="project-create-fields">
                             <FormControl fullWidth style={{ width: '70%' }} >
                             <TextField
                                 label="Name"
@@ -90,7 +90,6 @@ export default function CreateProject(props) {
                                 onChange={handleChange}
                             /></FormControl>
                             <br/>
-                            <br/>
                             <FormControl fullWidth style={{ width: '70%' }} >
                             <TextField
                                 label="Link"
@@ -98,7 +97,6 @@ export default function CreateProject(props) {
                                 value={projectData.link || ''}
                                 onChange={handleChange}
                             /></FormControl>
-                            <br/>
                             <br/>
                             <FormControl fullWidth style={{ width: '70%' }} >
                             <TextField
@@ -109,7 +107,6 @@ export default function CreateProject(props) {
                                 onChange={handleChange}
                             /></FormControl>
                             <br/>
-                            <br/>
 
                             <FormControl fullWidth style={{ width: '70%' }} >
                                 <InputLabel id="status-label">Status</InputLabel>
@@ -117,7 +114,7 @@ export default function CreateProject(props) {
                                     labelId="status-label"
                                     id="status"
                                     name="status"
-                                    value={projectData.status}
+                                    value={projectData.status || ''}
                                     onChange={handleChange}
                                 >
                                     <MenuItem value="Pending">Pending</MenuItem>
@@ -126,9 +123,8 @@ export default function CreateProject(props) {
                                 </Select>
                             </FormControl>
                             <br/>
-                            <br/>
                         </Grid>
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={4} className="project-create-fields">
 
                             <FormControl fullWidth style={{ width: '70%' }}>
                             <TextField
@@ -140,7 +136,6 @@ export default function CreateProject(props) {
                                 onChange={handleChange}
                             /></FormControl>
                             <br/>
-                            <br/>
                             <FormControl fullWidth style={{ width: '70%' }} >
 
                             <TextField
@@ -149,7 +144,6 @@ export default function CreateProject(props) {
                                 value={projectData.batch_price || ''}
                                 onChange={handleChange}
                             /></FormControl>
-                            <br/>
                             <br/>
                             <FormControl fullWidth style={{ width: '70%' }}>
                             <TextField
@@ -160,7 +154,6 @@ export default function CreateProject(props) {
                                 value={projectData.batch_payment_due_date || ''}
                                 onChange={handleChange}
                             /></FormControl>
-                            <br/>
                             <br/>
 
                             <FormControl fullWidth style={{ width: '70%' }} >
@@ -177,9 +170,8 @@ export default function CreateProject(props) {
                                 </Select>
                             </FormControl>
                             <br/>
-                            <br/>
                         </Grid>
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={4} className="project-create-fields">
                             <FormControl fullWidth style={{ width: '70%' }} >
 
                             <TextField
@@ -188,7 +180,6 @@ export default function CreateProject(props) {
                                 value={projectData.monthly_price || ''}
                                 onChange={handleChange}
                             /></FormControl>
-                            <br/>
                             <br/>
                             <FormControl fullWidth style={{ width: '70%' }}>
                             <TextField
@@ -199,7 +190,6 @@ export default function CreateProject(props) {
                                 value={projectData.monthly_payment_due_date || ''}
                                 onChange={handleChange}
                             /></FormControl>
-                            <br/>
                             <br/>
 
                             <FormControl fullWidth style={{ width: '70%' }} >
@@ -215,7 +205,6 @@ export default function CreateProject(props) {
                                     <MenuItem value="Not Paid">Not Paid</MenuItem>
                                 </Select>
                             </FormControl>
-                            <br/>
                             <br/>
                             <FormControl fullWidth style={{ width: '70%' }}>
                             <TextField

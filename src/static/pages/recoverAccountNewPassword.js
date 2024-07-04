@@ -6,6 +6,7 @@ import {FormattedMessage} from "react-intl";
 import CheckIcon from "@mui/icons-material/Check";
 import axios from "axios";
 import Messages from "../components/Messages";
+import {recoverPassword} from "../components/api";
 
 
 export default function RecoverAccountNewPassword(props) {
@@ -31,9 +32,9 @@ export default function RecoverAccountNewPassword(props) {
     };
 
 
-    const handleSubmit = async (formData) => {
+    const handleSubmit = async () => {
         try {
-            await axios.post('http://127.0.0.1:8000/backend/api/recover-password/', formData);
+            await recoverPassword(formData)
             const messageS = <FormattedMessage id='recover.password.succ'/>
             setSuccessMessage(messageS);
             setOpenSuccess(true);
@@ -117,12 +118,10 @@ export default function RecoverAccountNewPassword(props) {
 
                     <br/>
 
-                          <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
-                                  setOpenWarning={setOpenWarning}
-                                  successMessage={<FormattedMessage id='recover.password.succ'/>}
-                                  warningMessage={<FormattedMessage id='recover.password.warn'/>}/>
-
-
+                    <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
+                              setOpenWarning={setOpenWarning}
+                              successMessage={<FormattedMessage id='recover.password.succ'/>}
+                              warningMessage={<FormattedMessage id='recover.password.warn'/>}/>
 
 
                     <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">

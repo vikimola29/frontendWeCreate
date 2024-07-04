@@ -1,5 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
-import axios from 'axios';
+import React, {useContext, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import {Button, FormControl, FormHelperText, FormLabel, Grid, TextField, useMediaQuery} from "@mui/material";
@@ -7,6 +6,8 @@ import {BiMap, BiPhoneCall} from "react-icons/bi";
 import {LuMails} from "react-icons/lu";
 import {AiOutlineFieldTime, AiOutlineInfoCircle} from "react-icons/ai";
 import Messages from "../components/Messages";
+import {messageForm} from "../components/api";
+import AuthContext from "../components/AuthContext";
 
 
 export default function Contact(props) {
@@ -18,7 +19,8 @@ export default function Contact(props) {
     const logoDark = require("../image/contact/logoDark.png")
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
-    const alertRef = useRef(null);
+    const {authTokens} = useContext(AuthContext);
+
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -37,7 +39,7 @@ export default function Contact(props) {
 
     const handleSubmit = async () => {
         try {
-            await axios.post('http://127.0.0.1:8000/backend/api/create_message/', formData);
+            await messageForm(formData )
             setOpenSuccess(true);
             setOpenWarning(false);
         } catch (error) {

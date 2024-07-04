@@ -1,11 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
-import Header from "../../components/header";
-import {Button, Grid, useMediaQuery} from "@mui/material";
+import {Button, Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import AuthContext from "../../components/AuthContext";
-import axios from "axios";
 import {deleteUser, getAllUsers} from "../../components/api";
 
 export default function Clients(props) {
@@ -42,7 +40,7 @@ export default function Clients(props) {
 
     }
 
-    const goToRegister=()=>{
+    const goToRegister = () => {
         navigate('/register');
     }
 
@@ -59,22 +57,23 @@ export default function Clients(props) {
                     </Typography>
 
                 </Grid>
+                <br/>
+                <br/>
+                <div className="clients-nav-btns">
 
-                <div>
-
-                <Button onClick={() => goToProfile()} variant="contained" color="primary">
-                    <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                        <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
-                    </Typography>
-                </Button>
-                <Button onClick={() => goToRegister()} variant="contained" color="primary" style={{marginTop:'1rem'}}>
-                            <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                <FormattedMessage id='projects.profile.button' defaultMessage="Register new User"/>
-                            </Typography>
-                        </Button>
+                    <Button onClick={() => goToProfile()} variant="contained" color="primary">
+                        <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
+                            <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
+                        </Typography>
+                    </Button>
+                    <Button onClick={() => goToRegister()} variant="contained" color="primary"
+                            style={{marginTop: '1rem'}}>
+                        <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
+                            <FormattedMessage id='projects.profile.button' defaultMessage="Register new User"/>
+                        </Typography>
+                    </Button>
                 </div>
-                <br/>
-                <br/>
+
 
                 <Grid container>
                     {clients.map((client) => (
@@ -108,7 +107,8 @@ export default function Clients(props) {
                                         </Button>
                                         <div style={{height: '1rem'}}>
                                         </div>
-                                        <Button onClick={() => goToDelete(client.id)} variant="contained" color="secondary">
+                                        <Button onClick={() => goToDelete(client.id)} variant="contained"
+                                                color="secondary">
                                             <Typography component={'span'} style={{color: "#E0F2F1"}}
                                                         variant='body1'>
                                                 <FormattedMessage id='project.delete.button'
