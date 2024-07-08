@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {getCSRFToken} from "./getCsrfToken";
 
 
-const API_URL = 'http://127.0.0.1:8000/backend/api/';
+const API_URL = 'http://127.0.0.1:8000/';
 
 
 export const messageForm = (formData) => {
@@ -123,9 +124,55 @@ export const deleteUser = (authTokens, clientId) => {
     });
 };
 
-export const recover = (clientData) => {
-    return axios.post('http://127.0.0.1:8000/backend/api/recover/', clientData);
-}
-export const recoverPassword = (clientData) => {
-    return axios.post('http://127.0.0.1:8000/backend/api/recover-password/', clientData);
-}
+export const passwordReset = async (clientData) => {
+    try {
+        const csrfToken = await getCSRFToken();
+        const cookieValue = `${csrfToken}`;
+        console.log("api.js getCSRFToken: ", csrfToken);
+        console.log("api.js cookieVal:", cookieValue);
+
+        const response = await axios.post(`${API_URL}reset_password/`, clientData,
+            {
+                headers: {
+                    // 'Cookie': cookieValue,
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error during password reset:', error);
+        throw error;
+    }
+};
+
+export const recoverPassword = async (clientData,token) => {
+    try {
+        const csrfToken = await getCSRFToken();
+        console.log("api.js token: ", token);
+        const response = await axios.post(`${API_URL}reset_password/confirm/`, {token: token, ...clientData}, {
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error during password reset:', error);
+        throw error;
+    }
+};
+
+export const fetchCSRFToken = async () => {
+    try {
+        const response = await axios.get(`${API_URL}get-csrf-token/`, {withCredentials: true});
+        document.cookie = `csrftoken3=${response.data.csrfToken}; path=/`;
+        console.log("api.js fetchCSRFToken: ", response.data.csrfToken)
+    } catch (error) {
+        console.error('Error fetching CSRF token:', error);
+    }
+};
+

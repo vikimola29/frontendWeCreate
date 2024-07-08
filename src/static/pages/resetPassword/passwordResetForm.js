@@ -1,21 +1,24 @@
 import React, {useState} from "react";
-import Header from "../components/header";
+import Header from "../../components/header";
 import {Alert, Button, FormControl, FormHelperText, Grid, TextField, useMediaQuery} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import CheckIcon from "@mui/icons-material/Check";
 import axios from "axios";
-import Messages from "../components/Messages";
-import {recoverPassword} from "../components/api";
+import Messages from "../../components/Messages";
+import {recoverPassword} from "../../utils/api";
+import {useNavigate, useParams} from "react-router-dom";
 
 
-export default function RecoverAccountNewPassword(props) {
+export default function PasswordResetForm(props) {
     const GradientContainer = props.bgGradient
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+    const routerNavigate = useNavigate()
     const [successMessage, setSuccessMessage] = useState('');
     const [warningMessage, setWarningMessage] = useState('');
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
+    const {token} = useParams();
     const [formData, setFormData] = useState({
         password: '',
         password2: ''
@@ -33,17 +36,22 @@ export default function RecoverAccountNewPassword(props) {
 
 
     const handleSubmit = async () => {
-        try {
-            await recoverPassword(formData)
-            const messageS = <FormattedMessage id='recover.password.succ'/>
-            setSuccessMessage(messageS);
-            setOpenSuccess(true);
-            setOpenWarning(false);
-        } catch (error) {
-            const messageW = <FormattedMessage id='recover.password.warn'/>
-            setWarningMessage(messageW);
-            setOpenSuccess(false);
+        if (formData.password === formData.password2) {
+            try {
+                await recoverPassword(formData, token);
+                const messageS = <FormattedMessage id='recover.password.succ'/>;
+                setSuccessMessage(messageS);
+                setOpenSuccess(true);
+                setOpenWarning(false);
+                routerNavigate('/password-reset-done')
+
+            } catch (error) {
+                setOpenWarning(true);
+                setOpenSuccess(false);
+            }
+        } else {
             setOpenWarning(true);
+            setOpenSuccess(false);
         }
     };
 

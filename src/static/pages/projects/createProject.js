@@ -4,7 +4,7 @@ import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typo
 import AuthContext from '../../components/AuthContext';
 import {FormattedMessage} from "react-intl";
 import Messages from "../../components/Messages";
-import {createProject} from "../../components/api";
+import {createProject} from "../../utils/api";
 
 
 export default function CreateProject(props) {

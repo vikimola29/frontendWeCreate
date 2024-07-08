@@ -130,7 +130,7 @@ export default function LogIn(props) {
                                 defaultMessage="{link}"
                                 values={{
                                     link: (
-                                        <a href="/recover" target="_blank" rel="noopener noreferrer">
+                                        <a href="/password-reset" target="_blank" rel="noopener noreferrer">
                                             <FormattedMessage id="login.forgotten.password"
                                                               defaultMessage="Parola uitata"/>
                                         </a>

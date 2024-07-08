@@ -1,21 +1,16 @@
 import React, {useState} from "react";
-import Header from "../components/header";
-import {Alert, Button, FormControl, FormHelperText, Grid, TextField, useMediaQuery} from "@mui/material";
+import {Button, FormControl, FormHelperText, TextField, useMediaQuery} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import CheckIcon from "@mui/icons-material/Check";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import Messages from "../components/Messages";
-import {recover} from "../components/api";
+import Messages from "../../components/Messages";
+import {passwordReset} from "../../utils/api";
 
 
-export default function RecoverAccountMailForm(props) {
+export default function PasswordReset(props) {
     const GradientContainer = props.bgGradient
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
     const routerNavigate = useNavigate()
-    const [successMessage, setSuccessMessage] = useState('');
-    const [warningMessage, setWarningMessage] = useState('');
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
     const [formData, setFormData] = useState({
@@ -35,8 +30,8 @@ export default function RecoverAccountMailForm(props) {
 
     const handleSubmit = async () => {
         try {
-            await recover(formData)
-            routerNavigate('/recover-password')
+            await passwordReset(formData)
+            routerNavigate('/password-reset-sent')
         } catch (error) {
             setOpenSuccess(false);
             setOpenWarning(true);

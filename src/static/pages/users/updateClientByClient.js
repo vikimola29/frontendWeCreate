@@ -4,7 +4,7 @@ import {FormattedMessage} from "react-intl";
 import {Button, FormControl, TextField} from "@mui/material";
 import Messages from "../../components/Messages";
 import AuthContext from "../../components/AuthContext";
-import {getUser, updateUser} from "../../components/api";
+import {getUser, updateUser} from "../../utils/api";
 import {useNavigate, useParams} from "react-router-dom";
 
 

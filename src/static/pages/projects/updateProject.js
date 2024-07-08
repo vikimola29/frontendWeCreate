@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography} from '@mui/material';
 import AuthContext from '../../components/AuthContext';
-import {getProject, updateProject} from "../../components/api";
+import {getProject, updateProject} from "../../utils/api";
 import {FormattedMessage} from "react-intl";
 import Messages from "../../components/Messages";
 

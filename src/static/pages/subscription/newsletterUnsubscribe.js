@@ -3,8 +3,8 @@ import {Button, FormControl, FormHelperText, Grid, TextField} from "@mui/materia
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import axios from "axios";
-import Messages from "../components/Messages";
-import {unsubscribeNewsletter} from "../components/api";
+import Messages from "../../components/Messages";
+import {unsubscribeNewsletter} from "../../utils/api";
 
 export default function NewsletterUnsubscribe(props) {
     const GradientContainer = props.bgGradient

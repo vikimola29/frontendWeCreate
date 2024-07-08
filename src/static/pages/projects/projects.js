@@ -6,7 +6,7 @@ import {FormattedMessage} from "react-intl";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../components/AuthContext";
-import {deleteProject, getAllProjects} from "../../components/api";
+import {deleteProject, getAllProjects} from "../../utils/api";
 
 export default function Projects(props) {
     const GradientContainer = props.bgGradient

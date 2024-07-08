@@ -1,7 +1,7 @@
 import React, {createContext, useState, useEffect, useContext} from "react";
 import axios from "axios";
 import AuthContext from "./AuthContext";
-import {getLoggedUser, getUser} from "./api";
+import {getLoggedUser, getUser} from "../utils/api";
 
 const AuthContextProfileData = createContext();
 

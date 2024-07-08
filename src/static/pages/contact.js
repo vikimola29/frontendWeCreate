@@ -6,7 +6,7 @@ import {BiMap, BiPhoneCall} from "react-icons/bi";
 import {LuMails} from "react-icons/lu";
 import {AiOutlineFieldTime, AiOutlineInfoCircle} from "react-icons/ai";
 import Messages from "../components/Messages";
-import {messageForm} from "../components/api";
+import {messageForm} from "../utils/api";
 import AuthContext from "../components/AuthContext";
 
 

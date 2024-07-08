@@ -796,6 +796,15 @@ code {
     align-items: center;
 }
 
+/*RECOVER-PASSWORD SENT*/
+.recover-sent-content {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /*PROFILE*/
 .profile {
     min-height: 90vh;
@@ -858,7 +867,7 @@ code {
 }
 
 
-.clients-nav-btns{
+.clients-nav-btns {
     /*width: 50vw;*/
     display: flex;
     justify-content: space-evenly;
@@ -866,7 +875,7 @@ code {
     /*background-color: chartreuse;*/
 }
 
-.clients-data{
+.clients-data {
     /*background-color: palevioletred;*/
     display: flex !important;
     flex-direction: column !important;
@@ -875,25 +884,27 @@ code {
 }
 
 /*CLIENTS UPDATE*/
-.client-update-title{
+.client-update-title {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.client-update{
-     min-height: 90vh;
+.client-update {
+    min-height: 90vh;
     padding-left: 3%;
     padding-right: 3%;
 }
-.client-update-fields{
-     display: flex !important;
+
+.client-update-fields {
+    display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
 }
-.client-update-btn{
+
+.client-update-btn {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -912,7 +923,7 @@ code {
     padding-right: 3%;
 }
 
-.projects-nav-btns{
+.projects-nav-btns {
     /*width: 50vw;*/
     display: flex;
     justify-content: space-evenly;
@@ -935,26 +946,27 @@ code {
 }
 
 
-.project-update{
-     min-height: 90vh;
+.project-update {
+    min-height: 90vh;
     padding-left: 3%;
     padding-right: 3%;
 }
 
-.project-update-form{
+.project-update-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.project-update-fields{
+.project-update-fields {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
 }
-.project-update-btn{
+
+.project-update-btn {
     /*background-color: chartreuse;*/
     width: 100vw;
     display: flex;
@@ -962,31 +974,34 @@ code {
     align-items: center;
     justify-content: center;
 }
+
 /*PROJECT CREATE*/
 .project-create-title {
     display: flex;
     justify-content: center;
 }
-.project-create{
-     min-height: 90vh;
+
+.project-create {
+    min-height: 90vh;
     padding-left: 3%;
     padding-right: 3%;
 }
 
-.project-create-form{
+.project-create-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.project-create-fields{
+
+.project-create-fields {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
 }
 
-.project-create-btn{
+.project-create-btn {
     /*background-color: chartreuse;*/
     width: 100vw;
     display: flex;

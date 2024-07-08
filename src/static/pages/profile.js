@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {Button, Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import {getUsersProjects} from "../components/api";
+import {getUsersProjects} from "../utils/api";
 
 const Profile = (props) => {
     const GradientContainer = props.bgGradient

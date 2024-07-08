@@ -4,7 +4,7 @@ import {FormattedMessage} from "react-intl";
 import {Button, FormControl, FormHelperText, TextField} from "@mui/material";
 import Messages from "../../components/Messages";
 import AuthContext from "../../components/AuthContext";
-import {createUser} from "../../components/api";
+import {createUser} from "../../utils/api";
 
 
 export default function Register(props) {

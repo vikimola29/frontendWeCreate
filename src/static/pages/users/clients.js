@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import {useNavigate} from "react-router-dom";
 import AuthContext from "../../components/AuthContext";
-import {deleteUser, getAllUsers} from "../../components/api";
+import {deleteUser, getAllUsers} from "../../utils/api";
 
 export default function Clients(props) {
     const GradientContainer = props.bgGradient
