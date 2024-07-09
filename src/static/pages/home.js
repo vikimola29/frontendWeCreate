@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/header";
-import Page1 from "../components/page1";
+import LandingPage from "./landingPage";
 
 export default function Home(props) {
     return (
@@ -9,9 +9,9 @@ export default function Home(props) {
 
             {
                 props.isDarkTheme ?
-                    <Page1 bgGradient={props.gradientContainerDark} isDarkTheme={props.isDarkTheme}/>
+                    <LandingPage bgGradient={props.gradientContainerDark} isDarkTheme={props.isDarkTheme}/>
                     :
-                    <Page1 bgGradient={props.gradientContainerLight} isDarkTheme={props.isDarkTheme}/>
+                    <LandingPage bgGradient={props.gradientContainerLight} isDarkTheme={props.isDarkTheme}/>
             }
 
         </div>

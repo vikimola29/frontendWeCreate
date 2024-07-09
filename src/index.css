@@ -883,6 +883,14 @@ code {
     align-items: flex-start !important;
 }
 
+.clients-data-btn {
+    /*background-color: palevioletred;*/
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
 /*CLIENTS UPDATE*/
 .client-update-title {
     display: flex;
@@ -905,6 +913,14 @@ code {
 }
 
 .client-update-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*UPDATE CLIENT BY CLIENT*/
+.update-user-by-user-form {
     display: flex;
     flex-direction: column;
     justify-content: center;

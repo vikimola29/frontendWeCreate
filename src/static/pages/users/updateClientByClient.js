@@ -35,7 +35,6 @@ export default function UpdateClientByClient(props) {
                 setFormData(response.data);
                 if (response.data?.length > 0) {
                     setFormData(response.data[0]);
-                    console.log(formData)
                 } else {
                     console.log("No project found")
                 }
@@ -54,7 +53,7 @@ export default function UpdateClientByClient(props) {
             ...formData,
             [e.target.name]: e.target.value
         });
-        console.log(formData);
+
     };
 
     const handleSubmit = async (e) => {
@@ -69,8 +68,7 @@ export default function UpdateClientByClient(props) {
                 status: formData.status,
                 is_staff: formData.is_staff === 'true',
                 is_superuser: formData.is_superuser === 'true'
-            };
-            console.log("Updated data: " + updatedData);
+            };;
             await updateUser(authTokens, updatedData, clientId);
             setOpenSuccess(true);
             setOpenWarning(false);
@@ -104,21 +102,19 @@ export default function UpdateClientByClient(props) {
 
                 <div className="client-update-title">
                     <Typography component={'span'} variant="h3" style={{textAlign: 'center'}}>
-                        <FormattedMessage id='update.client.title'
-                                          defaultMessage="Update client"/>
+                        <FormattedMessage id='update.btn'
+                                          defaultMessage="Update"/> {formData.name}
                     </Typography>
-                    <br/>
-                    <br/>
-                    <Typography variant="h3">{formData.name}</Typography>
+
                 </div>
 
 
                 <br/>
                 <br/>
-                <form onSubmit={handleSubmit}>
+                <form className="update-user-by-user-form" onSubmit={handleSubmit}>
                     <div >
 
-                            <FormControl fullWidth style={{width: '70%'}}>
+                            <FormControl fullWidth >
                                 <TextField
                                     label="Name"
                                     id="name"
@@ -131,7 +127,7 @@ export default function UpdateClientByClient(props) {
                             <br/>
                             <br/>
 
-                            <FormControl fullWidth style={{width: '70%'}}>
+                            <FormControl fullWidth >
                                 <TextField label='Company Name'
                                            id="company_name"
                                            name="company_name"
@@ -143,7 +139,7 @@ export default function UpdateClientByClient(props) {
                             </FormControl>
                             <br/>
                             <br/>
-                            <FormControl fullWidth style={{width: '70%'}}>
+                            <FormControl fullWidth >
                                 <TextField id="address"
                                            name="address"
                                            type="text"
@@ -161,7 +157,7 @@ export default function UpdateClientByClient(props) {
                             <br/>
                             <br/>
 
-                            <FormControl fullWidth style={{width: '70%'}}>
+                            <FormControl fullWidth>
                                 <TextField id="phone_number"
                                            name="phone_number"
                                            type="text"
@@ -199,14 +195,14 @@ export default function UpdateClientByClient(props) {
                     </div>
                 </form>
                 <br/>
-
+                <div className="client-update-btn">
                 <Button onClick={() => goToProfile()} variant="contained" color="primary"
                         style={{marginTop: '1rem'}}>
                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
                         <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
                     </Typography>
                 </Button>
-
+                </div>
                 <br/>
                 <br/>
 

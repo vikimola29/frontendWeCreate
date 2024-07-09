@@ -35,7 +35,6 @@ export default function UpdateClient(props) {
                 setFormData(response.data);
                 if (response.data?.length > 0) {
                     setFormData(response.data[0]);
-                    console.log(formData)
                 } else {
                     console.log("No project found")
                 }
@@ -53,12 +52,10 @@ export default function UpdateClient(props) {
             ...formData,
             [e.target.name]: e.target.value
         });
-        console.log(formData);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("Formdata: " + formData)
         try {
             const updatedData = {
                 email: formData.email,
@@ -70,7 +67,6 @@ export default function UpdateClient(props) {
                 is_staff: formData.is_staff === 'true',
                 is_superuser: formData.is_superuser === 'true'
             };
-            console.log("Updated data: " + updatedData);
             await updateUser(authTokens, updatedData, clientId);
             setOpenSuccess(true);
             setOpenWarning(false);
@@ -247,7 +243,7 @@ export default function UpdateClient(props) {
                             <Button onClick={() => goToProfile()} variant="contained" color="primary"
                                     style={{marginTop: '1rem'}}>
                                 <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                    <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
+                                    <FormattedMessage id='profile.btn' defaultMessage="Go to Profile"/>
                                 </Typography>
                             </Button>
                     </div>

@@ -17,7 +17,7 @@ import Register from "./static/pages/users/register";
 import LogIn from "./static/pages/users/logIn";
 import PasswordReset from "./static/pages/resetPassword/passwordReset";
 import PasswordResetForm from "./static/pages/resetPassword/passwordResetForm";
-import Profile from "./static/pages/profile";
+import Profile from "./static/pages/users/profile";
 import Clients from "./static/pages/users/clients";
 import Header from "./static/components/header";
 import {AuthProvider} from "./static/components/AuthContext";
@@ -31,6 +31,7 @@ import PasswordResetSent from "./static/pages/resetPassword/passwordResetSent";
 import PasswordResetDone from "./static/pages/resetPassword/passwordResetDone";
 import axios from "axios";
 import {fetchCSRFToken} from "./static/utils/api";
+import LandingPage from "./static/pages/landingPage";
 
 
 function App() {
@@ -319,9 +320,9 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState('false');
 
     useEffect(() => {
-        fetchCSRFToken().then(r => {
-            console.log("App.js fetchCSRFToken ")})
-    }, [])
+            fetchCSRFToken()
+        }, []
+    )
 
     useEffect(() => {
 
@@ -368,21 +369,29 @@ function App() {
 
                             <Routes>
 
-                                <Route exact path="/" element={<Home isDarkTheme={isDarkTheme}
-                                                                     gradientContainerLight={gradientContainerLight}
-                                                                     gradientContainerDark={gradientContainerDark}/>}/>
+                                {/*<Route exact path="/" element={<Home isDarkTheme={isDarkTheme}*/}
+                                {/*                                     gradientContainerLight={gradientContainerLight}*/}
+                                {/*                                     gradientContainerDark={gradientContainerDark}/>}/>*/}
+
+                                {isDarkTheme && <Route exact path="/"
+                                                       element={<LandingPage isDarkTheme={isDarkTheme}
+                                                                             bgGradient={gradientContainerDark}/>}/>}
+
                                 {isDarkTheme && <Route exact path="/servicii"
                                                        element={<Services isDarkTheme={isDarkTheme}
                                                                           bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="/tehnologii" element={<Technologies isDarkTheme={isDarkTheme}
                                                                                            bgGradient={gradientContainerDark}/>}/>}
-                                {isDarkTheme && <Route exact path="/despre" element={<About isDarkTheme={isDarkTheme}
-                                                                                            bgGradient={gradientContainerDark}/>}/>}
-                                {isDarkTheme && <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
-                                                                                               bgGradient={gradientContainerDark}/>}/>}
-                                {isDarkTheme && <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
-                                                                                              bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/despre" element={<About isDarkTheme={isDarkTheme}
+                                                                                bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
+                                                                                   bgGradient={gradientContainerDark}/>}/>}
+                                {isDarkTheme &&
+                                    <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
+                                                                                  bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="/politica-confidentialitate"
                                            element={<Gdpr isDarkTheme={isDarkTheme}
@@ -426,7 +435,8 @@ function App() {
                                                <Profile setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
                                                         bgGradient={gradientContainerDark}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="/projects"
@@ -434,7 +444,8 @@ function App() {
                                                <Projects setIsAuthenticated={setIsAuthenticated}
                                                          isDarkTheme={isDarkTheme}
                                                          bgGradient={gradientContainerDark}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="/project-update/:projectId"
@@ -442,7 +453,8 @@ function App() {
                                                <UpdateProject setIsAuthenticated={setIsAuthenticated}
                                                               isDarkTheme={isDarkTheme}
                                                               bgGradient={gradientContainerDark}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="/project-create"
@@ -450,7 +462,8 @@ function App() {
                                                <CreateProject setIsAuthenticated={setIsAuthenticated}
                                                               isDarkTheme={isDarkTheme}
                                                               bgGradient={gradientContainerDark}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
 
                                 {isDarkTheme &&
@@ -459,7 +472,8 @@ function App() {
                                                <Clients setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
                                                         bgGradient={gradientContainerDark}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="/client-update/:clientId"
@@ -467,7 +481,8 @@ function App() {
                                                <UpdateClient setIsAuthenticated={setIsAuthenticated}
                                                              isDarkTheme={isDarkTheme}
                                                              bgGradient={gradientContainerDark}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="/clients-update/:clientId"
@@ -475,25 +490,32 @@ function App() {
                                                <UpdateClientByClient setIsAuthenticated={setIsAuthenticated}
                                                                      isDarkTheme={isDarkTheme}
                                                                      bgGradient={gradientContainerDark}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerDark}/>}/>}
                                 {isDarkTheme &&
                                     <Route exact path="*"
                                            element={<PageNotFound isDarkTheme={isDarkTheme}
                                                                   bgGradient={gradientContainerDark}/>}/>}
+
+                                {!isDarkTheme && <Route exact path="/"
+                                                        element={<LandingPage isDarkTheme={isDarkTheme}
+                                                                              bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme && <Route exact path="/servicii"
                                                         element={<Services isDarkTheme={isDarkTheme}
                                                                            bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/tehnologii" element={<Technologies isDarkTheme={isDarkTheme}
                                                                                            bgGradient={gradientContainerLight}/>}/>}
-                                {!isDarkTheme && <Route exact path="/despre" element={<About isDarkTheme={isDarkTheme}
-                                                                                             bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/despre" element={<About isDarkTheme={isDarkTheme}
+                                                                                bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/contact" element={<Contact isDarkTheme={isDarkTheme}
                                                                                    bgGradient={gradientContainerLight}/>}/>}
-                                {!isDarkTheme && <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
-                                                                                               bgGradient={gradientContainerLight}/>}/>}
+                                {!isDarkTheme &&
+                                    <Route exact path="/cookies" element={<Cookie isDarkTheme={isDarkTheme}
+                                                                                  bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/politica-confidentialitate"
                                            element={<Gdpr isDarkTheme={isDarkTheme}
@@ -537,7 +559,8 @@ function App() {
                                                <Profile setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
                                                         bgGradient={gradientContainerLight}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
 
                                 {!isDarkTheme &&
@@ -546,7 +569,8 @@ function App() {
                                                <Projects setIsAuthenticated={setIsAuthenticated}
                                                          isDarkTheme={isDarkTheme}
                                                          bgGradient={gradientContainerLight}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/project-update/:projectId"
@@ -554,7 +578,8 @@ function App() {
                                                <UpdateProject setIsAuthenticated={setIsAuthenticated}
                                                               isDarkTheme={isDarkTheme}
                                                               bgGradient={gradientContainerLight}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/project-create"
@@ -562,7 +587,8 @@ function App() {
                                                <CreateProject setIsAuthenticated={setIsAuthenticated}
                                                               isDarkTheme={isDarkTheme}
                                                               bgGradient={gradientContainerLight}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/clients"
@@ -570,7 +596,8 @@ function App() {
                                                <Clients setIsAuthenticated={setIsAuthenticated}
                                                         isDarkTheme={isDarkTheme}
                                                         bgGradient={gradientContainerLight}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/client-update/:clientId"
@@ -578,7 +605,8 @@ function App() {
                                                <UpdateClient setIsAuthenticated={setIsAuthenticated}
                                                              isDarkTheme={isDarkTheme}
                                                              bgGradient={gradientContainerLight}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="/clients-update/:clientId"
@@ -586,7 +614,8 @@ function App() {
                                                <UpdateClientByClient setIsAuthenticated={setIsAuthenticated}
                                                                      isDarkTheme={isDarkTheme}
                                                                      bgGradient={gradientContainerLight}/> :
-                                               <LogIn setIsAuthenticated={setIsAuthenticated} isDarkTheme={isDarkTheme}
+                                               <LogIn setIsAuthenticated={setIsAuthenticated}
+                                                      isDarkTheme={isDarkTheme}
                                                       bgGradient={gradientContainerLight}/>}/>}
                                 {!isDarkTheme &&
                                     <Route exact path="*"

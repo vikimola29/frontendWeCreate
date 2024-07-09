@@ -28,6 +28,7 @@ export default function Clients(props) {
 
     const goToProfile = () => {
         navigate('/profile');
+         scrollToTop()
     };
 
     const goToUpdate = (clientId) => {
@@ -39,6 +40,16 @@ export default function Clients(props) {
 
 
     }
+
+
+
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
 
     const goToRegister = () => {
         navigate('/register');
@@ -63,13 +74,13 @@ export default function Clients(props) {
 
                     <Button onClick={() => goToProfile()} variant="contained" color="primary">
                         <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                            <FormattedMessage id='clients.profile.button' defaultMessage="Go to Profile"/>
+                            <FormattedMessage id='profile.btn' defaultMessage="Go to Profile"/>
                         </Typography>
                     </Button>
                     <Button onClick={() => goToRegister()} variant="contained" color="primary"
                             style={{marginTop: '1rem'}}>
                         <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                            <FormattedMessage id='projects.profile.button' defaultMessage="Register new User"/>
+                            <FormattedMessage id='profile.btn2' defaultMessage="Register new User"/>
                         </Typography>
                     </Button>
                 </div>
@@ -88,20 +99,25 @@ export default function Clients(props) {
                                         <Typography variant="h4">{client.id}</Typography>
                                     </Grid>
                                     <Grid className="clients-data" item xs={12} md={4}>
-                                        <Typography variant="body1">Email: {client.email}</Typography>
-                                        <Typography variant="body1">Company Name: {client.company_name}</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='user.email'
+                                                                                      defaultMessage="Email:  "/>  {client.email}</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='user.company_name'
+                                                                                      defaultMessage="Company:  "/> {client.company_name}</Typography>
                                     </Grid>
-                                    <Grid className="clients-data" item xs={12} md={4}>
-                                        <Typography variant="body1">Phone Number: {client.phone_number}</Typography>
-                                        <Typography variant="body1">Address: {client.address}</Typography>
-                                        <Typography variant="body1">Status: {client.status}</Typography>
+                                    <Grid className="clients-data" item xs={12} md={3}>
+                                        <Typography variant="body1"><FormattedMessage id='user.phone'
+                                                                                      defaultMessage="Phone Number:  "/> {client.phone_number}</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='user.address'
+                                                                                      defaultMessage="Address:  "/> {client.address}</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='user.status'
+                                                                                      defaultMessage="Status:  "/> {client.status}</Typography>
                                     </Grid>
-                                    <Grid className="clients-data" item xs={12} md={1}>
+                                    <Grid className="clients-data-btn" item xs={12} md={2}>
                                         <Button onClick={() => goToUpdate(client.id)} variant="contained"
                                                 color="secondary">
                                             <Typography component={'span'} style={{color: "#E0F2F1"}}
                                                         variant='body1'>
-                                                <FormattedMessage id='project.edit.button'
+                                                <FormattedMessage id='update.btn'
                                                                   defaultMessage="Update"/>
                                             </Typography>
                                         </Button>
@@ -111,7 +127,7 @@ export default function Clients(props) {
                                                 color="secondary">
                                             <Typography component={'span'} style={{color: "#E0F2F1"}}
                                                         variant='body1'>
-                                                <FormattedMessage id='project.delete.button'
+                                                <FormattedMessage id='delete.btn'
                                                                   defaultMessage="Delete"/>
                                             </Typography>
                                         </Button>

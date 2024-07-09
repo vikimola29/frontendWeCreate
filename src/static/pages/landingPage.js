@@ -5,7 +5,8 @@ import Typography from "@mui/material/Typography";
 import {NavLink} from "react-router-dom";
 
 
-export default function Page1(props) {
+export default function LandingPage(props) {
+    const GradientContainer = props.bgGradient
     const p1MainImgLight = require('../image/page1/computerLight.png')
     const p1MainImgDark = require('../image/page1/computerDark.png')
     const logoG1 = require('../image/page1/earthLight.png')
@@ -16,10 +17,10 @@ export default function Page1(props) {
     const logoW3 = require('../image/page1/designDark.png')
     const logoG4 = require('../image/page1/startupLight.png')
     const logoW4 = require('../image/page1/startupDark.png')
-    const GradientContainer = props.bgGradient
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const isMediumScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const isLargeScreen = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+    const isExtraLargeScreen = useMediaQuery((theme) => theme.breakpoints.up('xl'));
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -41,10 +42,12 @@ export default function Page1(props) {
                     <div className="page1-top-first-text-button-container">
                         {isLargeScreen && <br/>}
                         {isLargeScreen && <br/>}
-                        {isLargeScreen && <br/>}
-                        {isLargeScreen && <br/>}
-                        {/*{isLargeScreen && <br/>}*/}
-                        {/*{isLargeScreen && <br/>}*/}
+                        {isExtraLargeScreen && <br/>}
+                        {isExtraLargeScreen && <br/>}
+                        {isExtraLargeScreen && <br/>}
+                        {isExtraLargeScreen && <br/>}
+                        {isExtraLargeScreen && <br/>}
+                        {isExtraLargeScreen && <br/>}
 
                         {/*<div className="page1-top-first-text-container">*/}
                         <Typography variant="h3">

@@ -19,12 +19,10 @@ export default function Register(props) {
         password2: ''
 
     });
-    const {loginUser} = useContext(AuthContext)
 
 
     const handleChange = (e) => {
         const {id, value} = e.target;
-        // console.log(id, value);
         setFormData({
             ...formData,
             [id]: value,
@@ -35,13 +33,13 @@ export default function Register(props) {
             await createUser(formData);
             setOpenSuccess(true);
             setOpenWarning(false);
+
         } catch (error) {
             console.error('Error during registration:', error);
             setOpenSuccess(false);
             setOpenWarning(true);
         }
     };
-
 
 
     return (

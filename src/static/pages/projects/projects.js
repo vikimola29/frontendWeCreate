@@ -44,10 +44,10 @@ export default function Projects(props) {
         navigate(`/project-update/${projectId}`);
         scrollToTop()
     }
-    const handleDelete  = async (projectId) =>  {
-        try{
+    const handleDelete = async (projectId) => {
+        try {
             await deleteProject(authTokens, projectId)
-        }catch (error) {
+        } catch (error) {
             console.log(error)
         }
         window.location.reload(false);
@@ -79,19 +79,20 @@ export default function Projects(props) {
                 <br/>
                 <Grid container className="projects-nav-btns-ccontainer">
                     <Grid item xs={12} sm={6} className="projects-nav-btns">
-                        <Button onClick={() => goToProfile()} variant="contained" color="primary" style={{marginTop:'1rem'}}>
+                        <Button onClick={() => goToProfile()} variant="contained" color="primary"
+                                style={{marginTop: '1rem'}}>
                             <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                <FormattedMessage id='projects.profile.button' defaultMessage="Go to Profile"/>
+                                <FormattedMessage id='projects.profile.btn1' defaultMessage="Go to Profile"/>
                             </Typography>
                         </Button>
                     </Grid>
                     <Grid item xs={12} sm={6} className="projects-nav-btns">
 
 
-
-                        <Button onClick={() => goToAddProject()} variant="contained" color="primary" style={{marginTop:'1rem'}}>
+                        <Button onClick={() => goToAddProject()} variant="contained" color="primary"
+                                style={{marginTop: '1rem'}}>
                             <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                <FormattedMessage id='projects.profile.button' defaultMessage="Create Prtoject"/>
+                                <FormattedMessage id='projects.profile.btn2' defaultMessage="Create Prtoject"/>
                             </Typography>
                         </Button>
                     </Grid>
@@ -108,32 +109,41 @@ export default function Projects(props) {
                                 <Grid container spacing={1}>
                                     <Grid className="projects-data" item xs={12} md={3}>
                                         <Typography variant="body1"><a href={project.link} target="_blank"
-                                                                       rel="noopener noreferrer">Go to
-                                            page</a></Typography>
-                                        <Typography variant="body1">Finish Due
-                                            Date: {project.finish_due_date}</Typography>
-                                        <Typography variant="body1">Status: {project.status}</Typography>
+                                                                       rel="noopener noreferrer">
+                                            <FormattedMessage id='projects.gotopage'
+                                                              defaultMessage="Go to page"/></a></Typography>
+                                        <Typography variant="body1"><FormattedMessage id='projects.finish.date'
+                                                                                      defaultMessage="Finish Due Date: "/>{project.finish_due_date}
+                                        </Typography>
+                                        <Typography variant="body1"><FormattedMessage id='projects.status'
+                                                                                      defaultMessage="Status: "/> {project.status}</Typography>
                                     </Grid>
                                     <Grid className="projects-data" item xs={12} md={4}>
-                                        <Typography variant="body1">Batch Price: ${project.batch_price}</Typography>
-                                        <Typography variant="body1">Batch Payment Due
-                                            Date: {project.batch_payment_due_date}</Typography>
-                                        <Typography variant="body1">Batch Payment
-                                            Status: {project.batch_payment_status}</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='projects.batch.price'
+                                                                                      defaultMessage="Batch Price: "/>{project.batch_price} €</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='projects.batch.date'
+                                                                                      defaultMessage="Batch Payment Due
+                                            Date: "/>{project.batch_payment_due_date}</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='projects.batch.status'
+                                                                                      defaultMessage="Batch Payment
+                                            Status: "/>{project.batch_payment_status}</Typography>
                                     </Grid>
-                                    <Grid className="projects-data" item xs={12} md={4}>
-                                        <Typography variant="body1">Monthly Price: ${project.monthly_price}</Typography>
-                                        <Typography variant="body1">Monthly Payment Due
-                                            Date: {project.monthly_payment_due_date}</Typography>
-                                        <Typography variant="body1">Monthly Payment
-                                            Status: {project.monthly_payment_status}</Typography>
+                                    <Grid className="projects-data" item xs={12} md={3}>
+                                        <Typography variant="body1"><FormattedMessage id='projects.monthly.price'
+                                                                                      defaultMessage="Monthly Price: "/> {project.monthly_price}€</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='projects.monthly.date'
+                                                                                      defaultMessage="Monthly Payment Due
+                                            Date: "/> {project.monthly_payment_due_date}</Typography>
+                                        <Typography variant="body1"><FormattedMessage id='projects.monthly.status'
+                                                                                      defaultMessage="Monthly Payment
+                                            Status: "/> {project.monthly_payment_status}</Typography>
                                     </Grid>
-                                    <Grid className="projects-data" item xs={12} md={1}>
+                                    <Grid className="projects-data" item xs={12} md={2}>
                                         <Button onClick={() => goToUpdate(project.id)} variant="contained"
                                                 color="secondary">
                                             <Typography component={'span'} style={{color: "#E0F2F1"}}
                                                         variant='body1'>
-                                                <FormattedMessage id='project.edit.button'
+                                                <FormattedMessage id='update.btn'
                                                                   defaultMessage="Update"/>
                                             </Typography>
                                         </Button>
@@ -143,7 +153,7 @@ export default function Projects(props) {
                                                 color="secondary">
                                             <Typography component={'span'} style={{color: "#E0F2F1"}}
                                                         variant='body1'>
-                                                <FormattedMessage id='project.delete.button'
+                                                <FormattedMessage id='delete.btn'
                                                                   defaultMessage="Delete"/>
                                             </Typography>
                                         </Button>

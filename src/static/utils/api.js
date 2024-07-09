@@ -57,7 +57,6 @@ export const getUsersProjects = (authTokens) => {
 }
 
 export const updateProject = (authTokens, projectId, projectData) => {
-    console.log("PROJECT DATA", projectData)
     return axios.put(`${API_URL}project/${projectId}/`, projectData, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
@@ -107,7 +106,6 @@ export const getAllUsers = (authTokens) => {
     });
 };
 export const updateUser = (authTokens, clientData, clientId) => {
-    console.log(clientData)
     return axios.put(`${API_URL}client/${clientId}/`, clientData, {
         headers: {
             'Authorization': `Bearer ${authTokens.access}`,
@@ -127,14 +125,10 @@ export const deleteUser = (authTokens, clientId) => {
 export const passwordReset = async (clientData) => {
     try {
         const csrfToken = await getCSRFToken();
-        const cookieValue = `${csrfToken}`;
-        console.log("api.js getCSRFToken: ", csrfToken);
-        console.log("api.js cookieVal:", cookieValue);
 
         const response = await axios.post(`${API_URL}reset_password/`, clientData,
             {
                 headers: {
-                    // 'Cookie': cookieValue,
                     'X-CSRFToken': csrfToken,
                     'Content-Type': 'application/json',
                 },
@@ -148,10 +142,9 @@ export const passwordReset = async (clientData) => {
     }
 };
 
-export const recoverPassword = async (clientData,token) => {
+export const recoverPassword = async (clientData, token) => {
     try {
         const csrfToken = await getCSRFToken();
-        console.log("api.js token: ", token);
         const response = await axios.post(`${API_URL}reset_password/confirm/`, {token: token, ...clientData}, {
             headers: {
                 'X-CSRFToken': csrfToken,
@@ -170,7 +163,6 @@ export const fetchCSRFToken = async () => {
     try {
         const response = await axios.get(`${API_URL}get-csrf-token/`, {withCredentials: true});
         document.cookie = `csrftoken3=${response.data.csrfToken}; path=/`;
-        console.log("api.js fetchCSRFToken: ", response.data.csrfToken)
     } catch (error) {
         console.error('Error fetching CSRF token:', error);
     }

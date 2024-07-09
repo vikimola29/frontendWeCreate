@@ -37,7 +37,6 @@ export default function UpdateProject(props) {
                 setProjectData(response.data);
                 if (response.data?.length > 0) {
                     setProjectData(response.data[0]);
-                    console.log(projectData)
                 } else {
                     console.log("No project found")
                 }
@@ -55,7 +54,6 @@ export default function UpdateProject(props) {
             ...projectData,
             [e.target.name]: e.target.value
         });
-        console.log(projectData);
     };
 
     const handleSubmit = async (e) => {
@@ -250,7 +248,7 @@ export default function UpdateProject(props) {
                                                                         default="Error ocurred!"/>}/>
                             <Button type='submit' variant="contained" color="secondary">
                                 <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                    <FormattedMessage id='projects.update.button' defaultMessage="Update"/>
+                                    <FormattedMessage id='update.btn' defaultMessage="Update"/>
                                 </Typography>
                             </Button>
 
@@ -259,7 +257,7 @@ export default function UpdateProject(props) {
                             <Button onClick={() => goToProfile()} variant="contained" color="primary"
                                     style={{marginTop: '1rem'}}>
                                 <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                    <FormattedMessage id='projects.profile.button' defaultMessage="Go to Profile"/>
+                                    <FormattedMessage id='projects.profile.btn' defaultMessage="Go to Profile"/>
                                 </Typography>
                             </Button>
                         </div>

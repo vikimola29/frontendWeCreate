@@ -1,5 +1,4 @@
 export const getCSRFToken = () => {
-    console.log("getCSRFToken")
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
@@ -11,6 +10,5 @@ export const getCSRFToken = () => {
             }
         }
     }
-    console.log("getCSRFToken cookie val: ", cookieValue)
     return cookieValue;
 };

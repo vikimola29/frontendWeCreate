@@ -10,7 +10,17 @@ export default function PasswordResetDone(props) {
     const routerNavigate = useNavigate()
     const navigateToHomePage = () => {
         routerNavigate('/')
+        scrollToTop()
+
     }
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
+
+
     return (
 
         <GradientContainer>

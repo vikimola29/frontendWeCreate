@@ -16,7 +16,6 @@ export default function NewsletterUnsubscribe(props) {
 
     const handleChange = (e) => {
         const {id, value} = e.target;
-        // console.log(id, value);
         setFormData({
             ...formData,
             [id]: value,

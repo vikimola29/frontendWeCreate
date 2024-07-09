@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from "react";
-import AuthContextProfileData from "../components/fetchProfileData";
-import AuthContext from "../components/AuthContext";
+import AuthContextProfileData from "../../components/fetchProfileData";
+import AuthContext from "../../components/AuthContext";
 import {useNavigate} from "react-router-dom";
 import {Button, Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
-import {getUsersProjects} from "../utils/api";
+import {getUsersProjects} from "../../utils/api";
 
 const Profile = (props) => {
     const GradientContainer = props.bgGradient
@@ -14,7 +14,6 @@ const Profile = (props) => {
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
     const {authTokens} = useContext(AuthContext);
-    console.log(user)
 
 
     useEffect(() => {
@@ -32,23 +31,33 @@ const Profile = (props) => {
 
     const goToClients = () => {
         navigate('/clients')
+        scrollToTop()
+
     }
     const goToProjects = () => {
         navigate('/projects')
+        scrollToTop()
+
     }
     const goToUpdateUser = (clientId) => {
         navigate(`/clientS-update/${clientId}`);
+        scrollToTop()
+
 
     }
     const handleLogout = async () => {
         await logoutUser()
         navigate('/')
+        scrollToTop()
+
+    }
+
+    const scrollToTop = () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         });
-
-    }
+    };
 
 
     return (
@@ -61,9 +70,9 @@ const Profile = (props) => {
                         <FormattedMessage id='profile.title'
                                           defaultMessage="Hellow"/>
                     </Typography>
-                    {user && <Typography component={'span'} variant="h3" style={{ marginLeft: '1rem' }}>
-                                    {user.name}
-                                </Typography>}
+                    {user && <Typography component={'span'} variant="h3" style={{marginLeft: '1rem'}}>
+                        {user.name}
+                    </Typography>}
 
                 </div>
                 <br/>
@@ -85,13 +94,17 @@ const Profile = (props) => {
 
                             <div>
                                 <br/>
-                                <Typography component={'span'} variant="body1">Email: {user.email}</Typography>
+                                <Typography component={'span'} variant="body1"><FormattedMessage id='user.email'
+                                                                                      defaultMessage="Email:  "/> {user.email}</Typography>
                                 <br/>
-                                <Typography component={'span'} variant="body1">Address: {user.address}</Typography>
+                                <Typography component={'span'} variant="body1"><FormattedMessage id='user.address'
+                                                                                      defaultMessage="Address:  "/>  {user.address}</Typography>
                                 <br/>
-                                <Typography component={'span'} variant="body1">Company: {user.company_name}</Typography>
+                                <Typography component={'span'} variant="body1"><FormattedMessage id='user.company_name'
+                                                                                      defaultMessage="Company:  "/> {user.company_name}</Typography>
                                 <br/>
-                                <Typography component={'span'} variant="body1">Status: {user.status}</Typography>
+                                <Typography component={'span'} variant="body1"><FormattedMessage id='user.status'
+                                                                                      defaultMessage="Status:  "/> {user.status}</Typography>
                                 <br/>
                                 <br/>
                                 <Button onClick={() => goToUpdateUser(user.id)} variant="contained" color="secondary">
@@ -110,24 +123,34 @@ const Profile = (props) => {
 
                                 <div className="profile-project-card" key={project.id}>
                                     <Typography variant="h4">{project.name}</Typography>
-                                    <Typography variant="body1"><a href={project.link} target="_blank"> Go to page </a></Typography>
+                                    <Typography variant="body1"><a href={project.link} target="_blank"><FormattedMessage
+                                        id='projects.gotopage'
+                                        defaultMessage="Go to page"/></a></Typography>
                                     <br/>
-                                    <Typography variant="body1">Finish Due
-                                        Date: {project.finish_due_date}</Typography>
-                                    <Typography variant="body1">Status: {project.status}</Typography>
+                                    <Typography variant="body1"><FormattedMessage id='projects.finish.date'
+                                                                                  defaultMessage="Finish Due Date: "/></Typography>
+                                    <Typography variant="body1"><FormattedMessage id='projects.status'
+                                                                                  defaultMessage="Status: "/> {project.status}
+                                    </Typography>
                                     <br/>
-                                    <Typography variant="body1">Batch Price: ${project.batch_price}</Typography>
-                                    <Typography variant="body1">Batch Payment Due
-                                        Date: {project.batch_payment_due_date}</Typography>
-                                    <Typography variant="body1">Batch Payment
-                                        Status: {project.batch_payment_status}</Typography>
+                                    <Typography variant="body1"><FormattedMessage id='projects.batch.price'
+                                                                                  defaultMessage="Batch Price: "/>{project.batch_price}€</Typography>
+                                    <Typography variant="body1"><FormattedMessage id='projects.batch.date'
+                                                                                  defaultMessage="Batch Payment Due
+                                            Date: "/> {project.batch_payment_due_date}</Typography>
+                                    <Typography variant="body1"><FormattedMessage id='projects.batch.status'
+                                                                                  defaultMessage="Batch Payment
+                                            Status: "/> {project.batch_payment_status}</Typography>
                                     <br/>
-                                    <Typography variant="body1">Monthly Price:
-                                        ${project.monthly_price}</Typography>
-                                    <Typography variant="body1">Monthly Payment Due
-                                        Date: {project.monthly_payment_due_date}</Typography>
-                                    <Typography variant="body1">Monthly Payment
-                                        Status: {project.monthly_payment_status}</Typography>
+                                    <Typography variant="body1"><FormattedMessage id='projects.monthly.price'
+                                                                                  defaultMessage="Monthly Price: "/> {project.monthly_price}€
+                                    </Typography>
+                                    <Typography variant="body1"><FormattedMessage id='projects.monthly.date'
+                                                                                      defaultMessage="Monthly Payment Due
+                                            Date: "/> {project.monthly_payment_due_date}</Typography>
+                                    <Typography variant="body1"><FormattedMessage id='projects.monthly.status'
+                                                                                      defaultMessage="Monthly Payment
+                                            Status: "/> {project.monthly_payment_status}</Typography>
                                     <br/>
                                     <br/>
                                     <br/>
@@ -151,9 +174,11 @@ const Profile = (props) => {
 
                             <div>
                                 <br/>
-                                <Typography component={'span'} variant="body1">Email: {user.email}</Typography>
+                                <Typography component={'span'} variant="body1"><FormattedMessage id='user.email'
+                                                                                      defaultMessage="Email:  "/> {user.email}</Typography>
                                 <br/>
-                                <Typography component={'span'} variant="body1">Status: {user.status}</Typography>
+                                <Typography component={'span'} variant="body1"><FormattedMessage id='user.status'
+                                                                                      defaultMessage="Status:  "/> {user.status}</Typography>
                                 <br/>
                                 <br/>
                             </div>
@@ -165,7 +190,7 @@ const Profile = (props) => {
                             <div className="profile-projects-btn">
                                 <Button onClick={() => goToClients()} variant="contained" color="primary">
                                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                        <FormattedMessage id='profile.clients.button' defaultMessage="Go to Clients"/>
+                                        <FormattedMessage id='profile.clients.btn' defaultMessage="Go to Clients"/>
                                     </Typography>
                                 </Button>
                             </div>
@@ -173,7 +198,7 @@ const Profile = (props) => {
                             <div className="profile-projects-btn">
                                 <Button onClick={() => goToProjects()} variant="contained" color="primary">
                                     <Typography component={'span'} style={{color: "#E0F2F1"}} variant='body1'>
-                                        <FormattedMessage id='profile.projects.button' defaultMessage="Go to Projects"/>
+                                        <FormattedMessage id='profile.projects.btn' defaultMessage="Go to Projects"/>
                                     </Typography>
                                 </Button>
                             </div>

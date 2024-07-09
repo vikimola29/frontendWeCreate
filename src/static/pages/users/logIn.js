@@ -33,7 +33,6 @@ export default function LogIn(props) {
 
     const handleChange = (e) => {
         const {id, value} = e.target;
-        console.log(id, value);
         setFormData({
             ...formData,
             [id]: value,
@@ -43,12 +42,9 @@ export default function LogIn(props) {
 
     const handleSubmit = async (e) => {
         try {
-            console.log("LOGIN")
             e.preventDefault()
             const email = e.target.email.value
             const password = e.target.password.value
-            console.log(email)
-            console.log(password)
             await loginUser(email, password)
 
             setOpenSuccess(true);
@@ -57,6 +53,7 @@ export default function LogIn(props) {
             props.setIsAuthenticated(true);
             localStorage.setItem('isAuthenticated', 'true');
             navigate('/profile');
+            scrollToTop()
         } catch (error) {
             setOpenSuccess(false);
             setOpenWarning(true);
@@ -66,8 +63,16 @@ export default function LogIn(props) {
 
     const handleButtonClick = () => {
         navigate('/register');
+        scrollToTop()
     };
 
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
     return (
 
         <GradientContainer>
@@ -77,7 +82,7 @@ export default function LogIn(props) {
 
             <div className="login-content">
                 <div className="login-title">
-                    <Typography component={'span'} variant="h3" >
+                    <Typography component={'span'} variant="h3">
                         <FormattedMessage id='login.title'
                                           defaultMessage="Log In"/>
                     </Typography>
