@@ -344,6 +344,21 @@
   "recover.warn": "Email is not in our database or a problem occurred!",
   "recover.password.title": "Choose a new password!",
   "recover.password.succ": "Password changed successfully!",
-  "recover.password.warn": "Problem occurred!"
+  "recover.password.warn": "Problem occurred!",
+
+  "recover.password.form.title": "Choose a new password!",
+  "recover.password.form.password": "Password",
+  "recover.password.form.helper": "Password",
+  "recover.password.form.password2": "Password repeat",
+  "recover.password.form.succ": "Mail sent successfully!",
+  "recover.password.form.warn": "Something went wrong",
+  "recover.password.form.btn": "Recover account",
+  "recover.sent.title": "Password reset sent",
+  "recover.sent.text1": "We’ve emailed you instructions for setting your password, if an account exists with the email you entered. You should receive them shortly.",
+  "recover.sent.text2": "If you don’t receive an email, please make sure you’ve entered the address you registered with, and check your spam folder.",
+  "recover.sent.btn": "To Home Page",
+  "recover.done.title": "Password reset complete!",
+  "recover.done.text": "Your Password has been set. You may go ahead and login.",
+  "recover.done.btn": "To Home Page"
 }
 

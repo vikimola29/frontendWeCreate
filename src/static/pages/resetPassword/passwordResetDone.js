@@ -1,10 +1,8 @@
-import React, {useState} from "react";
-import {Button, FormControl, FormHelperText, TextField, useMediaQuery} from "@mui/material";
+import React from "react";
+import {Button} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {FormattedMessage} from "react-intl";
 import {useNavigate} from "react-router-dom";
-import Messages from "../../components/Messages";
-import {passwordReset} from "../../utils/api";
 
 
 export default function PasswordResetDone(props) {

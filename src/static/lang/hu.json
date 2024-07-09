@@ -4,7 +4,6 @@
   "header.about": "Rólunk",
   "header.contact": "Kapcsolat",
   "header.login": "Fiók",
-
   "page1.title": "Lendítse fel vállalkozását egy innovatív, alkalmazkodó és költséghatékony weboldallal!",
   "page1.text": "A WeCreate-nél szenvedélyesen törekszünk hihetetlen és megfizethető weboldalak létrehozására.",
   "page1.button.text": "Dolgozz Velünk",
@@ -345,5 +344,19 @@
   "recover.warn": "Az email nincs az adatbázisunkban, vagy probléma történt!",
   "recover.password.title": "Válassz egy új jelszót!",
   "recover.password.succ": "A jelszó sikeresen megváltoztatva!",
-"recover.password.warn": "Probléma történt!"
+  "recover.password.warn": "Probléma történt!",
+  "recover.password.form.title": "Válasszon új jelszót!",
+  "recover.password.form.password": "Jelszó",
+  "recover.password.form.helper": "Jelszó",
+  "recover.password.form.password2": "Jelszó ismétlése",
+  "recover.password.form.succ": "Email sikeresen elküldve!",
+  "recover.password.form.warn": "Valami nem stimmelt",
+  "recover.password.form.btn": "Fiók helyreállítása",
+  "recover.sent.title": "Jelszó visszaállítás mail elküldve",
+  "recover.sent.text1": "Elküldtük az utasításokat a jelszó beállításához, ha van fiók a megadott email címmel. Hamarosan meg kell kapnod őket.",
+  "recover.sent.text2": "Ha nem kapsz emailt, kérjük, győződj meg arról, hogy a regisztrált email címet adtad meg, és ellenőrizd a spam mappát.",
+  "recover.sent.btn": "A főoldalra",
+  "recover.done.title": "Jelszó visszaállítás befejezve!",
+  "recover.done.text": "A jelszava beállítva. Most már bejelentkezhetsz.",
+  "recover.done.btn": "A főoldalra"
 }

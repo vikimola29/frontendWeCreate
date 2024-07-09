@@ -55,14 +55,6 @@ export default function PasswordResetForm(props) {
         }
     };
 
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseWarning = () => {
-        setOpenWarning(false);
-    };
     return (
 
         <GradientContainer>
@@ -73,7 +65,7 @@ export default function PasswordResetForm(props) {
             <div className="recover-password-content">
                 <div className="recover-password-title">
                     <Typography component={'span'} variant="h3" style={{textAlign: 'center'}}>
-                        <FormattedMessage id='recover.password.title'
+                        <FormattedMessage id='recover.password.form.title'
                                           defaultMessage="Choose a new password!"/>
                     </Typography>
                 </div>
@@ -97,14 +89,14 @@ export default function PasswordResetForm(props) {
                                InputLabelProps={{color: "primary"}}
                                label={
                                    <Typography variant="body2">
-                                       <FormattedMessage id='register.password'
+                                       <FormattedMessage id='recover.password.form.password'
                                                          defaultMessage="Password"/>
                                    </Typography>
                                }
                                aria-describedby="password-text"/>
                     <FormHelperText id="password-text">
                         <Typography component={'span'} variant="body2">
-                            <FormattedMessage id='register.password.helper'
+                            <FormattedMessage id='recover.password.form.helper'
                                               defaultMessage="Choose a secure password!"/>
                         </Typography>
                     </FormHelperText>
@@ -118,7 +110,7 @@ export default function PasswordResetForm(props) {
                                InputLabelProps={{color: "primary"}}
                                label={
                                    <Typography variant="body2">
-                                       <FormattedMessage id='register.password2'
+                                       <FormattedMessage id='recover.password.form.password2'
                                                          defaultMessage="Password Repeat"/>
                                    </Typography>
                                }
@@ -128,13 +120,13 @@ export default function PasswordResetForm(props) {
 
                     <Messages openSuccess={openSuccess} openWarning={openWarning} setOpenSuccess={setOpenSuccess}
                               setOpenWarning={setOpenWarning}
-                              successMessage={<FormattedMessage id='recover.password.succ'/>}
-                              warningMessage={<FormattedMessage id='recover.password.warn'/>}/>
+                              successMessage={<FormattedMessage id='recover.password.form.succ'/>}
+                              warningMessage={<FormattedMessage id='recover.password.form.warn'/>}/>
 
 
                     <Button onClick={() => handleSubmit(formData)} variant="contained" color="secondary">
                         <Typography component={'span'} variant='body1' style={{color: "#E0F2F1"}}>
-                            <FormattedMessage id='recover.title'
+                            <FormattedMessage id='recover.password.form.btn'
                                               defaultMessage="Recover"/>
                         </Typography>
                     </Button>

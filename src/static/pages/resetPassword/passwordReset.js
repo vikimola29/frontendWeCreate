@@ -38,14 +38,6 @@ export default function PasswordReset(props) {
         }
     };
 
-
-    const handleCloseSuccess = () => {
-        setOpenSuccess(false);
-    };
-
-    const handleCloseWarning = () => {
-        setOpenWarning(false);
-    };
     return (
 
         <GradientContainer>

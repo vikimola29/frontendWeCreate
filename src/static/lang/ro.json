@@ -344,6 +344,20 @@
   "recover.warn": "Email-ul nu este în baza noastră de date sau a apărut o problemă!",
   "recover.password.title": "Alege o parolă nouă!",
   "recover.password.succ": "Parola a fost schimbată cu succes!",
-  "recover.password.warn": "A apărut o problemă!"
+  "recover.password.warn": "A apărut o problemă!",
+  "recover.password.form.title": "Alege o parolă nouă!",
+  "recover.password.form.password": "Parolă",
+  "recover.password.form.helper": "Parolă",
+  "recover.password.form.password2": "Repetare parolă",
+  "recover.password.form.succ": "Email trimis cu succes!",
+  "recover.password.form.warn": "Ceva nu a mers bine",
+  "recover.password.form.btn": "Recuperează contul",
+  "recover.sent.title": "Mailul de resetarea parolă trimisă",
+  "recover.sent.text1": "Ți-am trimis prin email instrucțiunile pentru setarea parolei, dacă există un cont cu emailul introdus. Ar trebui să le primești în scurt timp.",
+  "recover.sent.text2": "Dacă nu primești un email, vă rugăm să te asigurică ai introdus adresa cu care te-ai înregistrat și verifică folderul de spam.",
+  "recover.sent.btn": "Către pagina principală",
+  "recover.done.title": "Resetarea parolei completă!",
+  "recover.done.text": "Parola a fost setată. Poți să te conectați acum.",
+  "recover.done.btn": "Către pagina principală"
 }
 
