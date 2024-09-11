@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {createTheme, CssBaseline, styled, ThemeProvider} from "@mui/material";
 import Footer from "./static/components/footer";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from "./static/pages/home";
 import Services from "./static/pages/subscription/services";
 import Technologies from "./static/pages/technologies";
 import About from "./static/pages/about";
@@ -29,7 +28,6 @@ import UpdateClient from "./static/pages/users/updateClient";
 import UpdateClientByClient from "./static/pages/users/updateClientByClient";
 import PasswordResetSent from "./static/pages/resetPassword/passwordResetSent";
 import PasswordResetDone from "./static/pages/resetPassword/passwordResetDone";
-import axios from "axios";
 import {fetchCSRFToken} from "./static/utils/api";
 import LandingPage from "./static/pages/landingPage";
 
@@ -42,7 +40,6 @@ function App() {
                 contrastText: '#F5F5F5',
             }, secondary: {
                 main: '#AD1457',
-                // main: '#151586',
             }, error: {
                 main: '#e21a00',
             }, text: {
@@ -174,21 +171,12 @@ function App() {
         palette: {
             primary: {
                 main: '#00BFA5',
-                // main: '#151586',
-                // main: '#1DE9B6',
-                // #00d4ff
-                // contrastText: '#E0E0E0',
                 contrastText: '#F5F5F5',
             }, secondary: {
-                // main: '#e2003c',
-                // main: '#880E4F', !!!
-                // main: '#AD1457',
-                // main: '#151586',
                 main: '#00213B',
             }, error: {
                 main: '#e21a00',
             }, text: {
-                // primary: '#E0E0E0', secondary: '#424242',
                 primary: '#E0E0E0', secondary: '#E0E0E0',
             }, info: {
                 main: '#5300bf',
@@ -198,8 +186,6 @@ function App() {
                 main: '#bf8900',
             },
             background: {
-                // default: "#00695C", paper: '#880E4F',
-                // default: "#00695C", paper: '#151586',
                 default: "#00695C", paper: '#00213B',
             },
 
@@ -297,18 +283,11 @@ function App() {
                 styleOverrides: {
                     root: {
                         borderRadius: 28,
-                        // color: '#880E4F'
-                        // backgroundColor: '#00213B'
                     },
                 },
             }, MuiAppBar: {
                 styleOverrides: {
                     colorPrimary: {
-                        // backgroundColor: '#880E4F'
-                        // backgroundColor: '#080831'
-                        // backgroundColor: '#080831'
-                        // backgroundColor: '#0c2898'
-                        // backgroundColor: '#151586'
                         backgroundColor: '#00213B'
                     }
                 }
@@ -368,10 +347,6 @@ function App() {
                             <Header isAuthenticated={isAuthenticated}/>
 
                             <Routes>
-
-                                {/*<Route exact path="/" element={<Home isDarkTheme={isDarkTheme}*/}
-                                {/*                                     gradientContainerLight={gradientContainerLight}*/}
-                                {/*                                     gradientContainerDark={gradientContainerDark}/>}/>*/}
 
                                 {isDarkTheme && <Route exact path="/"
                                                        element={<LandingPage isDarkTheme={isDarkTheme}

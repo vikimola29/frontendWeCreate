@@ -19,7 +19,6 @@ export default function Contact(props) {
     const logoDark = require("../image/contact/logoDark.png")
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
-    const {authTokens} = useContext(AuthContext);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -233,15 +232,9 @@ export default function Contact(props) {
                                                       defaultMessage="MESSAGE FORM"/>
                                 </Typography>
                             </FormLabel>
-                        </FormControl>
+                            <br/>
 
 
-                        <FormControl
-                            margin="normal"
-                            color="primary"
-                            variant="filled"
-                            sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}
-                        >
                             <TextField id="name" value={formData.name} onChange={handleChange}
                                 // type="email"
                                        variant="standard" color="secondary" style={{width: '100%'}}
@@ -259,16 +252,9 @@ export default function Contact(props) {
                                                       defaultMessage="We'll never share your name."/>
                                 </Typography>
                             </FormHelperText>
-                        </FormControl>
+                            <br/>
 
-                        <br/>
-
-                        <FormControl
-                            margin="normal"
-                            color="primary"
-                            variant="filled"
-                            sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
-                            <TextField id="phone" value={formData.phone} onChange={handleChange}
+                       <TextField id="phone" value={formData.phone} onChange={handleChange}
                                        type="tel"
                                        variant="standard" color="secondary" style={{width: '80%'}}
                                        InputLabelProps={{color: "primary"}}
@@ -284,17 +270,9 @@ export default function Contact(props) {
                                                       defaultMessage="We'll never share your phone num."/>
                                 </Typography>
                             </FormHelperText>
-                        </FormControl>
+                            <br/>
 
-                        <br/>
-
-                        <FormControl
-                            margin="normal"
-                            color="primary"
-                            variant="filled"
-                            sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
-
-                            <TextField id="email" value={formData.email} onChange={handleChange}
+                        <TextField id="email" value={formData.email} onChange={handleChange}
                                        type="email"
                                        variant="standard" color="secondary" style={{width: '100%'}}
                                        InputLabelProps={{color: "primary"}}
@@ -311,19 +289,10 @@ export default function Contact(props) {
                                                       defaultMessage="We'll never share your email."/>
                                 </Typography>
                             </FormHelperText>
-                        </FormControl>
+
+                            <br/>
 
 
-                        <br/>
-
-                        <FormControl
-                            margin="normal"
-                            color="primary"
-                            variant="filled"
-                            sx={{
-                                display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
-                                width: isSmallScreen ? '100%' : '60%'
-                            }}>
                             <TextField id="message" value={formData.message} onChange={handleChange} multiline
                                        rows={7} style={{width: '100%'}} color="secondary"
                                        InputLabelProps={{color: "primary"}}
@@ -339,17 +308,8 @@ export default function Contact(props) {
                                                       defaultMessage="Ask us anything!"/>
                                 </Typography>
                             </FormHelperText>
-                        </FormControl>
+                            <br/>
 
-                        <br/>
-
-                        <FormControl margin="normal"
-                                     color="primary"
-                                     variant="filled"
-                                     sx={{
-                                         display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                                         width: isSmallScreen ? '100%' : '60%'
-                                     }}>
 
 
                                 <Messages openSuccess={openSuccess} openWarning={openWarning}

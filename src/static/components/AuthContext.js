@@ -47,13 +47,8 @@ export const AuthProvider = ({children}) => {
 
 
     let loginUser = async (email, password) => {
-
         const response = await obtainToken(email, password)
-
-
         let data = response.data
-
-
         if (data) {
             localStorage.setItem('authTokens', JSON.stringify(data));
             setAuthTokens(data)
@@ -66,11 +61,8 @@ export const AuthProvider = ({children}) => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth',
-            });
-        } else {
-            alert('Something went wrong while logging in the user!')
-        }
-    }
+            });} else {
+            alert('Something went wrong while logging in the user!')}}
 
     let logoutUser = () => {
         localStorage.removeItem('authTokens')
@@ -88,55 +80,37 @@ export const AuthProvider = ({children}) => {
     }
 
     const updateToken = async () => {
-
         const response = await fetch('http://127.0.0.1:8000/token/refresh/', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({refresh: authTokens?.refresh})
-        })
-
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({refresh: authTokens?.refresh})})
         const data = await response.json()
         if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwtDecode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
-
-            // setIsAuthenticated('false');
-            // localStorage.setItem('isAuthenticated', 'false');
         } else {
             console.log("NO UPDATE")
-            logoutUser()
-        }
-
+            logoutUser()}
         if (loading) {
-            setLoading(false)
-        }
-    }
+            setLoading(false)}}
 
 
     useEffect(() => {
-
-        if (authTokens) {
-            updateToken()
-        }
-
-        const REFRESH_INTERVAL = 1000 * 60 * 100 // 100 min
+        if (authTokens) {updateToken()}
+        const REFRESH_INTERVAL = 1000 * 60 * 100
         let interval = setInterval(() => {
             if (authTokens) {
                 updateToken()
-            }
-        }, REFRESH_INTERVAL)
+            }}, REFRESH_INTERVAL)
         return () => clearInterval(interval)
-
     }, [loading])
 
     let contextData = {
         user: user,
         authTokens: authTokens,
         loginUser: loginUser,
-        logoutUser: logoutUser,
+        logoutUser: logoutUser
     }
 
     return (

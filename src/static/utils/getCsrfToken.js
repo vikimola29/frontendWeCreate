@@ -6,9 +6,6 @@ export const getCSRFToken = () => {
             const cookie = cookies[i].trim();
             if (cookie.startsWith('csrftoken3=')) {
                 cookieValue = cookie.substring('csrftoken3='.length, cookie.length);
-                break;
-            }
-        }
-    }
-    return cookieValue;
-};
+                break;}}}
+    return cookieValue;};
+

@@ -40,10 +40,6 @@ export default function Clients(props) {
 
 
     }
-
-
-
-
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
